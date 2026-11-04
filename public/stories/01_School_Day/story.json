@@ -1,0 +1,96 @@
+{
+  "id": "school_day",
+  "title": {
+    "ar": "يومي الأول في المدرسة",
+    "en": "My First Day at School"
+  },
+  "description": {
+    "ar": "قصة تفاعلية عن بداية يوم جديد والتعرّف على الأصدقاء والتعبير بالرسم.",
+    "en": "An interactive story about a new day, making friends, and expressing yourself through drawing."
+  },
+  "language_support": [
+    "ar",
+    "en"
+  ],
+  "direction": {
+    "ar": "rtl",
+    "en": "ltr"
+  },
+  "cover": "cover.png",
+  "start_scene": "scene_01",
+  "scenes": [
+    {
+      "id": "scene_01",
+      "image": "scene_01_wakeup.png",
+      "text": {
+        "ar": "استيقظ سامي في الصباح، فهذا أول يوم له في المدرسة!",
+        "en": "Sami woke up in the morning. It was his first day at school!"
+      },
+      "next": "scene_02"
+    },
+    {
+      "id": "scene_02",
+      "image": "scene_02_school.png",
+      "text": {
+        "ar": "وصل سامي إلى المدرسة ورأى أطفالًا جددًا في الساحة. ماذا يختار؟",
+        "en": "Sami arrived at school and saw new children in the playground. What should he choose?"
+      },
+      "choices": [
+        {
+          "id": "choice_a",
+          "label": {
+            "ar": "أذهب للتعرّف على صديق",
+            "en": "Go and meet a new friend"
+          },
+          "image": "choice_a_meet_friend.png",
+          "next": "scene_03_a"
+        },
+        {
+          "id": "choice_b",
+          "label": {
+            "ar": "أجلس وأرسم أولًا",
+            "en": "Sit down and draw first"
+          },
+          "image": "choice_b_draw_first.png",
+          "next": "scene_03_b"
+        }
+      ]
+    },
+    {
+      "id": "scene_03_a",
+      "image": "scene_03_friend_a.png",
+      "text": {
+        "ar": "اقترب سامي من طفل جديد وبدأ يتحدث معه.",
+        "en": "Sami walked over to a new child and started talking with him."
+      },
+      "next": "ending_a"
+    },
+    {
+      "id": "scene_03_b",
+      "image": "scene_03_friend_b.png",
+      "text": {
+        "ar": "اختار سامي الرسم، ثم جاءت طفلة وجلست بجانبه.",
+        "en": "Sami chose to draw, and then a girl came and sat beside him."
+      },
+      "next": "ending_b"
+    },
+    {
+      "id": "ending_a",
+      "image": "ending_a.png",
+      "text": {
+        "ar": "أصبح لدى سامي صديق جديد، ولعبا معًا بسعادة!",
+        "en": "Sami made a new friend, and they happily played together!"
+      },
+      "is_ending": true
+    },
+    {
+      "id": "ending_b",
+      "image": "ending_b.png",
+      "text": {
+        "ar": "شارك سامي رسمته مع أصدقائه، وقضوا وقتًا جميلًا معًا.",
+        "en": "Sami shared his drawing with his friends, and they had a lovely time together."
+      },
+      "is_ending": true
+    }
+  ]
+}

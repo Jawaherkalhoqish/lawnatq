@@ -1,0 +1,96 @@
+{
+  "id": "little_turtle_adventure",
+  "title": {
+    "ar": "مغامرة السلحفاة الصغيرة",
+    "en": "The Little Turtle's Adventure"
+  },
+  "description": {
+    "ar": "رحلة لولو الصغيرة بين الشاطئ والغابة، مع اختيار الطريق الذي تريد استكشافه.",
+    "en": "Lulu's little journey between the beach and the forest, where the child chooses which path to explore."
+  },
+  "language_support": [
+    "ar",
+    "en"
+  ],
+  "direction": {
+    "ar": "rtl",
+    "en": "ltr"
+  },
+  "cover": "cover.png",
+  "start_scene": "scene_01",
+  "scenes": [
+    {
+      "id": "scene_01",
+      "image": "scene_01_beach.png",
+      "text": {
+        "ar": "كانت لولو السلحفاة الصغيرة تستمتع بيوم جميل على الشاطئ.",
+        "en": "Lulu the little turtle was enjoying a beautiful day at the beach."
+      },
+      "next": "scene_02"
+    },
+    {
+      "id": "scene_02",
+      "image": "scene_02_crossroads.png",
+      "text": {
+        "ar": "وجدت لولو طريقين أمامها. أي طريق تختار؟",
+        "en": "Lulu found two paths ahead. Which path should she choose?"
+      },
+      "choices": [
+        {
+          "id": "choice_a",
+          "label": {
+            "ar": "أستكشف الغابة",
+            "en": "Explore the forest"
+          },
+          "image": "choice_a_forest.png",
+          "next": "scene_03_a"
+        },
+        {
+          "id": "choice_b",
+          "label": {
+            "ar": "أعود إلى البحر",
+            "en": "Go back to the sea"
+          },
+          "image": "choice_b_sea.png",
+          "next": "scene_03_b"
+        }
+      ]
+    },
+    {
+      "id": "scene_03_a",
+      "image": "scene_03_forest.png",
+      "text": {
+        "ar": "دخلت لولو الغابة وقابلت سنجابًا لطيفًا.",
+        "en": "Lulu entered the forest and met a friendly squirrel."
+      },
+      "next": "ending_a"
+    },
+    {
+      "id": "scene_03_b",
+      "image": "scene_03_sea.png",
+      "text": {
+        "ar": "عادت لولو إلى البحر وقابلت سلطعونًا مرحًا.",
+        "en": "Lulu returned to the sea and met a playful crab."
+      },
+      "next": "ending_b"
+    },
+    {
+      "id": "ending_a",
+      "image": "ending_a_forest.png",
+      "text": {
+        "ar": "استمتعت لولو بالغابة وصديقها السنجاب في نهاية مغامرتها.",
+        "en": "Lulu enjoyed the forest and her squirrel friend at the end of her adventure."
+      },
+      "is_ending": true
+    },
+    {
+      "id": "ending_b",
+      "image": "ending_b_sea.png",
+      "text": {
+        "ar": "استمتعت لولو بغروب الشمس وصديقها السلطعون على الشاطئ.",
+        "en": "Lulu enjoyed the sunset and her crab friend by the shore."
+      },
+      "is_ending": true
+    }
+  ]
+}
