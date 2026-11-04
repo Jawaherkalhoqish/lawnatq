@@ -1,3 +1,11 @@
-/** The official LAWNATQ mascot, used exactly as provided (transparent PNG). */
-export const MASCOT_URL =
-  "https://base44.app/api/apps/6aeaa7cdb1406c78a8420eae/files/mp/public/6aeaa7cdb1406c78a8420eae/6cd56e974_lawnatq-mascot.png";
+/**
+ * The official LAWNATQ assets, used exactly as supplied.
+ * The logo and the hero illustration are transparent PNGs — never recolored,
+ * cropped or flattened onto white.
+ */
+export const LOGO_URL = "/brand/lawnatq-logo.png";
+
+/** Kept for the mascot slots (child space, favicon) — same official mark. */
+export const MASCOT_URL = LOGO_URL;
+
+export const HERO_URL = "/hero/01_Hero_Header/hero_main_kids_drawing_transparent.png";

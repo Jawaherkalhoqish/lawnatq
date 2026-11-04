@@ -4,42 +4,42 @@
 
 @layer base {
   :root {
-    /* LAWNATQ palette — brand book */
-    --background: 36 100% 98.4%;
-    --foreground: 198 17% 25%;
-    --card: 0 0% 100%;
-    --card-foreground: 198 17% 25%;
+    /* LAWNATQ palette — Paper, Turquoise, Yellow, Coral, Lavender, Blue, Pink, Ink, Muted */
+    --background: 43 30% 95.5%; /* Paper #F7F5F0 */
+    --foreground: 200 16% 25%; /* Ink #35434A */
+    --card: 0 0% 100%; /* White #FFFFFF */
+    --card-foreground: 200 16% 25%;
     --popover: 0 0% 100%;
-    --popover-foreground: 198 17% 25%;
-    --primary: 174 50% 62%;
-    --primary-foreground: 176 40% 16%;
-    --secondary: 36 100% 95.5%;
-    --secondary-foreground: 198 17% 25%;
-    --muted: 36 60% 96.5%;
-    --muted-foreground: 197 9% 44%;
-    --accent: 36 100% 94%;
-    --accent-foreground: 198 17% 25%;
+    --popover-foreground: 200 16% 25%;
+    --primary: 173 51% 63%; /* Turquoise #6FD0C5 */
+    --primary-foreground: 200 30% 16%;
+    --secondary: 43 38% 92%;
+    --secondary-foreground: 200 16% 25%;
+    --muted: 43 26% 92%;
+    --muted-foreground: 199 8% 51%; /* Muted #78858B */
+    --accent: 173 42% 90%;
+    --accent-foreground: 200 16% 25%;
     --destructive: 4 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 32 42% 90%;
-    --input: 32 34% 87%;
-    --ring: 174 50% 52%;
+    --border: 40 20% 87%;
+    --input: 40 18% 85%;
+    --ring: 173 51% 45%;
 
-    --turq: 174 50% 62%;
-    --turq-deep: 176 46% 34%;
-    --sun: 39 100% 70%;
-    --sun-deep: 32 74% 46%;
-    --coral: 4 100% 73%;
-    --coral-deep: 5 63% 55%;
-    --lav: 283 39% 72%;
-    --lav-deep: 277 27% 48%;
-    --sky: 203 51% 67%;
-    --sky-deep: 205 41% 44%;
-    --rose: 353 100% 81%;
-    --rose-deep: 349 58% 55%;
-    --cream: 36 100% 95.5%;
-    --ink: 198 17% 25%;
-    --ink-soft: 197 9% 44%;
+    --turq: 173 51% 63%; /* #6FD0C5 */
+    --turq-deep: 173 46% 31%;
+    --sun: 41 100% 70%; /* #FFD068 */
+    --sun-deep: 38 76% 38%;
+    --coral: 4 100% 73%; /* #FF7E75 */
+    --coral-deep: 4 60% 47%;
+    --lav: 283 39% 72%; /* #C39BD3 */
+    --lav-deep: 283 26% 44%;
+    --sky: 204 51% 67%; /* #7FB3D5 */
+    --sky-deep: 204 40% 39%;
+    --rose: 353 100% 81%; /* #FF9EAA */
+    --rose-deep: 353 52% 50%;
+    --cream: 43 33% 92.5%;
+    --ink: 200 16% 25%; /* #35434A */
+    --ink-soft: 199 8% 51%; /* #78858B */
 
     --radius: 1.35rem;
     --base-font-size: 17px;
@@ -48,62 +48,44 @@
     --font-body: "Rubik", "Baloo Bhaijaan 2", ui-sans-serif, system-ui, sans-serif;
     --font-display: "Baloo Bhaijaan 2", "Rubik", ui-sans-serif, system-ui, sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-
-    --sidebar-background: 36 100% 97%;
-    --sidebar-foreground: 198 17% 25%;
-    --sidebar-primary: 174 50% 62%;
-    --sidebar-primary-foreground: 176 40% 16%;
-    --sidebar-accent: 174 40% 92%;
-    --sidebar-accent-foreground: 176 40% 20%;
-    --sidebar-border: 32 42% 90%;
-    --sidebar-ring: 174 50% 52%;
   }
 
   .dark {
-    --background: 200 19% 10%;
-    --foreground: 36 30% 95%;
-    --card: 200 16% 13.5%;
-    --card-foreground: 36 30% 95%;
-    --popover: 200 16% 14%;
-    --popover-foreground: 36 30% 95%;
-    --primary: 174 44% 55%;
-    --primary-foreground: 200 30% 9%;
-    --secondary: 200 14% 18%;
-    --secondary-foreground: 36 30% 95%;
-    --muted: 200 14% 17%;
-    --muted-foreground: 197 12% 68%;
-    --accent: 200 14% 19%;
-    --accent-foreground: 36 30% 95%;
+    --background: 200 20% 11%;
+    --foreground: 40 18% 94%;
+    --card: 200 16% 15%;
+    --card-foreground: 40 18% 94%;
+    --popover: 200 16% 16%;
+    --popover-foreground: 40 18% 94%;
+    --primary: 173 45% 58%;
+    --primary-foreground: 200 30% 10%;
+    --secondary: 200 14% 19%;
+    --secondary-foreground: 40 18% 94%;
+    --muted: 200 14% 18%;
+    --muted-foreground: 200 10% 68%;
+    --accent: 200 14% 21%;
+    --accent-foreground: 40 18% 94%;
     --destructive: 4 70% 55%;
     --destructive-foreground: 0 0% 100%;
     --border: 200 12% 24%;
     --input: 200 12% 26%;
-    --ring: 174 44% 55%;
+    --ring: 173 45% 55%;
 
-    --turq: 174 40% 52%;
-    --turq-deep: 174 45% 72%;
-    --sun: 39 82% 62%;
-    --sun-deep: 39 84% 72%;
-    --coral: 4 78% 66%;
-    --coral-deep: 4 82% 74%;
-    --lav: 283 33% 63%;
-    --lav-deep: 283 40% 76%;
-    --sky: 203 42% 60%;
-    --sky-deep: 203 50% 74%;
-    --rose: 353 72% 70%;
-    --rose-deep: 353 78% 78%;
-    --cream: 200 15% 14.5%;
-    --ink: 36 30% 95%;
-    --ink-soft: 197 12% 68%;
-
-    --sidebar-background: 200 18% 11.5%;
-    --sidebar-foreground: 36 30% 95%;
-    --sidebar-primary: 174 44% 55%;
-    --sidebar-primary-foreground: 200 30% 9%;
-    --sidebar-accent: 200 14% 18%;
-    --sidebar-accent-foreground: 36 30% 95%;
-    --sidebar-border: 200 12% 22%;
-    --sidebar-ring: 174 44% 55%;
+    --turq: 173 45% 58%;
+    --turq-deep: 173 48% 76%;
+    --sun: 41 85% 66%;
+    --sun-deep: 41 88% 78%;
+    --coral: 4 85% 70%;
+    --coral-deep: 4 88% 80%;
+    --lav: 283 35% 68%;
+    --lav-deep: 283 42% 80%;
+    --sky: 204 45% 64%;
+    --sky-deep: 204 50% 78%;
+    --rose: 353 78% 74%;
+    --rose-deep: 353 82% 82%;
+    --cream: 200 15% 15.5%;
+    --ink: 40 18% 94%;
+    --ink-soft: 200 10% 68%;
   }
 
   html {
@@ -160,10 +142,6 @@
     display: none;
   }
 
-  .marquee-track {
-    animation: lawnatq-marquee 42s linear infinite;
-  }
-
   .float-slow {
     animation: lawnatq-float 7s ease-in-out infinite;
   }
@@ -176,11 +154,6 @@
     background-image: radial-gradient(hsl(var(--ink) / 0.09) 1px, transparent 1px);
     background-size: 22px 22px;
   }
-}
-
-@keyframes lawnatq-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 
 @keyframes lawnatq-float {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Download, Eraser, Loader2, Paintbrush, Redo2, Save, Trash2, Undo2 } from "lucide-react";
+import { Circle, Download, Eraser, Loader2, Paintbrush, Redo2, Save, Square, Star, Trash2, Triangle, Undo2 } from "lucide-react";
 import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
 import { templateById } from "@/components/draw/templates";
@@ -21,6 +21,12 @@ const PALETTE = [
   { hex: "#FFFFFF", name: "white" },
 ];
 const SIZES = [10, 20, 36];
+const SHAPE_TOOLS = [
+  { id: "circle", Icon: Circle, ar: "دائرة", en: "Circle" },
+  { id: "square", Icon: Square, ar: "مربع", en: "Square" },
+  { id: "triangle", Icon: Triangle, ar: "مثلث", en: "Triangle" },
+  { id: "star", Icon: Star, ar: "نجمة", en: "Star" },
+];
 
 export function DrawingCanvas({ child, template, onSaved }) {
   const { t, lang } = useI18n();
@@ -31,6 +37,7 @@ export function DrawingCanvas({ child, template, onSaved }) {
   const cursorRef = useRef(-1);
   const colorsUsed = useRef(new Set());
   const [tool, setTool] = useState("brush");
+  const [shape, setShape] = useState("circle");
   const [color, setColor] = useState(PALETTE[0].hex);
   const [size, setSize] = useState(SIZES[1]);
   const [stackState, setStackState] = useState({ canUndo: false, canRedo: false });
@@ -101,11 +108,48 @@ export function DrawingCanvas({ child, template, onSaved }) {
     ctx.lineWidth = tool === "eraser" ? size * 1.8 : size;
   }
 
+  /** Stamps one filled shape of the chosen colour — a simple sticker tool. */
+  function stampShape(x, y) {
+    const ctx = ctxOf();
+    const r = size * 2.2;
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    if (shape === "circle") {
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+    } else if (shape === "square") {
+      ctx.rect(x - r, y - r, r * 2, r * 2);
+    } else if (shape === "triangle") {
+      ctx.moveTo(x, y - r);
+      ctx.lineTo(x + r, y + r);
+      ctx.lineTo(x - r, y + r);
+      ctx.closePath();
+    } else {
+      for (let i = 0; i < 10; i++) {
+        const radius = i % 2 === 0 ? r : r / 2.2;
+        const angle = (Math.PI / 5) * i - Math.PI / 2;
+        const px = x + Math.cos(angle) * radius;
+        const py = y + Math.sin(angle) * radius;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+    }
+    ctx.fill();
+  }
+
   function start(event) {
     event.preventDefault();
     canvasRef.current.setPointerCapture?.(event.pointerId);
-    drawing.current = true;
     lastPoint.current = pointFromEvent(event);
+    if (tool === "shape") {
+      colorsUsed.current.add(color);
+      stampShape(lastPoint.current.x, lastPoint.current.y);
+      drawing.current = false;
+      commit();
+      return;
+    }
+    drawing.current = true;
     if (tool === "brush") colorsUsed.current.add(color);
     strokeStyle();
     const ctx = ctxOf();
@@ -159,7 +203,11 @@ export function DrawingCanvas({ child, template, onSaved }) {
   }
 
   async function save() {
-    if (!child) return;
+    if (!child) {
+      toast(t("سجّل الدخول لتحفظ رسمتك في مساحتك", "Sign in to keep your drawing in your space"));
+      base44.auth.redirectToLogin("/colors");
+      return;
+    }
     setSaving(true);
     try {
       const out = await composite();
@@ -258,6 +306,27 @@ export function DrawingCanvas({ child, template, onSaved }) {
                 )}
               >
                 <span className="rounded-full bg-ink" style={{ width: s / 2 + 4, height: s / 2 + 4 }} />
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-1 rounded-full bg-cream p-1">
+            {SHAPE_TOOLS.map(({ id, Icon, ar, en }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => {
+                  setShape(id);
+                  setTool("shape");
+                }}
+                aria-pressed={tool === "shape" && shape === id}
+                aria-label={t(ar, en)}
+                className={cn(
+                  "grid h-10 w-10 place-items-center rounded-full transition",
+                  tool === "shape" && shape === id ? "bg-card shadow-sm text-ink" : "text-ink-soft",
+                )}
+              >
+                <Icon className="h-4 w-4" />
               </button>
             ))}
           </div>

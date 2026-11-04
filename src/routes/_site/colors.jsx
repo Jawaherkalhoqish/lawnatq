@@ -1,0 +1,49 @@
+import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import DrawingCanvas from "@/components/draw/DrawingCanvas";
+import TemplatePicker from "@/components/draw/TemplatePicker";
+import PageIntro from "@/components/site/PageIntro";
+import { useI18n } from "@/lib/preferences";
+
+export const Route = createFileRoute("/_site/colors")({
+  head: () => ({
+    meta: [
+      { title: "الرسم والتلوين | لونُطق" },
+      {
+        name: "description",
+        content: "مساحة رسم وتلوين للأطفال: فرشاة، ممحاة، أحجام، أشكال، وتراجع — بألوان لونُطق.",
+      },
+    ],
+  }),
+  component: ColorsPage,
+});
+
+function ColorsPage() {
+  const { t } = useI18n();
+  const [template, setTemplate] = useState("free");
+
+  return (
+    <div className="pb-16">
+      <PageIntro
+        eyebrow={t("الرسم", "Drawing")}
+        title={t("ألوانك، بلا قواعد", "Your colors, no rules")}
+        description={t(
+          "اختر ورقة تلوين أو ابدأ بورقة بيضاء، ثم ارسم بحرية. لا يوجد رسم خاطئ، ولا نقرأ الرسمة لنحكم على شعورك.",
+          "Pick a coloring sheet or start blank, then draw freely. There is no wrong drawing, and we never read your drawing to judge how you feel.",
+        )}
+        tone="sun"
+      />
+
+      <div className="mx-auto mt-8 max-w-5xl space-y-4 px-5 sm:px-8">
+        <TemplatePicker value={template} onChange={setTemplate} />
+        <DrawingCanvas template={template} />
+        <p className="rounded-2xl bg-cream/70 px-5 py-4 text-sm leading-relaxed text-ink-soft">
+          {t(
+            "الرسم هنا للتعبير فقط. لا يستنتج لونُطق مشاعر الطفل أو قدراته من الرسمة.",
+            "Drawing here is for expression only. LAWNATQ never infers a child's feelings or abilities from a drawing.",
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}

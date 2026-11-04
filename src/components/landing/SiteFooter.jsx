@@ -28,17 +28,18 @@ export function SiteFooter() {
           <nav aria-label={t("الأنشطة", "Activities")}>
             <h3 className="text-sm font-bold text-ink">{t("الأنشطة", "Activities")}</h3>
             <ul className="mt-4 space-y-2.5 text-sm text-ink-soft">
-              <li><Link to="/register" className="transition hover:text-ink">{t("بطاقات التواصل", "Communication cards")}</Link></li>
-              <li><Link to="/register" className="transition hover:text-ink">{t("ألواني — الرسم والتلوين", "My colors — drawing")}</Link></li>
-              <li><Link to="/register" className="transition hover:text-ink">{t("قصتي أنا — القصص", "My story — stories")}</Link></li>
-              <li><Link to="/register" className="transition hover:text-ink">{t("مساعدي", "My helper")}</Link></li>
+              <li><Link to="/cards" className="transition hover:text-ink">{t("بطاقات التواصل", "Communication cards")}</Link></li>
+              <li><Link to="/colors" className="transition hover:text-ink">{t("ألواني — الرسم والتلوين", "My colors — drawing")}</Link></li>
+              <li><Link to="/story" className="transition hover:text-ink">{t("قصتي أنا", "My story")}</Link></li>
+              <li><Link to="/stories" className="transition hover:text-ink">{t("القصص التفاعلية", "Interactive stories")}</Link></li>
+              <li><Link to="/assistant" className="transition hover:text-ink">{t("المرافق", "Companion")}</Link></li>
             </ul>
           </nav>
 
           <nav aria-label={t("للوالدين", "For parents")}>
             <h3 className="text-sm font-bold text-ink">{t("للوالدين", "For parents")}</h3>
             <ul className="mt-4 space-y-2.5 text-sm text-ink-soft">
-              <li><Link to="/dashboard" className="transition hover:text-ink">{t("لوحة الوالد", "Parent dashboard")}</Link></li>
+              <li><Link to="/parent" className="transition hover:text-ink">{t("لوحة الوالد", "Parent dashboard")}</Link></li>
               <li><Link to="/insights" className="transition hover:text-ink">{t("رؤى النشاط", "Activity insights")}</Link></li>
               <li><Link to="/settings" className="transition hover:text-ink">{t("الإعدادات والوصول", "Settings & accessibility")}</Link></li>
               <li><Link to="/privacy" className="transition hover:text-ink">{t("الخصوصية والأمان", "Privacy & safety")}</Link></li>
