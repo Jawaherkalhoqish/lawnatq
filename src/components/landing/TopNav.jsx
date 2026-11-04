@@ -50,7 +50,7 @@ export function TopNav() {
           <LangToggle className="hidden sm:inline-flex" />
           <ThemeToggle className="hidden sm:inline-flex" />
           <Link
-            to="/parent"
+            to="/dashboard"
             className="hidden h-11 items-center rounded-full px-4 text-sm font-semibold text-ink transition hover:bg-cream lg:inline-flex"
           >
             {t("لوحة الوالد", "Parent dashboard")}
@@ -98,7 +98,7 @@ export function TopNav() {
             </Link>
           ))}
           <Link
-            to="/parent"
+            to="/dashboard"
             onClick={close}
             className="rounded-2xl px-4 py-3 text-base font-semibold text-ink transition hover:bg-cream"
           >

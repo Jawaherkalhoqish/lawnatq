@@ -39,7 +39,7 @@ export function SiteFooter() {
           <nav aria-label={t("للوالدين", "For parents")}>
             <h3 className="text-sm font-bold text-ink">{t("للوالدين", "For parents")}</h3>
             <ul className="mt-4 space-y-2.5 text-sm text-ink-soft">
-              <li><Link to="/parent" className="transition hover:text-ink">{t("لوحة الوالد", "Parent dashboard")}</Link></li>
+              <li><Link to="/dashboard" className="transition hover:text-ink">{t("لوحة الوالد", "Parent dashboard")}</Link></li>
               <li><Link to="/insights" className="transition hover:text-ink">{t("رؤى النشاط", "Activity insights")}</Link></li>
               <li><Link to="/settings" className="transition hover:text-ink">{t("الإعدادات والوصول", "Settings & accessibility")}</Link></li>
               <li><Link to="/privacy" className="transition hover:text-ink">{t("الخصوصية والأمان", "Privacy & safety")}</Link></li>
