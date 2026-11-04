@@ -1,6 +1,7 @@
 import { Image } from "@/components/ui/image";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/preferences";
+import { MASCOT_URL } from "@/lib/brand-asset";
 
 /** The official LAWNATQ logo (background removed) with optional wordmark. */
 export function Logo({ className = "h-12 w-auto", wordmark = false, compact = false }) {
@@ -8,10 +9,8 @@ export function Logo({ className = "h-12 w-auto", wordmark = false, compact = fa
   return (
     <span className="inline-flex items-center gap-3">
       <Image
-        src="/brand/logo.png"
+        src={MASCOT_URL}
         alt={t("شعار لونُطق", "LAWNATQ logo")}
-        width={720}
-        height={589}
         className={cn("w-auto object-contain select-none", className)}
         fittingType="fit"
         draggable={false}

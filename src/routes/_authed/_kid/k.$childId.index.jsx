@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { activityArt } from "@/components/brand/ActivityArt";
 import { Image } from "@/components/ui/image";
 import { useChild } from "@/hooks/useFamily";
+import { MASCOT_URL } from "@/lib/brand-asset";
 import { useI18n } from "@/lib/preferences";
 
 export const Route = createFileRoute("/_authed/_kid/k/$childId/")({
@@ -73,7 +74,7 @@ function ChildHome() {
             </p>
           </div>
           <Image
-            src="/brand/logo.png"
+            src={MASCOT_URL}
             alt=""
             className="h-32 w-auto origin-center float-mid drop-shadow-[0_16px_24px_rgba(53,67,74,0.14)] sm:h-40"
             fittingType="fit"
