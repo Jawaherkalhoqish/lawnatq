@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "name": "StoryProgress",
+  "description": "A story a child read, with the scene they reached and whether it was saved.",
+  "properties": {
+    "child_id": {
+      "type": "string"
+    },
+    "story_id": {
+      "type": "string"
+    },
+    "scene_index": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "saved",
+        "completed"
+      ],
+      "enumColors": [
+        "yellow",
+        "green",
+        "blue"
+      ],
+      "default": "in_progress"
+    }
+  },
+  "required": [
+    "child_id",
+    "story_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

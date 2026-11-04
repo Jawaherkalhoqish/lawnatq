@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "name": "AssistantMessage",
+  "description": "One turn of a conversation with the LAWNATQ helper, kept per child.",
+  "properties": {
+    "child_id": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "user",
+        "assistant"
+      ],
+      "enumColors": [
+        "blue",
+        "green"
+      ]
+    },
+    "content": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "child",
+        "parent"
+      ],
+      "enumColors": [
+        "yellow",
+        "purple"
+      ],
+      "default": "child"
+    }
+  },
+  "required": [
+    "child_id",
+    "role",
+    "content"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

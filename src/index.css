@@ -4,89 +4,219 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    /* LAWNATQ palette — brand book */
+    --background: 36 100% 98.4%;
+    --foreground: 198 17% 25%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 198 17% 25%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --font-heading: ui-sans-serif, system-ui, sans-serif;
-    --font-body: ui-sans-serif, system-ui, sans-serif;
-    --font-display: ui-sans-serif, system-ui, sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --popover-foreground: 198 17% 25%;
+    --primary: 174 50% 62%;
+    --primary-foreground: 176 40% 16%;
+    --secondary: 36 100% 95.5%;
+    --secondary-foreground: 198 17% 25%;
+    --muted: 36 60% 96.5%;
+    --muted-foreground: 197 9% 44%;
+    --accent: 36 100% 94%;
+    --accent-foreground: 198 17% 25%;
+    --destructive: 4 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 32 42% 90%;
+    --input: 32 34% 87%;
+    --ring: 174 50% 52%;
+
+    --turq: 174 50% 62%;
+    --turq-deep: 176 46% 34%;
+    --sun: 39 100% 70%;
+    --sun-deep: 32 74% 46%;
+    --coral: 4 100% 73%;
+    --coral-deep: 5 63% 55%;
+    --lav: 283 39% 72%;
+    --lav-deep: 277 27% 48%;
+    --sky: 203 51% 67%;
+    --sky-deep: 205 41% 44%;
+    --rose: 353 100% 81%;
+    --rose-deep: 349 58% 55%;
+    --cream: 36 100% 95.5%;
+    --ink: 198 17% 25%;
+    --ink-soft: 197 9% 44%;
+
+    --radius: 1.35rem;
+    --base-font-size: 17px;
+
+    --font-heading: "Baloo Bhaijaan 2", "Rubik", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Rubik", "Baloo Bhaijaan 2", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Baloo Bhaijaan 2", "Rubik", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --sidebar-background: 36 100% 97%;
+    --sidebar-foreground: 198 17% 25%;
+    --sidebar-primary: 174 50% 62%;
+    --sidebar-primary-foreground: 176 40% 16%;
+    --sidebar-accent: 174 40% 92%;
+    --sidebar-accent-foreground: 176 40% 20%;
+    --sidebar-border: 32 42% 90%;
+    --sidebar-ring: 174 50% 52%;
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 200 19% 10%;
+    --foreground: 36 30% 95%;
+    --card: 200 16% 13.5%;
+    --card-foreground: 36 30% 95%;
+    --popover: 200 16% 14%;
+    --popover-foreground: 36 30% 95%;
+    --primary: 174 44% 55%;
+    --primary-foreground: 200 30% 9%;
+    --secondary: 200 14% 18%;
+    --secondary-foreground: 36 30% 95%;
+    --muted: 200 14% 17%;
+    --muted-foreground: 197 12% 68%;
+    --accent: 200 14% 19%;
+    --accent-foreground: 36 30% 95%;
+    --destructive: 4 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 200 12% 24%;
+    --input: 200 12% 26%;
+    --ring: 174 44% 55%;
+
+    --turq: 174 40% 52%;
+    --turq-deep: 174 45% 72%;
+    --sun: 39 82% 62%;
+    --sun-deep: 39 84% 72%;
+    --coral: 4 78% 66%;
+    --coral-deep: 4 82% 74%;
+    --lav: 283 33% 63%;
+    --lav-deep: 283 40% 76%;
+    --sky: 203 42% 60%;
+    --sky-deep: 203 50% 74%;
+    --rose: 353 72% 70%;
+    --rose-deep: 353 78% 78%;
+    --cream: 200 15% 14.5%;
+    --ink: 36 30% 95%;
+    --ink-soft: 197 12% 68%;
+
+    --sidebar-background: 200 18% 11.5%;
+    --sidebar-foreground: 36 30% 95%;
+    --sidebar-primary: 174 44% 55%;
+    --sidebar-primary-foreground: 200 30% 9%;
+    --sidebar-accent: 200 14% 18%;
+    --sidebar-accent-foreground: 36 30% 95%;
+    --sidebar-border: 200 12% 22%;
+    --sidebar-ring: 174 44% 55%;
   }
-}
 
+  html {
+    font-size: var(--base-font-size);
+    -webkit-text-size-adjust: 100%;
+  }
 
-
-@layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background font-body text-foreground;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  :focus-visible {
+    outline: 3px solid hsl(var(--ring));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: hsl(var(--sun) / 0.55);
+    color: hsl(var(--ink));
   }
 }
+
+@layer components {
+  .shadow-soft {
+    box-shadow: 0 1px 2px hsl(var(--ink) / 0.04), 0 14px 32px -18px hsl(var(--ink) / 0.22);
+  }
+
+  .shadow-lift {
+    box-shadow: 0 2px 6px hsl(var(--ink) / 0.05), 0 28px 54px -26px hsl(var(--ink) / 0.32);
+  }
+
+  .ring-pastel {
+    box-shadow: inset 0 0 0 1px hsl(var(--border));
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .marquee-track {
+    animation: lawnatq-marquee 42s linear infinite;
+  }
+
+  .float-slow {
+    animation: lawnatq-float 7s ease-in-out infinite;
+  }
+
+  .float-mid {
+    animation: lawnatq-float 5.5s ease-in-out infinite;
+  }
+
+  .dotted-grid {
+    background-image: radial-gradient(hsl(var(--ink) / 0.09) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+}
+
+@keyframes lawnatq-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes lawnatq-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(-1.5deg); }
+}
+
+@keyframes lawnatq-pop {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop {
+  animation: lawnatq-pop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Reduced motion: OS setting or the in-app accessibility toggle */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+[data-textsize="small"] { --base-font-size: 15.5px; }
+[data-textsize="normal"] { --base-font-size: 17px; }
+[data-textsize="large"] { --base-font-size: 19px; }
+[data-textsize="xlarge"] { --base-font-size: 21px; }
