@@ -35,7 +35,7 @@ export function CardTile({ card, selected, favorite, onSelect, onToggleFavorite 
         aria-pressed={favorite}
         className={cn(
           "absolute end-1.5 top-1.5 grid h-8 w-8 place-items-center rounded-full transition",
-          favorite ? "bg-sun text-sun-deep" : "bg-background/80 text-ink-soft hover:text-ink",
+          favorite ? "bg-sun text-sun-deep dark:text-primary-foreground" : "bg-background/80 text-ink-soft hover:text-ink",
         )}
       >
         <Star className={cn("h-4 w-4", favorite && "fill-current")} aria-hidden="true" />

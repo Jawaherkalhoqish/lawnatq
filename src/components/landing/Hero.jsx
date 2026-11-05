@@ -12,8 +12,8 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-card via-background to-cream/70">
-      <div className="pointer-events-none absolute -top-28 start-[-12%] h-[420px] w-[420px] rounded-full bg-rose/30 blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute bottom-0 end-[-10%] h-[380px] w-[380px] rounded-full bg-lav/30 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute -top-28 start-[-12%] h-[420px] w-[420px] rounded-full bg-rose/30 blur-3xl dark:bg-rose/10" aria-hidden="true" />
+      <div className="pointer-events-none absolute bottom-0 end-[-10%] h-[380px] w-[380px] rounded-full bg-lav/30 blur-3xl dark:bg-lav/10" aria-hidden="true" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-12 pt-10 sm:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8 lg:pb-20 lg:pt-16">
         <motion.div
@@ -85,8 +85,8 @@ export function Hero() {
           <Image
             src={HERO_URL}
             alt={t(
-              "رسمة أطفال ملونة تمثل التعبير بالألوان والقصص في لونطق",
-              "A colourful children's illustration of expression through colors and stories",
+              "طفلان يرسمان مع شخصية لونُطق",
+              "Two children drawing alongside the LAWNATQ mascot",
             )}
             className="relative h-auto w-full object-contain drop-shadow-[0_26px_40px_rgba(53,67,74,0.12)]"
             fittingType="fit"

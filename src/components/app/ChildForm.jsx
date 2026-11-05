@@ -126,7 +126,7 @@ export function ChildForm({ child, onDone, submitLabel }) {
                 aria-pressed={form.age === age}
                 className={cn(
                   "h-10 w-10 rounded-full text-sm font-bold transition",
-                  form.age === age ? "bg-turq text-turq-deep ring-2 ring-turq-deep/30" : "bg-cream text-ink-soft hover:text-ink",
+                  form.age === age ? "bg-turq text-turq-deep ring-2 ring-turq-deep/30 dark:text-primary-foreground" : "bg-cream text-ink-soft hover:text-ink",
                 )}
               >
                 {age}

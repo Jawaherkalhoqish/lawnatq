@@ -158,7 +158,7 @@ function StoryReader() {
         <button
           type="button"
           onClick={() => go(scene.next)}
-          className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-turq px-7 text-base font-bold text-turq-deep transition hover:brightness-105"
+          className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-turq px-7 text-base font-bold text-turq-deep transition hover:brightness-105 dark:text-primary-foreground"
         >
           {t("التالي", "Next")}
           <ArrowRight className="h-5 w-5 rtl:rotate-180" aria-hidden="true" />

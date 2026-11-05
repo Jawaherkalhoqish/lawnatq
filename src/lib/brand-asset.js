@@ -8,7 +8,9 @@ export const LOGO_URL = "/brand/lawnatq-logo.png";
 /** Kept for the mascot slots (child space, favicon) — same official mark. */
 export const MASCOT_URL = LOGO_URL;
 
-export const HERO_URL = "/hero/01_Hero_Header/hero_main_kids_drawing_transparent.png";
+/** Supplied hero artwork — two children drawing with the teal mascot, transparent PNG. */
+export const HERO_URL =
+  "https://base44.app/api/apps/6aeaa7cdb1406c78a8420eae/files/mp/public/6aeaa7cdb1406c78a8420eae/84a765656_hero_children_mascot.png";
 
 /**
  * The four worlds, exactly as supplied in LAWNATQ_Four_Worlds_Images.zip.

@@ -56,21 +56,21 @@
     --base-font-size: 17px;
 
     --font-heading: "Baloo Bhaijaan 2", "Rubik", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Rubik", "Baloo Bhaijaan 2", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "IBM Plex Sans Arabic", "Rubik", ui-sans-serif, system-ui, sans-serif;
     --font-display: "Baloo Bhaijaan 2", "Rubik", ui-sans-serif, system-ui, sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
 
   .dark {
     /* Coordinated dark theme: Deep Background #202A35 with Dark Surface #2B3743,
-       and the same pastel brand accents brightened so they still read softly. */
-    --background: 211 25% 17%; /* #202A35 */
+       and the approved pastel accents kept soft but readable. */
+    --background: 211 12% 17%; /* #202A35 */
     --foreground: 43 24% 93%;
-    --card: 210 22% 22%; /* #2B3743 */
+    --card: 210 22% 21.5%; /* #2B3743 */
     --card-foreground: 43 24% 93%;
     --popover: 210 22% 24%;
     --popover-foreground: 43 24% 93%;
-    --primary: 283 45% 76%;
+    --primary: 283 39% 72%; /* Lavender #C39BD3 */
     --primary-foreground: 211 30% 12%;
     --secondary: 210 20% 26%;
     --secondary-foreground: 43 24% 93%;
@@ -82,20 +82,20 @@
     --destructive-foreground: 211 30% 10%;
     --border: 210 16% 30%;
     --input: 210 16% 32%;
-    --ring: 283 45% 74%;
+    --ring: 283 39% 72%;
 
-    --turq: 173 52% 66%;
-    --turq-deep: 173 55% 80%;
-    --sun: 41 92% 70%;
-    --sun-deep: 41 90% 82%;
-    --coral: 4 92% 74%;
-    --coral-deep: 4 88% 84%;
-    --lav: 283 45% 76%;
-    --lav-deep: 283 45% 76%;
-    --rose: 353 88% 80%;
-    --rose-deep: 353 82% 86%;
-    --sky: 204 46% 70%;
-    --sky-deep: 204 52% 82%;
+    --turq: 173 51% 63%; /* Turquoise #6FD0C5 */
+    --turq-deep: 173 58% 82%;
+    --sun: 41 100% 70%; /* Yellow #FFD068 */
+    --sun-deep: 41 100% 84%;
+    --coral: 4 100% 73%; /* Coral #FF7E75 */
+    --coral-deep: 4 92% 84%;
+    --lav: 283 39% 72%; /* Lavender #C39BD3 */
+    --lav-deep: 283 39% 72%;
+    --rose: 353 100% 81%; /* Pink #FF9EAA */
+    --rose-deep: 353 100% 87%;
+    --sky: 204 51% 67%;
+    --sky-deep: 204 50% 82%;
 
     /* Light shades become soft tinted dark surfaces */
     --blush: 347 22% 26%;
@@ -175,6 +175,25 @@
   .dotted-grid {
     background-image: radial-gradient(hsl(var(--ink) / 0.09) 1px, transparent 1px);
     background-size: 22px 22px;
+  }
+
+  /* Dark mode stays quiet: depth comes from surface tone and a hairline edge,
+     never from glow or heavy shadow. */
+  .dark .shadow-soft {
+    box-shadow: 0 1px 2px hsl(0 0% 0% / 0.28), 0 10px 24px -20px hsl(0 0% 0% / 0.45);
+  }
+
+  .dark .shadow-lift {
+    box-shadow: 0 1px 3px hsl(0 0% 0% / 0.32), 0 18px 36px -30px hsl(0 0% 0% / 0.5);
+  }
+
+  .dark .card-glow,
+  .dark .card-glow-on {
+    box-shadow: 0 0 0 1px hsl(var(--border) / 0.85);
+  }
+
+  .dark .dotted-grid {
+    background-image: radial-gradient(hsl(var(--ink) / 0.055) 1px, transparent 1px);
   }
 }
 

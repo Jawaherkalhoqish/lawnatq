@@ -62,7 +62,7 @@ function StoriesPage() {
                   <Link
                     to="/stories/$storyId"
                     params={{ storyId: story.id }}
-                    className="inline-flex h-13 items-center gap-2 rounded-full bg-turq px-6 text-base font-bold text-turq-deep transition hover:brightness-105"
+                    className="inline-flex h-13 items-center gap-2 rounded-full bg-turq px-6 text-base font-bold text-turq-deep transition hover:brightness-105 dark:text-primary-foreground"
                   >
                     <BookOpen className="h-4 w-4" aria-hidden="true" />
                     {resumed ? t("أكمل القصة", "Continue") : t("اقرأ القصة", "Read the story")}

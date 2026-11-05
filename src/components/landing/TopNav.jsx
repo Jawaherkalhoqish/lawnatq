@@ -11,12 +11,10 @@ import { cn } from "@/lib/utils";
 /** The one navigation used on every public page — pages first, then homepage sections. */
 const links = [
   { to: "/", ar: "الرئيسية", en: "Home" },
-  { href: "/#about", ar: "عن لونُطق", en: "About" },
-  { to: "/cards", ar: "البطاقات", en: "Cards" },
-  { to: "/colors", ar: "الرسم", en: "Drawing" },
-  { to: "/story", ar: "قصتي", en: "My story" },
-  { to: "/stories", ar: "القصص التفاعلية", en: "Stories" },
-  { to: "/assistant", ar: "المرافق", en: "Companion" },
+  { href: "/#how", ar: "كيف يعمل", en: "How it works" },
+  { href: "/#activities", ar: "الأنشطة", en: "Activities" },
+  { to: "/stories", ar: "القصص", en: "Stories" },
+  { href: "/#contact", ar: "اتصل بنا", en: "Contact us" },
 ];
 
 export function TopNav() {
@@ -25,7 +23,7 @@ export function TopNav() {
   const [open, setOpen] = useState(false);
 
   const close = () => setOpen(false);
-  const linkClass = "rounded-full px-3 py-2 text-sm font-semibold text-ink-soft transition hover:bg-cream hover:text-ink";
+  const linkClass = "rounded-full px-2.5 py-2 text-sm font-semibold text-ink-soft transition hover:bg-cream hover:text-ink xl:px-3";
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 shadow-[0_10px_30px_-26px_hsl(var(--ink)/0.45)] backdrop-blur-xl">
@@ -34,7 +32,7 @@ export function TopNav() {
           <Logo className="h-10 sm:h-11" wordmark />
         </Link>
 
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label={t("التنقل الرئيسي", "Main navigation")}>
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label={t("التنقل الرئيسي", "Main navigation")}>
           {links.map((l) =>
             l.href ? (
               <a key={l.href} href={l.href} className={linkClass}>
@@ -78,14 +76,14 @@ export function TopNav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={t("القائمة", "Menu")}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card xl:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      <div id="mobile-nav" className={cn("border-t border-border/70 bg-background xl:hidden", open ? "block" : "hidden")}>
+      <div id="mobile-nav" className={cn("border-t border-border/70 bg-background lg:hidden", open ? "block" : "hidden")}>
         <div className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4">
           {links.map((l) =>
             l.href ? (

@@ -242,7 +242,7 @@ function CompanionPage() {
                 type="submit"
                 disabled={!draft.trim() || send.isPending}
                 aria-label={t("إرسال", "Send")}
-                className="grid h-13 w-13 shrink-0 place-items-center rounded-full bg-turq text-turq-deep transition hover:brightness-105 disabled:opacity-40"
+                className="grid h-13 w-13 shrink-0 place-items-center rounded-full bg-turq text-turq-deep transition hover:brightness-105 disabled:opacity-40 dark:text-primary-foreground"
               >
                 <Send className="h-5 w-5 rtl:rotate-180" aria-hidden="true" />
               </button>

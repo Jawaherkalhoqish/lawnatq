@@ -128,7 +128,7 @@ function MyStoryPage() {
             <button
               type="button"
               onClick={() => setSceneIndex((i) => Math.min(scenes.length - 1, i + 1))}
-              className="inline-flex h-14 items-center gap-2 rounded-full bg-turq px-7 text-base font-bold text-turq-deep transition hover:brightness-105"
+              className="inline-flex h-14 items-center gap-2 rounded-full bg-turq px-7 text-base font-bold text-turq-deep transition hover:brightness-105 dark:text-primary-foreground"
             >
               {t("التالي", "Next")}
               <Arrow className="h-5 w-5" aria-hidden="true" />
