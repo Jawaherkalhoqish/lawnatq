@@ -32,7 +32,7 @@ const items = [
 export function WhyDifferent() {
   const { t } = useI18n();
   return (
-    <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
+    <section id="about" className="mx-auto max-w-7xl scroll-mt-24 px-5 py-20 sm:px-8 lg:py-24">
       <Reveal className="mx-auto max-w-2xl text-center">
         <span className="text-sm font-bold uppercase tracking-[0.2em] text-turq-deep">
           {t("لماذا لونُطق", "Why LAWNATQ")}

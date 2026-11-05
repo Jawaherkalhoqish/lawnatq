@@ -7,7 +7,7 @@ export const cardCategories = [
   { id: "01_Basic_Needs", ar: "احتياجاتي", en: "My needs", tone: "turq" },
   { id: "02_Actions_Activities", ar: "أفعال وأنشطة", en: "Actions", tone: "sun" },
   { id: "03_People", ar: "الناس", en: "People", tone: "coral" },
-  { id: "04_Feelings", ar: "أشعري", en: "Feelings", tone: "lav" },
+  { id: "04_Feelings", ar: "مشاعري", en: "My Feelings", tone: "lav" },
   { id: "05_Social_Interaction", ar: "أتكلم مع الآخرين", en: "Talking", tone: "sky" },
   { id: "06_Choices_Refusal", ar: "أختار", en: "I choose", tone: "rose" },
   { id: "07_Help_Regulation", ar: "أطلب مساعدة", en: "Getting help", tone: "turq" },
