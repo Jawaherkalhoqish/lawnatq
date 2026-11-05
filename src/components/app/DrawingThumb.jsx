@@ -39,7 +39,7 @@ export function DrawingThumb({ drawing, className, onClick }) {
         </div>
       )}
       {drawing?.title && (
-        <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 to-transparent px-3 pb-2 pt-6 text-start text-xs font-bold text-ink">
+        <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-card/95 to-transparent px-3 pb-2 pt-6 text-start text-xs font-bold text-ink">
           {drawing.title}
         </span>
       )}

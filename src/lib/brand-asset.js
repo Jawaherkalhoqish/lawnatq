@@ -14,6 +14,12 @@ export const HERO_URL = "/hero/01_Hero_Header/hero_main_kids_drawing_transparent
  * The four worlds, exactly as supplied in LAWNATQ_Four_Worlds_Images.zip.
  * Square transparent PNGs — shown whole, never cropped, recolored or replaced.
  */
+/** Supplied photography, used exactly as provided — never regenerated or cropped. */
+export const PARENT_PHOTO_URL =
+  "https://base44.app/api/apps/6aeaa7cdb1406c78a8420eae/files/mp/public/6aeaa7cdb1406c78a8420eae/8de406a84_drow.jpg";
+export const SIGNUP_PHOTO_URL =
+  "https://base44.app/api/apps/6aeaa7cdb1406c78a8420eae/files/mp/public/6aeaa7cdb1406c78a8420eae/bb29c3e00_lab.jpg";
+
 export const WORLD_IMAGES = {
   cards: "/worlds/01_Bitqati.png",
   feelings: "/worlds/02_Mashaeri.png",

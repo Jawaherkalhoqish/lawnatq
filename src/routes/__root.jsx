@@ -20,7 +20,7 @@ export const Route = createRootRoute({
         content:
           "لونُطق مساحة تعبير للأطفال من 5 إلى 10 سنوات: بطاقات تواصل، رسم وتلوين، قصص تفاعلية، ومساعد ودود. LAWNATQ — a gentle space where children express themselves through colors, cards and stories.",
       },
-      { name: "theme-color", content: "#FFFCF7" },
+      { name: "theme-color", content: "#F7F5F0" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

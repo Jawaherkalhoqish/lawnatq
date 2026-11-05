@@ -5,7 +5,7 @@ const tones = {
   sun: "bg-sun/20 text-sun-deep border-sun/40",
   coral: "bg-coral/15 text-coral-deep border-coral/30",
   lav: "bg-lav/15 text-lav-deep border-lav/30",
-  sky: "bg-sky/15 text-sky-deep border-sky/30",
+  sky: "bg-lilac/80 text-lav-deep border-lav/30",
 };
 
 /** Shared page opening: eyebrow, heading and one short description. */

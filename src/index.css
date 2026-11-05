@@ -4,41 +4,52 @@
 
 @layer base {
   :root {
-    /* LAWNATQ palette — Paper, Turquoise, Yellow, Coral, Lavender, Blue, Pink, Ink, Muted */
+    /* LAWNATQ approved palette.
+       Pink #FF9EAA and Lavender #C39BD3 lead; Turquoise #6FD0C5, Yellow #FFD068
+       and Coral #FF7E75 support; Blue #7FB3D5 stays a rare accent. */
     --background: 43 30% 95.5%; /* Paper #F7F5F0 */
-    --foreground: 200 16% 25%; /* Ink #35434A */
+    --foreground: 200 17% 25%; /* Ink #35434A */
     --card: 0 0% 100%; /* White #FFFFFF */
-    --card-foreground: 200 16% 25%;
+    --card-foreground: 200 17% 25%;
     --popover: 0 0% 100%;
-    --popover-foreground: 200 16% 25%;
-    --primary: 173 51% 63%; /* Turquoise #6FD0C5 */
-    --primary-foreground: 200 30% 16%;
-    --secondary: 43 38% 92%;
-    --secondary-foreground: 200 16% 25%;
-    --muted: 43 26% 92%;
+    --popover-foreground: 200 17% 25%;
+    --primary: 278 23% 50%; /* Deep Lavender #88649D */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 341 67% 92%; /* Blush Pink #F8DCE5 */
+    --secondary-foreground: 200 17% 25%;
+    --muted: 40 24% 93%;
     --muted-foreground: 199 8% 51%; /* Muted #78858B */
-    --accent: 173 42% 90%;
-    --accent-foreground: 200 16% 25%;
-    --destructive: 4 84% 60%;
+    --accent: 271 45% 91%; /* Lilac Mist #E8DDF2 */
+    --accent-foreground: 278 23% 38%;
+    --destructive: 3 53% 55%; /* Deep Coral #C9534D */
     --destructive-foreground: 0 0% 100%;
-    --border: 40 20% 87%;
-    --input: 40 18% 85%;
-    --ring: 173 51% 45%;
+    --border: 341 22% 89%;
+    --input: 40 20% 86%;
+    --ring: 278 28% 56%;
 
     --turq: 173 51% 63%; /* #6FD0C5 */
-    --turq-deep: 173 46% 31%;
+    --turq-deep: 174 29% 38%; /* #328F86 */
     --sun: 41 100% 70%; /* #FFD068 */
-    --sun-deep: 38 76% 38%;
+    --sun-deep: 39 52% 43%; /* #B98524 */
     --coral: 4 100% 73%; /* #FF7E75 */
-    --coral-deep: 4 60% 47%;
+    --coral-deep: 3 53% 55%; /* #C9534D */
     --lav: 283 39% 72%; /* #C39BD3 */
-    --lav-deep: 283 26% 44%;
-    --sky: 204 51% 67%; /* #7FB3D5 */
-    --sky-deep: 204 40% 39%;
+    --lav-deep: 278 23% 50%; /* #88649D */
     --rose: 353 100% 81%; /* #FF9EAA */
-    --rose-deep: 353 52% 50%;
-    --cream: 43 33% 92.5%;
-    --ink: 200 16% 25%; /* #35434A */
+    --rose-deep: 347 46% 61%; /* #C96F82 */
+    --sky: 204 51% 67%; /* #7FB3D5 — supporting only */
+    --sky-deep: 205 31% 45%; /* #477A9E */
+
+    /* Light shades — soft surfaces */
+    --blush: 341 67% 92%; /* #F8DCE5 */
+    --lilac: 271 45% 91%; /* #E8DDF2 */
+    --aqua: 171 42% 91%; /* #DDF1EE */
+    --butter: 42 100% 90%; /* #FFF0CC */
+    --peach: 15 73% 91%; /* #F9E1D9 */
+    --powder: 210 50% 92%; /* #E1EBF5 */
+
+    --cream: 43 40% 97%; /* warm off-white */
+    --ink: 200 17% 25%; /* #35434A */
     --ink-soft: 199 8% 51%; /* #78858B */
 
     --radius: 1.35rem;
@@ -51,41 +62,52 @@
   }
 
   .dark {
-    --background: 200 20% 11%;
-    --foreground: 40 18% 94%;
-    --card: 200 16% 15%;
-    --card-foreground: 40 18% 94%;
-    --popover: 200 16% 16%;
-    --popover-foreground: 40 18% 94%;
-    --primary: 173 45% 58%;
-    --primary-foreground: 200 30% 10%;
-    --secondary: 200 14% 19%;
-    --secondary-foreground: 40 18% 94%;
-    --muted: 200 14% 18%;
-    --muted-foreground: 200 10% 68%;
-    --accent: 200 14% 21%;
-    --accent-foreground: 40 18% 94%;
-    --destructive: 4 70% 55%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 200 12% 24%;
-    --input: 200 12% 26%;
-    --ring: 173 45% 55%;
+    /* Coordinated dark theme: Deep Background #202A35 with Dark Surface #2B3743,
+       and the same pastel brand accents brightened so they still read softly. */
+    --background: 211 25% 17%; /* #202A35 */
+    --foreground: 43 24% 93%;
+    --card: 210 22% 22%; /* #2B3743 */
+    --card-foreground: 43 24% 93%;
+    --popover: 210 22% 24%;
+    --popover-foreground: 43 24% 93%;
+    --primary: 283 45% 76%;
+    --primary-foreground: 211 30% 12%;
+    --secondary: 210 20% 26%;
+    --secondary-foreground: 43 24% 93%;
+    --muted: 210 18% 25%;
+    --muted-foreground: 43 12% 74%;
+    --accent: 278 22% 30%;
+    --accent-foreground: 43 24% 95%;
+    --destructive: 3 58% 62%;
+    --destructive-foreground: 211 30% 10%;
+    --border: 210 16% 30%;
+    --input: 210 16% 32%;
+    --ring: 283 45% 74%;
 
-    --turq: 173 45% 58%;
-    --turq-deep: 173 48% 76%;
-    --sun: 41 85% 66%;
-    --sun-deep: 41 88% 78%;
-    --coral: 4 85% 70%;
-    --coral-deep: 4 88% 80%;
-    --lav: 283 35% 68%;
-    --lav-deep: 283 42% 80%;
-    --sky: 204 45% 64%;
-    --sky-deep: 204 50% 78%;
-    --rose: 353 78% 74%;
-    --rose-deep: 353 82% 82%;
-    --cream: 200 15% 15.5%;
-    --ink: 40 18% 94%;
-    --ink-soft: 200 10% 68%;
+    --turq: 173 52% 66%;
+    --turq-deep: 173 55% 80%;
+    --sun: 41 92% 70%;
+    --sun-deep: 41 90% 82%;
+    --coral: 4 92% 74%;
+    --coral-deep: 4 88% 84%;
+    --lav: 283 45% 76%;
+    --lav-deep: 283 45% 76%;
+    --rose: 353 88% 80%;
+    --rose-deep: 353 82% 86%;
+    --sky: 204 46% 70%;
+    --sky-deep: 204 52% 82%;
+
+    /* Light shades become soft tinted dark surfaces */
+    --blush: 347 22% 26%;
+    --lilac: 278 22% 27%;
+    --aqua: 174 20% 25%;
+    --butter: 39 26% 26%;
+    --peach: 15 22% 25%;
+    --powder: 206 22% 26%;
+
+    --cream: 210 20% 20%;
+    --ink: 43 24% 93%;
+    --ink-soft: 43 12% 74%;
   }
 
   html {

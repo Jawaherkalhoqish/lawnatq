@@ -11,7 +11,7 @@ export function Hero() {
   const Arrow = isAr ? ArrowLeft : ArrowRight;
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-background to-cream/70">
+    <section className="relative overflow-hidden bg-gradient-to-b from-card via-background to-cream/70">
       <div className="pointer-events-none absolute -top-28 start-[-12%] h-[420px] w-[420px] rounded-full bg-rose/30 blur-3xl" aria-hidden="true" />
       <div className="pointer-events-none absolute bottom-0 end-[-10%] h-[380px] w-[380px] rounded-full bg-lav/30 blur-3xl" aria-hidden="true" />
 
@@ -22,7 +22,7 @@ export function Hero() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-xl"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-rose/40 bg-rose/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-rose-deep">
+          <span className="inline-flex items-center gap-2 rounded-full border border-lav/40 bg-lilac/80 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-lav-deep">
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
             {t("عالَم صغير من التعبير", "A little world of expression")}
           </span>
@@ -40,20 +40,20 @@ export function Hero() {
                 <path d="M2 8c26-6 62-7 116-3" stroke="currentColor" strokeWidth="7" strokeLinecap="round" fill="none" />
               </svg>
             </span>
-            <span className="text-ink">{t(" عنك.", ".")}</span>
+            <span className="text-ink">{t(" عنك", " for you")}</span>
           </h1>
 
           <p className="mt-6 text-lg leading-relaxed text-ink-soft sm:text-xl">
             {t(
-              "مساحة تفاعلية تساعد الأطفال على التعبير عن أفكارهم واحتياجاتهم واختياراتهم من خلال الصور والألوان والقصص، بطريقتهم الخاصة.",
-              "An interactive space for children to share their ideas, needs, and feelings through colors, pictures, and stories, in their own way.",
+              "لأن لكل طفل لونًا وصوتًا يستحق أن يُسمع.",
+              "Because every child has a color and a voice worth being heard.",
             )}
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               to="/cards"
-              className="group inline-flex h-16 items-center justify-center gap-2 rounded-full bg-lav-deep px-9 text-lg font-bold text-white shadow-lift transition hover:brightness-110"
+              className="group inline-flex h-16 items-center justify-center gap-2 rounded-full bg-lav-deep px-9 text-lg font-bold text-primary-foreground shadow-lift transition hover:brightness-110"
             >
               {t("ابدأ الرحلة", "Start the journey")}
               <Arrow className="h-5 w-5 transition group-hover:-translate-x-1 rtl:group-hover:translate-x-1" aria-hidden="true" />

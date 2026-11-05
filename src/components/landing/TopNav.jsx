@@ -60,7 +60,7 @@ export function TopNav() {
           {isAuthenticated ? (
             <Link
               to="/dashboard"
-              className="inline-flex h-10 items-center rounded-full bg-lav-deep px-5 text-sm font-bold text-white transition hover:brightness-110"
+              className="inline-flex h-10 items-center rounded-full bg-lav-deep px-5 text-sm font-bold text-primary-foreground transition hover:brightness-110"
             >
               {t("مساحتي", "My space")}
             </Link>

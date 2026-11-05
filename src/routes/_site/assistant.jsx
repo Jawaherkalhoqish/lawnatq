@@ -104,7 +104,7 @@ function CompanionPage() {
           "يمكنك أن تحكي له عن يومك أو تسأله ماذا نرسم. لا يشخّص، ولا يدّعي أنه يعرف شعورك بالتحديد.",
           "You can tell it about your day or ask what to draw. It never diagnoses, and never claims to know exactly how you feel.",
         )}
-        tone="sky"
+        tone="lav"
       />
 
       <div className="mx-auto mt-8 max-w-3xl px-5 sm:px-8">
@@ -114,7 +114,7 @@ function CompanionPage() {
           </div>
         ) : !isAuthenticated ? (
           <div className="rounded-[2rem] border border-border bg-card p-8 text-center shadow-soft sm:p-12">
-            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-sky/20 text-sky-deep">
+            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-lav/20 text-lav-deep">
               <Lock className="h-7 w-7" aria-hidden="true" />
             </span>
             <h2 className="mt-5 font-display text-2xl font-extrabold text-ink">

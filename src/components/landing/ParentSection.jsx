@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Check, MessageCircleQuestion } from "lucide-react";
+import { Check } from "lucide-react";
+import { Image } from "@/components/ui/image";
 import Reveal from "@/components/landing/Reveal";
+import { PARENT_PHOTO_URL } from "@/lib/brand-asset";
 import { useI18n } from "@/lib/preferences";
 
 export function ParentSection() {
@@ -16,7 +18,7 @@ export function ParentSection() {
     <section id="parents" className="scroll-mt-24 bg-cream/70 py-20 lg:py-28">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <span className="text-sm font-bold uppercase tracking-[0.2em] text-sky-deep">
+          <span className="text-sm font-bold uppercase tracking-[0.2em] text-lav-deep">
             {t("للوالدين", "For parents")}
           </span>
           <h2 className="mt-3 text-3xl font-extrabold text-ink sm:text-4xl">
@@ -32,7 +34,7 @@ export function ParentSection() {
           <ul className="mt-7 space-y-3.5">
             {points.map((p) => (
               <li key={p} className="flex items-start gap-3">
-                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-turq/25 text-turq-deep">
+                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-lav/25 text-lav-deep">
                   <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />
                 </span>
                 <span className="text-ink">{p}</span>
@@ -50,55 +52,20 @@ export function ParentSection() {
 
         <Reveal delay={0.1}>
           <div className="relative">
-            <div className="absolute -inset-4 rounded-[2.5rem] bg-turq/12" aria-hidden="true" />
-            <div className="relative rounded-[2rem] border border-border bg-card p-5 shadow-lift">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="grid h-11 w-11 place-items-center rounded-2xl bg-sun/30 font-display text-lg font-extrabold text-sun-deep">
-                    س
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-ink">{t("ملف سارة", "Sara's profile")}</p>
-                    <p className="text-xs text-ink-soft">{t("آخر نشاط: اليوم", "Last activity: today")}</p>
-                  </div>
-                </div>
-                <span className="rounded-full bg-turq/15 px-3 py-1 text-xs font-bold text-turq-deep">
-                  {t("٦ سنوات", "Age 6")}
-                </span>
-              </div>
-
-              <div className="mt-5 grid grid-cols-3 gap-3">
-                {[
-                  { bg: "bg-sun/25", svg: "M10 52c14-16 34-16 48 0", stroke: "#FF7E75" },
-                  { bg: "bg-lav/20", svg: "M14 24h40M14 36h28M14 48h34", stroke: "#C39BD3" },
-                  { bg: "bg-turq/20", svg: "M12 40c12-24 30-24 44 0", stroke: "#6FD0C5" },
-                ].map((d, i) => (
-                  <div key={i} className={`aspect-square rounded-2xl ${d.bg} p-2`}>
-                    <svg viewBox="0 0 68 68" className="h-full w-full">
-                      <path d={d.svg} stroke={d.stroke} strokeWidth="5" strokeLinecap="round" fill="none" />
-                    </svg>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-5 rounded-2xl bg-cream p-4">
-                <div className="flex items-center gap-2 text-sm font-bold text-ink">
-                  <MessageCircleQuestion className="h-4 w-4 text-coral-deep" aria-hidden="true" />
-                  {t("سؤال اليوم لطفلك", "Today's question for your child")}
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                  {t(
-                    "«استخدمت ألوانًا زرقاء كثيرة في هذه الرسمة. هل تحكي لي عنها؟»",
-                    "\"You used lots of blue in this drawing. Can you tell me about it?\"",
-                  )}
-                </p>
-                <p className="mt-2 text-xs text-ink-soft/80">
-                  {t(
-                    "ملاحظة وصفية فقط — لونُطق لا يفسّر المشاعر من الألوان.",
-                    "A description only — LAWNATQ never reads feelings from colors.",
-                  )}
-                </p>
-              </div>
+            <div
+              className="pointer-events-none absolute -inset-3 rounded-[2.75rem] bg-gradient-to-tr from-blush/80 via-lilac/70 to-aqua/50"
+              aria-hidden="true"
+            />
+            <div className="relative overflow-hidden rounded-[2rem] border border-lav/30 bg-card p-2 shadow-lift">
+              <Image
+                src={PARENT_PHOTO_URL}
+                alt={t(
+                  "أم وطفلتها ترسمان معًا على طاولة دافئة",
+                  "A mother and her daughter drawing together at a warm table",
+                )}
+                className="h-auto w-full rounded-[1.6rem] object-contain"
+                fittingType="fit"
+              />
             </div>
           </div>
         </Reveal>

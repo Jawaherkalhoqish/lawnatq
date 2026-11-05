@@ -11,7 +11,7 @@ const items = [
   },
   {
     icon: Languages,
-    tone: "bg-sky/20 text-sky-deep",
+    tone: "bg-lav/20 text-lav-deep",
     ar: ["عربي وإنجليزي بالكامل", "كل زر وقصة ورسالة تتغير مع اللغة، مع اتجاه كتابة صحيح."],
     en: ["Fully Arabic and English", "Every button, story and message switches with the language, right-to-left included."],
   },

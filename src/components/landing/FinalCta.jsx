@@ -1,40 +1,52 @@
 import { Link } from "@tanstack/react-router";
-import Logo from "@/components/brand/Logo";
+import { Image } from "@/components/ui/image";
 import Reveal from "@/components/landing/Reveal";
+import { SIGNUP_PHOTO_URL } from "@/lib/brand-asset";
 import { useI18n } from "@/lib/preferences";
 
 export function FinalCta() {
   const { t } = useI18n();
   return (
-    <section className="px-5 pb-20 sm:px-8">
+    <section id="start" className="scroll-mt-24 px-5 pb-20 sm:px-8">
       <Reveal className="mx-auto max-w-7xl">
-        <div className="relative overflow-hidden rounded-[2.75rem] bg-primary px-6 py-14 text-center sm:px-12 sm:py-20">
-          <div className="pointer-events-none absolute inset-0 opacity-[0.14] dotted-grid" aria-hidden="true" />
-          <div className="pointer-events-none absolute -bottom-16 start-1/4 h-56 w-56 rounded-full bg-white/25 blur-2xl" aria-hidden="true" />
-          <div className="relative mx-auto flex max-w-2xl flex-col items-center">
-            <Logo className="h-24 float-mid drop-shadow-[0_18px_30px_rgba(38,64,61,0.18)]" />
-            <h2 className="mt-6 text-3xl font-extrabold text-primary-foreground sm:text-[2.6rem] sm:leading-tight">
-              {t("لنبدأ بلون، وكلمة، وقصة", "Let's begin with a color, a word, a story")}
-            </h2>
-            <p className="mt-4 text-lg text-primary-foreground/85">
-              {t(
-                "أنشئ حساب الوالد، وأضف ملف طفلك في دقيقة واحدة.",
-                "Create your parent account and add your child's profile in a minute.",
-              )}
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                to="/register"
-                className="inline-flex h-16 items-center justify-center rounded-full bg-primary-foreground px-9 text-lg font-bold text-white shadow-lift transition hover:opacity-90"
-              >
-                {t("ابدأ الرحلة مجانًا", "Start the journey free")}
-              </Link>
-              <Link
-                to="/login"
-                className="inline-flex h-16 items-center justify-center rounded-full border-2 border-primary-foreground/25 px-9 text-lg font-bold text-primary-foreground transition hover:border-primary-foreground/50"
-              >
-                {t("لدي حساب", "I have an account")}
-              </Link>
+        <div className="overflow-hidden rounded-[2.75rem] border border-lav/25 bg-gradient-to-br from-blush/70 via-peach/60 to-lilac/60 shadow-lift">
+          <div className="grid items-center gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-4">
+            <div className="px-6 pb-10 pt-10 text-center sm:px-10 sm:pb-12 sm:pt-12 lg:py-16 lg:pe-2 lg:ps-12 lg:text-start">
+              <h2 className="text-3xl font-extrabold text-ink sm:text-[2.6rem] sm:leading-tight">
+                {t("لنبدأ بلون، وكلمة، وقصة", "Let's begin with a color, a word, a story")}
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-ink-soft">
+                {t(
+                  "أنشئ حساب الوالد، وأضف ملف طفلك في دقيقة واحدة.",
+                  "Create your parent account and add your child's profile in a minute.",
+                )}
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+                <Link
+                  to="/register"
+                  className="inline-flex h-16 items-center justify-center rounded-full bg-lav-deep px-9 text-lg font-bold text-primary-foreground shadow-lift transition hover:brightness-110"
+                >
+                  {t("ابدأ الرحلة مجانًا", "Start the journey free")}
+                </Link>
+                <Link
+                  to="/login"
+                  className="inline-flex h-16 items-center justify-center rounded-full border-2 border-ink/15 bg-card px-9 text-lg font-bold text-ink transition hover:border-ink/30 hover:bg-cream"
+                >
+                  {t("لدي حساب", "I have an account")}
+                </Link>
+              </div>
+            </div>
+
+            <div className="px-3 pb-3 sm:px-5 sm:pb-5 lg:py-6 lg:pe-6 lg:ps-2">
+              <Image
+                src={SIGNUP_PHOTO_URL}
+                alt={t(
+                  "أم وطفلتها تبتسمان أمام حاسوب في غرفة مليئة بالألوان والرسم",
+                  "A mother and her daughter smiling at a laptop in a room full of colors and drawings",
+                )}
+                className="h-auto w-full rounded-[1.9rem] object-contain shadow-soft ring-1 ring-card/70"
+                fittingType="fit"
+              />
             </div>
           </div>
         </div>

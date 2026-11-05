@@ -29,7 +29,7 @@ export function StoryTeaser() {
 
             <Link
               to="/stories"
-              className="mt-7 inline-flex h-14 items-center gap-2 rounded-full bg-lav-deep px-7 text-base font-bold text-white shadow-soft transition hover:opacity-90"
+              className="mt-7 inline-flex h-14 items-center gap-2 rounded-full bg-lav-deep px-7 text-base font-bold text-primary-foreground shadow-soft transition hover:opacity-90"
             >
               <PlayCircle className="h-5 w-5" aria-hidden="true" />
               {t("افتح مكتبة القصص", "Open the story library")}

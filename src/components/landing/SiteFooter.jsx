@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import Logo from "@/components/brand/Logo";
-import LangToggle from "@/components/brand/LangToggle";
 import { useI18n } from "@/lib/preferences";
 
 export function SiteFooter() {
@@ -47,9 +46,10 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
-          <p className="text-xs text-ink-soft">© {new Date().getFullYear()} LAWNATQ · لونُطق</p>
-          <LangToggle />
+        <div className="mt-12 flex justify-center border-t border-border pt-6">
+          <p className="text-center text-xs leading-relaxed text-ink-soft">
+            © 2026 LAWNATQ | صُمّم بحب، لأن لكل طفل حكاية تستحق أن تُنطق.
+          </p>
         </div>
       </div>
     </footer>

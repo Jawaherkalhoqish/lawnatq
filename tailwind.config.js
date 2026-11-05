@@ -34,6 +34,12 @@ export default {
         lav: { DEFAULT: "hsl(var(--lav))", deep: "hsl(var(--lav-deep))" },
         sky: { DEFAULT: "hsl(var(--sky))", deep: "hsl(var(--sky-deep))" },
         rose: { DEFAULT: "hsl(var(--rose))", deep: "hsl(var(--rose-deep))" },
+        blush: "hsl(var(--blush))",
+        lilac: "hsl(var(--lilac))",
+        aqua: "hsl(var(--aqua))",
+        butter: "hsl(var(--butter))",
+        peach: "hsl(var(--peach))",
+        powder: "hsl(var(--powder))",
         cream: "hsl(var(--cream))",
         ink: { DEFAULT: "hsl(var(--ink))", soft: "hsl(var(--ink-soft))" },
         sidebar: {
