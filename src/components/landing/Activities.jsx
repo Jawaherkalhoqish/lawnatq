@@ -34,30 +34,35 @@ export function Activities() {
         <div className="mt-10 grid grid-cols-2 items-stretch gap-3 sm:gap-5 lg:grid-cols-4">
           {worlds.map((world, i) => (
             <Reveal key={world.key} delay={i * 0.06} className="h-full">
-              <Link
-                to={world.site}
-                className={`group flex h-full flex-col rounded-[1.5rem] ${world.bg} p-4 ring-1 ${world.ring} transition duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-[2rem] sm:p-6`}
+              <div
+                className={`float-x h-full ${i % 2 === 1 ? "float-x-reverse" : ""}`}
+                style={{ animationDelay: `${-i * 1.9}s` }}
               >
-                <span className="mx-auto flex w-full max-w-[9rem] items-center justify-center gap-1 sm:max-w-[11rem]">
-                  {world.images.map((src, j) => (
-                    <Image
-                      key={src}
-                      src={src}
-                      alt={j === 0 ? world.title[lang] : ""}
-                      className={`aspect-square h-auto ${world.images.length > 1 ? "w-1/2" : "w-full"} object-contain transition duration-500 group-hover:scale-105 ${world.glow}`}
-                      fittingType="fit"
-                    />
-                  ))}
-                </span>
-                <h3 className={`mt-3 text-center font-display text-lg font-extrabold sm:text-2xl ${world.accent}`}>
-                  {world.title[lang]}
-                </h3>
-                <p className="mt-1.5 flex-1 text-center text-xs leading-relaxed text-ink sm:text-sm">{world.body[lang]}</p>
-                <span className="mt-3 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-ink underline decoration-ink/25 decoration-2 underline-offset-4 sm:text-sm">
-                  {t("افتح العالم", "Open the world")}
-                  <Arrow className="h-3.5 w-3.5" aria-hidden="true" />
-                </span>
-              </Link>
+                <Link
+                  to={world.site}
+                  className={`group flex h-full flex-col rounded-[1.5rem] ${world.bg} p-4 ring-1 ${world.ring} transition duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-[2rem] sm:p-6`}
+                >
+                  <span className="mx-auto flex w-full max-w-[9rem] items-center justify-center gap-1 sm:max-w-[11rem]">
+                    {world.images.map((src, j) => (
+                      <Image
+                        key={src}
+                        src={src}
+                        alt={j === 0 ? world.title[lang] : ""}
+                        className={`aspect-square h-auto ${world.images.length > 1 ? "w-1/2" : "w-full"} object-contain transition duration-500 group-hover:scale-105 ${world.glow}`}
+                        fittingType="fit"
+                      />
+                    ))}
+                  </span>
+                  <h3 className={`mt-3 text-center font-display text-lg font-extrabold sm:text-2xl ${world.accent}`}>
+                    {world.title[lang]}
+                  </h3>
+                  <p className="mt-1.5 flex-1 text-center text-xs leading-relaxed text-ink sm:text-sm">{world.body[lang]}</p>
+                  <span className="mt-3 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-ink underline decoration-ink/25 decoration-2 underline-offset-4 sm:text-sm">
+                    {t("افتح العالم", "Open the world")}
+                    <Arrow className="h-3.5 w-3.5" aria-hidden="true" />
+                  </span>
+                </Link>
+              </div>
             </Reveal>
           ))}
         </div>

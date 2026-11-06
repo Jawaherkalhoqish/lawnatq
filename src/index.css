@@ -185,6 +185,18 @@
     animation: lawnatq-float 5.5s ease-in-out infinite;
   }
 
+  /* Cards drift gently left and right inside their own cell, then settle back.
+     The amplitude stays under half the smallest grid gap, so neighbours never
+     overlap and no empty gap opens. */
+  .float-x {
+    animation: lawnatq-float-x 11s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .float-x-reverse {
+    animation-direction: reverse;
+  }
+
   .dotted-grid {
     background-image: radial-gradient(hsl(var(--ink) / 0.09) 1px, transparent 1px);
     background-size: 22px 22px;
@@ -213,6 +225,14 @@
 @keyframes lawnatq-float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-12px) rotate(-1.5deg); }
+}
+
+@keyframes lawnatq-float-x {
+  0% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-4px, 0, 0); }
+  50% { transform: translate3d(0, 0, 0); }
+  75% { transform: translate3d(4px, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 @keyframes lawnatq-pop {
