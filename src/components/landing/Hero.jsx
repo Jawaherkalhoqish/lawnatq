@@ -71,21 +71,23 @@ export function Hero() {
           </p>
         </motion.div>
 
-        {/* The approved artwork, transparent, blending straight into the paper. */}
-        <div className="relative mx-auto w-full max-w-[540px] lg:max-w-[620px]">
+        {/* The approved artwork, shown whole: its own ratio, contained, never cropped or stretched. */}
+        <div className="relative mx-auto w-full max-w-[560px] lg:max-w-[640px]">
           <div
             className="pointer-events-none absolute inset-10 rounded-full bg-gradient-to-br from-rose/30 via-sun/15 to-lav/25 blur-3xl dark:from-rose/10 dark:via-transparent dark:to-lav/15"
             aria-hidden="true"
           />
-          <Image
-            src={HERO_URL}
-            alt={t(
-              "طفلان يرسمان مع شخصية لونُطق",
-              "Two children drawing alongside the LAWNATQ mascot",
-            )}
-            className="relative block h-auto w-full object-contain"
-            fittingType="fit"
-          />
+          <div className="relative aspect-[1398/1125] w-full overflow-hidden rounded-[2rem] shadow-lift">
+            <Image
+              src={HERO_URL}
+              alt={t(
+                "طفلان يرسمان مع شخصية لونُطق",
+                "Two children drawing alongside the LAWNATQ mascot",
+              )}
+              className="block h-full w-full object-contain"
+              fittingType="fit"
+            />
+          </div>
         </div>
       </div>
     </section>
