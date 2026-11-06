@@ -19,7 +19,7 @@ export function Activities() {
               {t("أنشطة لونُطق", "LAWNATQ activities")}
             </span>
             <h2 className="mt-3 text-3xl font-extrabold text-ink sm:text-4xl">
-              {t("خمسة عوالم، كلها بانتظار طفلك", "Five little worlds, all waiting for your child")}
+              {t("أربعة عوالم، كلها بانتظار طفلك", "Four little worlds, all waiting for your child")}
             </h2>
           </div>
           <Link
@@ -31,9 +31,9 @@ export function Activities() {
           </Link>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 items-stretch gap-3 sm:gap-5 lg:grid-cols-4">
           {activities.map((activity, i) => (
-            <Reveal key={activity.key} delay={i * 0.06}>
+            <Reveal key={activity.key} delay={i * 0.06} className="h-full">
               <Link
                 to={activity.site}
                 className={`group flex h-full flex-col rounded-[1.5rem] ${activity.bg} p-4 ring-1 ${activity.ring} transition duration-300 hover:-translate-y-1 hover:shadow-lift sm:rounded-[2rem] sm:p-6`}
