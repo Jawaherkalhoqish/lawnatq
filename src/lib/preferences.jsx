@@ -108,6 +108,11 @@ export function speak(text, lang = "ar") {
   utter.lang = lang === "ar" ? "ar-SA" : "en-US";
   utter.rate = 0.92;
   utter.pitch = 1.08;
+  // Lets the background music duck while something is being read aloud.
+  const signal = (on) => window.dispatchEvent(new CustomEvent("lawnatq:speaking", { detail: on }));
+  utter.onend = () => signal(false);
+  utter.onerror = () => signal(false);
+  signal(true);
   window.speechSynthesis.speak(utter);
   return true;
 }

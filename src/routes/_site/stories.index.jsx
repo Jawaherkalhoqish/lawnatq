@@ -33,8 +33,8 @@ function StoriesPage() {
         eyebrow={t("القصص التفاعلية", "Interactive stories")}
         title={t("أنت من يختار ما يحدث", "You choose what happens")}
         description={t(
-          "كل قصة تُقرأ مشهدًا واحدًا في كل مرة، وفيها قرار يتغيّر به المسار. لا توجد إجابة صحيحة.",
-          "Each story is read one scene at a time, and a choice changes the path. There is no right answer.",
+          "لونطق، قصة اليوم وعالم من الحكايات غدًا.",
+          "LAWNATQ — a story today, a world of stories tomorrow.",
         )}
         tone="lav"
       />

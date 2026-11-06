@@ -4,9 +4,11 @@ import CardStrip from "@/components/landing/CardStrip";
 import HowItWorks from "@/components/landing/HowItWorks";
 import Activities from "@/components/landing/Activities";
 import StoryTeaser from "@/components/landing/StoryTeaser";
+import Subscription from "@/components/landing/Subscription";
 import ParentSection from "@/components/landing/ParentSection";
 import WhyDifferent from "@/components/landing/WhyDifferent";
 import FinalCta from "@/components/landing/FinalCta";
+import ConnectWithUs from "@/components/landing/ConnectWithUs";
 
 export const Route = createFileRoute("/_site/")({
   head: () => ({
@@ -32,9 +34,11 @@ function HomePage() {
       <HowItWorks />
       <Activities />
       <StoryTeaser />
-      <ParentSection />
+      <Subscription />
       <WhyDifferent />
+      <ParentSection />
       <FinalCta />
+      <ConnectWithUs />
     </>
   );
 }

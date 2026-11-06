@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "name": "CustomCard",
+  "description": "A card a parent created with their own phrase, illustrated by the child's drawing. Lives inside that child's My Feelings collection.",
+  "properties": {
+    "child_id": {
+      "type": "string",
+      "description": "The child this custom card belongs to"
+    },
+    "phrase_ar": {
+      "type": "string",
+      "description": "The phrase exactly as the parent wrote it"
+    },
+    "phrase_en": {
+      "type": "string",
+      "description": "Optional English phrasing"
+    },
+    "file_uri": {
+      "type": "string",
+      "description": "Private storage URI of the child's drawing for this phrase"
+    },
+    "colors_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Brand color names the child painted with"
+    }
+  },
+  "required": [
+    "child_id",
+    "phrase_ar"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

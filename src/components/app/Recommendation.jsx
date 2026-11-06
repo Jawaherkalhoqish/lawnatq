@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Lightbulb, MessageCircleQuestion } from "lucide-react";
 import { cardByKey } from "@/lib/cards";
-import { storyById } from "@/lib/stories";
+import { storyPackById as storyById } from "@/lib/story-pack";
 import { useI18n } from "@/lib/preferences";
 
 /**

@@ -4,10 +4,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, Bookmark, Check, RotateCcw, Volume2 } from "lucide-react";
 import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
-import StoryScene from "@/components/story/StoryScene";
+import { Image } from "@/components/ui/image";
 import { useStoryProgress } from "@/hooks/useFamily";
+import { sceneById, storyImage, storyPackById } from "@/lib/story-pack";
 import { speak, useI18n, usePrefs } from "@/lib/preferences";
-import { storyById } from "@/lib/stories";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authed/_kid/k/$childId/stories/$storyId")({
@@ -20,9 +20,9 @@ function StoryReader() {
   const { t, lang, isAr } = useI18n();
   const { voice } = usePrefs();
   const queryClient = useQueryClient();
-  const story = storyById(storyId);
+  const story = storyPackById(storyId);
   const { data: progress } = useStoryProgress(childId);
-  const [scene, setScene] = useState(0);
+  const [path, setPath] = useState(story ? [story.start] : []);
   const [saved, setSaved] = useState(false);
   const progressId = useRef(null);
   const initialised = useRef(false);
@@ -30,11 +30,12 @@ function StoryReader() {
 
   // Resume where the child stopped, once.
   useEffect(() => {
-    if (initialised.current || !progress) return;
+    if (initialised.current || !progress || !story) return;
     const entry = progress.find((p) => p.story_id === storyId);
     if (entry) {
       progressId.current = entry.id;
-      setScene(Math.min(entry.scene_index ?? 0, (story?.scenes.length ?? 1) - 1));
+      const resumed = story.scenes[Math.min(entry.scene_index ?? 0, story.scenes.length - 1)];
+      if (resumed) setPath([resumed.id]);
       setSaved(entry.status !== "in_progress");
     }
     initialised.current = true;
@@ -51,8 +52,8 @@ function StoryReader() {
     );
   }
 
-  const current = story.scenes[scene];
-  const isLast = scene === story.scenes.length - 1;
+  const current = sceneById(story, path[path.length - 1]) ?? sceneById(story, story.start);
+  const sceneIndex = story.scenes.findIndex((s) => s.id === current.id);
 
   async function persist(index, status) {
     const payload = { child_id: childId, story_id: story.id, scene_index: index, status };
@@ -65,21 +66,33 @@ function StoryReader() {
     queryClient.invalidateQueries({ queryKey: ["story-progress", childId] });
   }
 
-  async function goTo(index) {
-    setScene(index);
-    if (voice) speak(story.scenes[index].text[lang], lang);
-    await persist(index, index === story.scenes.length - 1 ? "completed" : saved ? "saved" : "in_progress").catch(() => {});
+  function goTo(nextId) {
+    const next = sceneById(story, nextId);
+    if (!next) return;
+    setPath((prev) => [...prev, nextId]);
+    if (voice) speak(next.text[lang], lang);
+    const index = story.scenes.findIndex((s) => s.id === nextId);
+    persist(index, next.isEnding ? "completed" : saved ? "saved" : "in_progress").catch(() => {});
+  }
+
+  function goBack() {
+    setPath((prev) => (prev.length > 1 ? prev.slice(0, -1) : prev));
+  }
+
+  function restart() {
+    setPath([story.start]);
+    persist(0, "in_progress").catch(() => {});
   }
 
   async function saveStory() {
-    await persist(scene, "saved");
+    await persist(sceneIndex, "saved");
     setSaved(true);
     toast.success(t("حُفظت القصة في مكتبتك", "Story saved to your library"));
   }
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center justify-between gap-2">
         <Link
           to="/k/$childId/stories"
           params={{ childId }}
@@ -89,10 +102,10 @@ function StoryReader() {
           {t("القصص", "Stories")}
         </Link>
         <div className="flex items-center gap-1.5" aria-hidden="true">
-          {story.scenes.map((_, i) => (
+          {path.map((id, i) => (
             <span
-              key={i}
-              className={cn("h-2 rounded-full transition-all", i === scene ? "w-7 bg-ink" : i < scene ? "w-2 bg-ink/40" : "w-2 bg-ink/15")}
+              key={`${id}-${i}`}
+              className={cn("h-2 rounded-full transition-all", i === path.length - 1 ? "w-7 bg-ink" : "w-2 bg-ink/25")}
             />
           ))}
         </div>
@@ -106,67 +119,80 @@ function StoryReader() {
         </button>
       </div>
 
-      <StoryScene setting={current.setting} sky={current.sky} who={current.who} className="w-full rounded-[2rem] shadow-soft" />
+      <div className="overflow-hidden rounded-[2rem] bg-cream/50 shadow-soft ring-1 ring-border">
+        <Image
+          key={current.image}
+          src={storyImage(story, current.image)}
+          alt={t("مشهد من القصة", "A scene from the story")}
+          className="mx-auto h-56 w-full object-contain p-3 animate-pop sm:h-80"
+          fittingType="fit"
+        />
+      </div>
 
-      <div className="rounded-[2rem] border border-border bg-card p-6 sm:p-8">
+      <div className="rounded-[2rem] border border-border bg-card p-5 sm:p-7">
         <p className="text-lg leading-relaxed text-ink sm:text-xl">{current.text[lang]}</p>
 
         {current.choices ? (
-          <div className="mt-6 space-y-2.5">
-            <p className="text-sm font-bold text-ink-soft">{t("ماذا تختار؟", "What do you choose?")}</p>
+          <div className="mt-5 grid gap-2.5 sm:grid-cols-2">
             {current.choices.map((choice) => (
               <button
-                key={choice.label[lang]}
+                key={choice.id}
                 type="button"
                 onClick={() => goTo(choice.next)}
-                className="flex w-full items-center justify-between gap-3 rounded-2xl border border-border bg-background px-5 py-4 text-start text-base font-bold text-ink transition hover:-translate-y-0.5 hover:border-ink/20 hover:shadow-soft"
+                className="flex items-center gap-3 rounded-2xl border-2 border-border bg-background p-2.5 text-start transition hover:-translate-y-0.5 hover:border-lav/60 hover:shadow-soft"
               >
-                {choice.label[lang]}
-                <Arrow className="h-4 w-4 text-ink-soft" aria-hidden="true" />
+                <Image
+                  src={storyImage(story, choice.image)}
+                  alt=""
+                  className="h-16 w-16 shrink-0 rounded-xl bg-cream object-contain p-1"
+                  fittingType="fit"
+                />
+                <span className="flex-1 text-base font-bold text-ink">{choice.label[lang]}</span>
+                <Arrow className="h-4 w-4 shrink-0 text-ink-soft" aria-hidden="true" />
               </button>
             ))}
           </div>
-        ) : isLast ? (
-          <div className="mt-6 flex flex-wrap gap-2.5">
+        ) : current.isEnding ? (
+          <div className="mt-5 flex flex-wrap gap-2.5">
             <button
               type="button"
               onClick={saveStory}
-              className="inline-flex h-13 items-center gap-2 rounded-full bg-ink px-6 text-base font-bold text-background"
+              className="inline-flex h-12 items-center gap-2 rounded-full bg-ink px-5 text-base font-bold text-background"
             >
               {saved ? <Check className="h-5 w-5" aria-hidden="true" /> : <Bookmark className="h-5 w-5" aria-hidden="true" />}
               {saved ? t("محفوظة", "Saved") : t("احفظ القصة", "Save story")}
             </button>
             <button
               type="button"
-              onClick={() => goTo(0)}
-              className="inline-flex h-13 items-center gap-2 rounded-full border border-border px-6 text-base font-bold text-ink transition hover:bg-cream"
+              onClick={restart}
+              className="inline-flex h-12 items-center gap-2 rounded-full border border-border px-5 text-base font-bold text-ink transition hover:bg-cream"
             >
               <RotateCcw className="h-5 w-5" aria-hidden="true" />
               {t("من البداية", "From the start")}
             </button>
-            <Link
-              to="/k/$childId/stories"
-              params={{ childId }}
-              className="inline-flex h-13 items-center gap-2 rounded-full px-5 text-base font-bold text-ink-soft transition hover:text-ink"
-            >
-              {t("قصص أخرى", "More stories")}
-            </Link>
           </div>
         ) : (
-          <button
-            type="button"
-            onClick={() => goTo(scene + 1)}
-            className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-ink px-7 text-base font-bold text-background transition hover:opacity-90"
-          >
-            {t("التالي", "Next")}
-            <Arrow className="h-5 w-5 rtl:rotate-180" aria-hidden="true" />
-          </button>
+          <div className="mt-5 flex flex-wrap items-center gap-2.5">
+            <button
+              type="button"
+              onClick={goBack}
+              disabled={path.length <= 1}
+              className="inline-flex h-12 items-center gap-2 rounded-full border border-border px-5 text-base font-bold text-ink transition hover:bg-cream disabled:opacity-40"
+            >
+              <Arrow className="h-4 w-4 rotate-180" aria-hidden="true" />
+              {t("السابق", "Back")}
+            </button>
+            <button
+              type="button"
+              onClick={() => goTo(current.next)}
+              className="inline-flex h-13 items-center gap-2 rounded-full bg-turq px-6 text-base font-bold text-turq-deep transition hover:brightness-105 dark:text-primary-foreground"
+            >
+              {t("التالي", "Next")}
+              <Arrow className="h-5 w-5 rtl:rotate-180" aria-hidden="true" />
+            </button>
+          </div>
         )}
       </div>
-
-      <p className="text-center text-xs text-ink-soft">
-        {t("هذه القصة لك — لا توجد إجابة صحيحة.", "This story is yours — there is no right answer.")}
-      </p>
     </div>
   );
 }

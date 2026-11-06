@@ -4,9 +4,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Search, Star } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import CardTile from "@/components/cards/CardTile";
+import FeelingsCustomCards from "@/components/cards/FeelingsCustomCards";
 import SequenceTray from "@/components/cards/SequenceTray";
 import { Input } from "@/components/ui/input";
 import { useCardSequences, useChild } from "@/hooks/useFamily";
+import { FEELINGS_CATEGORY } from "@/lib/activities";
 import { cardByKey, cardCategories, cardImage, cards, toneClasses } from "@/lib/cards";
 import { speak, useI18n, usePrefs } from "@/lib/preferences";
 import { cn } from "@/lib/utils";
@@ -158,6 +160,8 @@ function CardsPage() {
           <p className="mt-1 text-sm text-ink-soft">{t("جرّب كلمة أبسط أو أزل التصفية.", "Try a simpler word or clear the filter.")}</p>
         </div>
       )}
+
+      {category === FEELINGS_CATEGORY ? <FeelingsCustomCards child={child} /> : null}
 
       <div className="sticky bottom-3 z-20">
         <SequenceTray

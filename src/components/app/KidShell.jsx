@@ -1,6 +1,7 @@
 import { Link, Outlet, useParams } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, MessageCircleHeart, Palette, Sparkles, Volume2, VolumeX, LayoutGrid } from "lucide-react";
 import LangToggle from "@/components/brand/LangToggle";
+import MusicControl from "@/components/sound/MusicControl";
 import { useChild } from "@/hooks/useFamily";
 import { avatarClasses } from "@/lib/cards";
 import { useI18n, usePrefs } from "@/lib/preferences";
@@ -68,6 +69,7 @@ export function KidShell() {
             >
               {voice ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
             </button>
+            <MusicControl />
             <LangToggle />
           </div>
         </div>

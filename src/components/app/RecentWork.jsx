@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, BookOpen, MessageCircleHeart, Palette } from "lucide-react";
 import DrawingThumb from "@/components/app/DrawingThumb";
 import { cardByKey, cardImage } from "@/lib/cards";
-import { storyById } from "@/lib/stories";
+import { storyPackById as storyById } from "@/lib/story-pack";
 import { timeAgo } from "@/lib/dates";
 import { useI18n } from "@/lib/preferences";
 

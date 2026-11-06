@@ -28,7 +28,7 @@ const SHAPE_TOOLS = [
   { id: "star", Icon: Star, ar: "نجمة", en: "Star" },
 ];
 
-export function DrawingCanvas({ child, template, onSaved }) {
+export function DrawingCanvas({ child, template, onSaved, onSave, saving: savingProp, saveLabel }) {
   const { t, lang } = useI18n();
   const canvasRef = useRef(null);
   const drawing = useRef(false);
@@ -41,7 +41,8 @@ export function DrawingCanvas({ child, template, onSaved }) {
   const [color, setColor] = useState(PALETTE[0].hex);
   const [size, setSize] = useState(SIZES[1]);
   const [stackState, setStackState] = useState({ canUndo: false, canRedo: false });
-  const [saving, setSaving] = useState(false);
+  const [savingInternal, setSavingInternal] = useState(false);
+  const saving = savingProp ?? savingInternal;
 
   const ctxOf = () => canvasRef.current.getContext("2d");
 
@@ -203,12 +204,25 @@ export function DrawingCanvas({ child, template, onSaved }) {
   }
 
   async function save() {
+    // A caller can take the drawing itself (a custom card, for example).
+    if (onSave) {
+      setSavingInternal(true);
+      try {
+        const out = await composite();
+        const blob = await new Promise((resolve) => out.toBlob(resolve, "image/png"));
+        const file = new File([blob], "lawnatq-card.png", { type: "image/png" });
+        await onSave({ file, blob, colorsUsed: [...colorsUsed.current] });
+      } finally {
+        setSavingInternal(false);
+      }
+      return;
+    }
     if (!child) {
       toast(t("سجّل الدخول لتحفظ رسمتك في مساحتك", "Sign in to keep your drawing in your space"));
       base44.auth.redirectToLogin("/colors");
       return;
     }
-    setSaving(true);
+    setSavingInternal(true);
     try {
       const out = await composite();
       const blob = await new Promise((resolve) => out.toBlob(resolve, "image/png"));
@@ -230,7 +244,7 @@ export function DrawingCanvas({ child, template, onSaved }) {
     } catch {
       toast.error(t("تعذّر الحفظ، حاول مرة أخرى", "Could not save, please try again"));
     } finally {
-      setSaving(false);
+      setSavingInternal(false);
     }
   }
 
@@ -379,7 +393,7 @@ export function DrawingCanvas({ child, template, onSaved }) {
               className="inline-flex h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-background transition hover:opacity-90 disabled:opacity-60"
             >
               {saving ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Save className="h-4 w-4" aria-hidden="true" />}
-              {t("احفظ رسمتي", "Save my drawing")}
+              {saveLabel ?? t("احفظ رسمتي", "Save my drawing")}
             </button>
           </div>
         </div>

@@ -18,7 +18,7 @@ import { suggestIdeas } from "@/lib/app-fns";
 import { cardByKey, cardImage } from "@/lib/cards";
 import { timeAgo } from "@/lib/dates";
 import { useI18n } from "@/lib/preferences";
-import { storyById } from "@/lib/stories";
+import { storyPackById as storyById } from "@/lib/story-pack";
 
 export const Route = createFileRoute("/_authed/_parent/insights")({
   head: () => ({ meta: [{ title: "الأسئلة والرؤى | لونُطق" }] }),

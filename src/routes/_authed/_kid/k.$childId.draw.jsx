@@ -22,15 +22,13 @@ function DrawPage() {
     <div className="space-y-4">
       <header>
         <h1 className="font-display text-3xl font-extrabold text-ink">{t("ألواني", "My colors")}</h1>
-        <p className="mt-2 max-w-xl text-ink-soft">
-          {t(
-            "اختر ورقة، ثم ارسم. لا شيء هنا خطأ — كل الألوان لك.",
-            "Pick a sheet, then draw. Nothing here is wrong — all the colors are yours.",
-          )}
-        </p>
       </header>
 
       <TemplatePicker value={template} onChange={setTemplate} />
+
+      <h2 className="text-center font-display text-2xl font-extrabold text-lav-deep sm:text-3xl">
+        {t("يلا نرسم عالمنا!", "Let's draw our world!")}
+      </h2>
 
       <DrawingCanvas
         child={child}

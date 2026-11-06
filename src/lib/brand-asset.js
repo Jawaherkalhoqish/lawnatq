@@ -1,30 +1,44 @@
 /**
  * The official LAWNATQ assets, used exactly as supplied.
- * The logo and the hero illustration are transparent PNGs — never recolored,
- * cropped or flattened onto white.
+ * Every illustration below is the approved file from its package — never
+ * recolored, redrawn, cropped or replaced.
  */
 export const LOGO_URL = "/brand/lawnatq-logo.png";
 
 /** Kept for the mascot slots (child space, favicon) — same official mark. */
 export const MASCOT_URL = LOGO_URL;
 
-/** Supplied hero artwork — two children drawing with the teal mascot, transparent PNG. */
-export const HERO_URL =
-  "https://base44.app/api/apps/6aeaa7cdb1406c78a8420eae/files/mp/public/6aeaa7cdb1406c78a8420eae/84a765656_hero_children_mascot.png";
+/** Approved homepage hero photograph (hd.jpg). */
+export const HERO_URL = "/hero/hd.jpg";
 
-/**
- * The four worlds, exactly as supplied in LAWNATQ_Four_Worlds_Images.zip.
- * Square transparent PNGs — shown whole, never cropped, recolored or replaced.
- */
 /** Supplied photography, used exactly as provided — never regenerated or cropped. */
 export const PARENT_PHOTO_URL =
   "https://base44.app/api/apps/6aeaa7cdb1406c78a8420eae/files/mp/public/6aeaa7cdb1406c78a8420eae/8de406a84_drow.jpg";
 export const SIGNUP_PHOTO_URL =
   "https://base44.app/api/apps/6aeaa7cdb1406c78a8420eae/files/mp/public/6aeaa7cdb1406c78a8420eae/bb29c3e00_lab.jpg";
 
+/** The five worlds, exactly as supplied in LAWNATQ_Five_Worlds_Images.zip. */
 export const WORLD_IMAGES = {
   cards: "/worlds/01_Bitqati.png",
   feelings: "/worlds/02_Mashaeri.png",
   story: "/worlds/03_Qissati.png",
   colors: "/worlds/04_Alwani.png",
+  assistant: "/worlds/05_Mosaedi.png",
 };
+
+/** The three approved How It Works illustrations. */
+export const HOW_IMAGES = {
+  profile: "/how/01_create_child_profile.png",
+  activity: "/how/02_choose_today_activity.png",
+  share: "/how/03_share_expression_moment.png",
+};
+
+/** The approved subscription illustrations. */
+export const SUBSCRIPTION_IMAGES = {
+  trial: "/subscription/01_free_trial_7_days.png",
+  monthly: "/subscription/02_monthly_subscription.png",
+  annual: "/subscription/03_annual_subscription.png",
+};
+
+/** The approved background music for the whole platform. */
+export const MUSIC_URL = "/audio/lonotq-bg-music.mp3";

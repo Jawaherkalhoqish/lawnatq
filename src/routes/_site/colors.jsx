@@ -36,13 +36,10 @@ function ColorsPage() {
 
       <div className="mx-auto mt-8 max-w-5xl space-y-4 px-5 sm:px-8">
         <TemplatePicker value={template} onChange={setTemplate} />
+        <h2 className="text-center font-display text-2xl font-extrabold text-lav-deep sm:text-3xl">
+          {t("يلا نرسم عالمنا!", "Let's draw our world!")}
+        </h2>
         <DrawingCanvas template={template} />
-        <p className="rounded-2xl bg-cream/70 px-5 py-4 text-sm leading-relaxed text-ink-soft">
-          {t(
-            "الرسم هنا للتعبير فقط. لا يستنتج لونُطق مشاعر الطفل أو قدراته من الرسمة.",
-            "Drawing here is for expression only. LAWNATQ never infers a child's feelings or abilities from a drawing.",
-          )}
-        </p>
       </div>
     </div>
   );

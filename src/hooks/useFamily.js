@@ -12,6 +12,17 @@ export function useChildren() {
   });
 }
 
+export function useCustomCards(childId) {
+  return useQuery({
+    queryKey: ["custom-cards", childId],
+    enabled: Boolean(childId),
+    queryFn: async () => {
+      const page = await base44.entities.CustomCard.filter({ child_id: childId }, { sort: "-created_date", limit: 40 });
+      return page.items ?? [];
+    },
+  });
+}
+
 export function useChild(childId) {
   return useQuery({
     queryKey: ["child", childId],

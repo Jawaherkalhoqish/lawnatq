@@ -5,6 +5,7 @@ import { NotFound } from "@/components/NotFound";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/AuthContext";
 import { PreferencesProvider } from "@/lib/preferences";
+import { SoundProvider } from "@/lib/sound";
 import { Base44Scripts } from "base44:document";
 import { MASCOT_URL } from "@/lib/brand-asset";
 import appCss from "@/index.css?url";
@@ -44,8 +45,10 @@ function RootComponent() {
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
       <AuthProvider>
         <PreferencesProvider>
-          <Outlet />
-          <Toaster />
+          <SoundProvider>
+            <Outlet />
+            <Toaster />
+          </SoundProvider>
         </PreferencesProvider>
       </AuthProvider>
     </ThemeProvider>

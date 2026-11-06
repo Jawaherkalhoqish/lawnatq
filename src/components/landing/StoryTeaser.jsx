@@ -22,8 +22,8 @@ export function StoryTeaser() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-ink-soft">
               {t(
-                "مشاهد متصلة، شخصيات ثابتة، وقرار صغير في منتصف كل قصة يختار فيه الطفل ما يحدث بعد ذلك. لا إجابات صحيحة — فقط طريقته في رؤية العالم.",
-                "Connected scenes, familiar characters, and one small decision in the middle of each story where the child chooses what happens next. No right answers — just their way of seeing the world.",
+                "حكايتان مصوّرتان، والطفل يختار الطريق في كل مشهد.",
+                "Two illustrated tales, with the child choosing the path in every scene.",
               )}
             </p>
 
@@ -57,6 +57,10 @@ export function StoryTeaser() {
             ))}
           </Reveal>
         </div>
+
+        <p className="border-t border-lav/25 px-7 py-5 text-center font-display text-base font-extrabold text-lav-deep sm:px-12 sm:text-lg">
+          {t("لونطق، قصة اليوم وعالم من الحكايات غدًا", "LAWNATQ — a story today, a world of stories tomorrow")}
+        </p>
       </div>
     </section>
   );
