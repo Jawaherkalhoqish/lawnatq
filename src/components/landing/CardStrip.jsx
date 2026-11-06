@@ -73,8 +73,8 @@ export function CardStrip() {
             </div>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-y-0 start-0 w-16 bg-gradient-to-r from-cream to-transparent rtl:bg-gradient-to-l" />
-        <div className="pointer-events-none absolute inset-y-0 end-0 w-16 bg-gradient-to-l from-cream to-transparent rtl:bg-gradient-to-r" />
+        <div className="pointer-events-none absolute inset-y-0 start-0 w-16 bg-gradient-to-r from-background to-transparent rtl:bg-gradient-to-l" />
+        <div className="pointer-events-none absolute inset-y-0 end-0 w-16 bg-gradient-to-l from-background to-transparent rtl:bg-gradient-to-r" />
       </div>
     </section>
   );

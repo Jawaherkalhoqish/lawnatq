@@ -187,7 +187,7 @@ function ParentPinPage() {
         : t("أدخلي رمز الأربعة أرقام للمتابعة.", "Enter the four-digit PIN to continue.");
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-card via-background to-cream/60">
+    <div className="min-h-screen bg-background">
       <div className="mx-auto flex max-w-md flex-col px-5 py-8">
         <div className="flex items-center justify-between">
           <Link to="/" className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-soft hover:bg-cream hover:text-ink">
