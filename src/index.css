@@ -284,29 +284,4 @@
     0 0 28px -10px hsl(var(--turq) / 0.6);
 }
 
-/* Communication-card row: one track holding four identical copies, sliding by
-   exactly half its width. The sequence repeats every copy, so the frame at the
-   end is identical to the start — one direction, constant speed, never pausing. */
-@keyframes lawnatq-marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
-
-.card-marquee {
-  animation: lawnatq-marquee 120s linear infinite;
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card-marquee {
-    animation: none !important;
-    transform: none !important;
-    will-change: auto;
-  }
-}
-
-[data-motion="reduced"] .card-marquee {
-  animation: none !important;
-  transform: none !important;
-  will-change: auto;
-}
+/* Communication cards stay in place; each card only sways inside its own slot. */
