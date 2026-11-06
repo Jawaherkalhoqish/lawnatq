@@ -19,22 +19,25 @@ const strip = [
 ];
 
 /**
- * The real communication cards, all visible at once and fixed in their own
- * slots. Each card drifts a few pixels left and right inside its own cell and
- * returns to its exact origin — the layout, spacing and images never move, so
- * no gap can open and no card is ever hidden.
+ * The real communication cards in one single horizontal track that travels
+ * right to left at a constant speed. The sequence is repeated inside the track
+ * and the track slides by exactly half its width, so the frame at the end is
+ * identical to the start: no pause, no jump, no reset, no empty space.
+ * While the row travels, each card also sways a couple of pixels inside its own
+ * slot and returns to its exact origin, so the row feels alive without ever
+ * changing the card sizes, order or spacing.
  */
 export function CardStrip() {
   const { t } = useI18n();
   const [active, setActive] = useState(null);
 
-  const renderCard = (card, index) => {
+  const renderCard = (card, index, copy) => {
     const [cat, file, ar, en] = card;
     const id = `${cat}-${file}`;
     const isActive = active === id;
     return (
       <div
-        key={id}
+        key={`${id}-${copy}-${index}`}
         className={cn("float-x", index % 2 === 1 && "float-x-reverse")}
         style={{ animationDelay: `${(index % 6) * 0.45}s` }}
       >
@@ -42,6 +45,7 @@ export function CardStrip() {
           type="button"
           onClick={() => setActive((current) => (current === id ? null : id))}
           aria-pressed={isActive}
+          tabIndex={copy > 0 ? -1 : undefined}
           className="flex w-[92px] shrink-0 flex-col items-center gap-1.5 rounded-3xl border border-border bg-card p-2.5 sm:w-[108px] sm:p-3"
         >
           <span
@@ -68,8 +72,16 @@ export function CardStrip() {
       <p className="mb-5 text-center text-sm font-semibold text-ink-soft">
         {t("بطاقات حقيقية من مكتبة لونُطق — المسها لتكبر معك", "Real cards from the LAWNATQ library — tap one and watch it grow")}
       </p>
-      <div className="mx-auto flex w-full max-w-[760px] flex-wrap items-center justify-center gap-4 px-4">
-        {strip.map((card, index) => renderCard(card, index))}
+      <div className="relative overflow-hidden">
+        <div className="card-marquee flex w-max">
+          {[0, 1, 2, 3].map((copy) => (
+            <div key={copy} className="flex items-center gap-4 pe-4" aria-hidden={copy > 0}>
+              {strip.map((card, index) => renderCard(card, index, copy))}
+            </div>
+          ))}
+        </div>
+        <div className="pointer-events-none absolute inset-y-0 start-0 w-16 bg-gradient-to-r from-background to-transparent rtl:bg-gradient-to-l" />
+        <div className="pointer-events-none absolute inset-y-0 end-0 w-16 bg-gradient-to-l from-background to-transparent rtl:bg-gradient-to-r" />
       </div>
     </section>
   );
