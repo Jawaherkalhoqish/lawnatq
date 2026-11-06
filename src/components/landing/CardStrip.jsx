@@ -20,8 +20,11 @@ const strip = [
 
 /**
  * One continuous, seamless row of the real communication cards.
- * The strip is rendered twice inside one track, so the CSS marquee always
- * loops on an identical frame — no pause, no jump, no restart.
+ * The strip is rendered four times inside one track and the track slides by
+ * exactly half its width, so the frame at the end is identical to the start —
+ * constant speed in one direction, with no pause, jump or restart. Four copies
+ * keep the track wider than the viewport twice over, so no gap can open even on
+ * very wide screens.
  */
 export function CardStrip() {
   const { t } = useI18n();
@@ -32,12 +35,12 @@ export function CardStrip() {
     const id = `${cat}-${file}`;
     const isActive = active === id;
     return (
-      <div key={`${id}-${copy}-${index}`} className="card-bob" style={{ animationDelay: `${(index % 6) * 0.55}s` }}>
+      <div key={`${id}-${copy}-${index}`}>
         <button
           type="button"
           onClick={() => setActive((current) => (current === id ? null : id))}
           aria-pressed={isActive}
-          tabIndex={copy === 1 ? -1 : undefined}
+          tabIndex={copy > 0 ? -1 : undefined}
           className="flex w-[92px] shrink-0 flex-col items-center gap-1.5 rounded-3xl border border-border bg-card p-2.5 sm:w-[108px] sm:p-3"
         >
           <span
@@ -50,7 +53,6 @@ export function CardStrip() {
               src={`/cards/${cat}/${file}.png`}
               alt=""
               className="h-16 w-16 object-contain"
-              loading="lazy"
               decoding="async"
             />
             <span className="text-xs font-bold text-ink">{t(ar, en)}</span>
@@ -67,8 +69,8 @@ export function CardStrip() {
       </p>
       <div className="relative overflow-hidden">
         <div className="card-marquee flex w-max">
-          {[0, 1].map((copy) => (
-            <div key={copy} className="flex items-center gap-4 pe-4" aria-hidden={copy === 1}>
+          {[0, 1, 2, 3].map((copy) => (
+            <div key={copy} className="flex items-center gap-4 pe-4" aria-hidden={copy > 0}>
               {strip.map((card, index) => renderCard(card, index, copy))}
             </div>
           ))}

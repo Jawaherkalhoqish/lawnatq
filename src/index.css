@@ -268,26 +268,17 @@
 [data-textsize="large"] { --base-font-size: 19px; }
 [data-textsize="xlarge"] { --base-font-size: 21px; }
 
-/* Communication-card marquee: one track with two identical copies, looping at -50%.
-   Never pauses, never restarts — the frame at 100% is identical to 0%. */
+/* Communication-card marquee: one track holding four identical copies, sliding
+   by exactly half its width. The sequence repeats every copy, so the frame at
+   100% is identical to 0% — one direction, constant speed, never pausing. */
 @keyframes lawnatq-marquee {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-50%, 0, 0); }
 }
 
-@keyframes lawnatq-bob {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -5px, 0); }
-}
-
 .card-marquee {
-  animation: lawnatq-marquee 80s linear infinite;
+  animation: lawnatq-marquee 120s linear infinite;
   will-change: transform;
-}
-
-.card-bob {
-  animation: lawnatq-bob 6.5s ease-in-out infinite;
-  padding-block: 0.4rem;
 }
 
 /* A soft pastel halo — pink, lavender and turquoise — around each card. */
@@ -307,16 +298,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card-marquee,
-  .card-bob {
+  .card-marquee {
     animation: none !important;
     transform: none !important;
     will-change: auto;
   }
 }
 
-[data-motion="reduced"] .card-marquee,
-[data-motion="reduced"] .card-bob {
+[data-motion="reduced"] .card-marquee {
   animation: none !important;
   transform: none !important;
   will-change: auto;
