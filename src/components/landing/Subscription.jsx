@@ -140,9 +140,21 @@ export function Subscription() {
         </Reveal>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3 md:gap-5">
-          {plans.map((plan, i) => (
-            <Reveal key={plan.key} delay={i * 0.08}>
-              <article className={`flex h-full flex-col rounded-[1.75rem] ${plan.bg} p-5 ring-1 ${plan.ring} sm:rounded-[2rem] sm:p-6`}>
+          {plans.map((plan, i) => {
+            const selected = activePlan?.plan === plan.action;
+            const effects = selected
+              ? "-translate-y-1 ring-2 ring-offset-2 ring-offset-background shadow-[0_28px_58px_-30px_hsl(var(--ink)/0.4),0_0_44px_-10px_hsl(var(--lav)/0.8),0_0_30px_-14px_hsl(var(--rose)/0.5)]"
+              : "shadow-[0_10px_30px_-24px_hsl(var(--ink)/0.35),0_0_26px_-16px_hsl(var(--lav)/0.5)] md:hover:-translate-y-1 md:hover:ring-2 md:hover:shadow-[0_26px_54px_-28px_hsl(var(--ink)/0.38),0_0_38px_-12px_hsl(var(--lav)/0.7)] active:-translate-y-0.5 active:scale-[0.995] active:shadow-[0_16px_36px_-24px_hsl(var(--ink)/0.4),0_0_30px_-14px_hsl(var(--lav)/0.65)]";
+            return (
+            <Reveal key={plan.key} delay={i * 0.08} className="h-full">
+              <article
+                onClick={(event) => {
+                  if (event.target.closest("button")) return;
+                  subscribe(plan);
+                }}
+                data-selected={selected || undefined}
+                className={`flex h-full cursor-pointer flex-col rounded-[1.75rem] ${plan.bg} p-5 ring-1 transition-all duration-300 ease-out ${plan.ring} ${effects} sm:rounded-[2rem] sm:p-6`}
+              >
                 <div className="flex items-start justify-between gap-3">
                   <Image src={plan.image} alt="" className="h-20 w-20 object-contain sm:h-24 sm:w-24" fittingType="fit" />
                   <span className="rounded-full bg-card px-3 py-1 text-[0.7rem] font-bold text-ink-soft ring-1 ring-border">
@@ -183,7 +195,8 @@ export function Subscription() {
                 </button>
               </article>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
 
         {error ? (
