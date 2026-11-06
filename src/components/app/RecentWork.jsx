@@ -10,13 +10,16 @@ import { useI18n } from "@/lib/preferences";
 export function RecentWork({ childId, drawings, sequences, progress }) {
   const { t, lang, isAr } = useI18n();
   const Arrow = isAr ? ArrowLeft : ArrowRight;
+  const drawingItems = drawings ?? [];
+  const sequenceItems = sequences ?? [];
+  const progressItems = progress ?? [];
   const recentCards = [];
-  sequences.forEach((seq) => {
+  sequenceItems.forEach((seq) => {
     (seq.card_keys || []).forEach((key) => {
       if (!recentCards.includes(key) && cardByKey[key]) recentCards.push(key);
     });
   });
-  const savedStories = (progress || []).filter((p) => p.status !== "in_progress").slice(0, 3);
+  const savedStories = progressItems.filter((p) => p.status !== "in_progress").slice(0, 3);
 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
@@ -31,9 +34,9 @@ export function RecentWork({ childId, drawings, sequences, progress }) {
             <Arrow className="h-3 w-3" aria-hidden="true" />
           </Link>
         </header>
-        {drawings?.length ? (
+        {drawingItems.length ? (
           <div className="grid grid-cols-3 gap-2.5">
-            {drawings.slice(0, 3).map((drawing) => (
+            {drawingItems.slice(0, 3).map((drawing) => (
               <DrawingThumb key={drawing.id} drawing={drawing} className="aspect-square" />
             ))}
           </div>
@@ -87,8 +90,8 @@ export function RecentWork({ childId, drawings, sequences, progress }) {
             <MessageCircleHeart className="h-4 w-4 text-turq-deep" aria-hidden="true" />
             {t("بطاقات استخدمها مؤخرًا", "Cards used recently")}
           </h2>
-          {sequences?.[0] && (
-            <span className="text-xs text-ink-soft">{timeAgo(sequences[0].created_date, lang)}</span>
+          {sequenceItems[0] && (
+            <span className="text-xs text-ink-soft">{timeAgo(sequenceItems[0].created_date, lang)}</span>
           )}
         </header>
         {recentCards.length ? (

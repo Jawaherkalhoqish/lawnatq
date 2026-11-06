@@ -43,10 +43,10 @@ function DashboardPage() {
   }, [children, activeId]);
 
   const child = children?.find((c) => c.id === activeId);
-  const { data: drawings } = useDrawings(activeId, 6);
-  const { data: sequences } = useCardSequences(activeId, 6);
-  const { data: progress } = useStoryProgress(activeId);
-  const { data: counts } = useCounts(activeId);
+  const { data: drawings = [] } = useDrawings(activeId, 6);
+  const { data: sequences = [] } = useCardSequences(activeId, 6);
+  const { data: progress = [] } = useStoryProgress(activeId);
+  const { data: counts, isLoading: countsLoading } = useCounts(activeId);
 
   const Arrow = isAr ? ArrowLeft : ArrowRight;
   const firstName = (user?.full_name || "").split(" ")[0];
@@ -127,7 +127,11 @@ function DashboardPage() {
                   <stat.icon className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <div>
-                  <p className="font-display text-2xl font-extrabold text-ink">{stat.value}</p>
+                  {countsLoading ? (
+                    <span className="mb-1 block h-7 w-10 animate-pulse rounded-lg bg-cream" aria-hidden="true" />
+                  ) : (
+                    <p className="font-display text-2xl font-extrabold text-ink">{stat.value}</p>
+                  )}
                   <p className="text-xs font-semibold text-ink-soft">{stat.label}</p>
                 </div>
               </div>
