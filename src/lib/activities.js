@@ -1,57 +1,47 @@
 import { WORLD_IMAGES } from "@/lib/brand-asset";
 
 /**
- * Two approved lists, one source of illustrations.
+ * «عالمي» — the four approved worlds.
  *
- * The homepage shows exactly four worlds; «بيتي» (the child's own space) shows
- * five, with مساعدي added. Every image below is an approved LAWNATQ file.
+ * One single list, used by the homepage AND by the child's own space, so both
+ * places always show the same four cards: same order, same approved images,
+ * same names and descriptions. Never duplicate this list.
  */
-export const homeWorlds = [
+export const worlds = [
   {
-    key: "bitqati",
-    image: WORLD_IMAGES.cards,
+    key: "bitqati-mashaeri",
+    // The approved card and feelings illustrations together in one card.
+    images: [WORLD_IMAGES.cards, WORLD_IMAGES.feelings],
     bg: "bg-coral/12",
     ring: "ring-coral/25",
     accent: "text-coral-deep",
     glow: "shadow-[0_18px_40px_-24px_hsl(var(--coral)/0.85)]",
-    title: { ar: "بطاقاتي", en: "My cards" },
+    title: { ar: "بطاقاتي ومشاعري", en: "My cards & feelings" },
     body: {
-      ar: "بطاقات المشاعر والاحتياجات والأفعال، مع إضافة بطاقاتكم الخاصة.",
-      en: "Feelings, needs and action cards, plus your own family cards.",
+      ar: "بطاقات الاحتياجات والأفعال، وبطاقات تُسمّي المشاعر بهدوء، مع بطاقاتكم الخاصة.",
+      en: "Needs, action and feeling cards in one place, plus your own family cards.",
     },
     site: "/cards",
-  },
-  {
-    key: "mashaeri",
-    image: WORLD_IMAGES.feelings,
-    bg: "bg-rose/15",
-    ring: "ring-rose/30",
-    accent: "text-rose-deep",
-    glow: "shadow-[0_18px_40px_-24px_hsl(var(--rose)/0.9)]",
-    title: { ar: "مشاعري", en: "My feelings" },
-    body: {
-      ar: "بطاقات تُسمّي المشاعر بهدوء، بلا إلزام ولا تقييم.",
-      en: "Cards that name feelings calmly, without pressure or judgement.",
-    },
-    site: "/cards",
+    kid: "/cards",
   },
   {
     key: "qissati",
-    image: WORLD_IMAGES.story,
+    images: [WORLD_IMAGES.story],
     bg: "bg-lav/15",
     ring: "ring-lav/30",
     accent: "text-lav-deep",
     glow: "shadow-[0_18px_40px_-24px_hsl(var(--lav)/0.85)]",
     title: { ar: "قصتي", en: "My stories" },
     body: {
-      ar: "قصص مصوّرة يتشارك فيها الطفل القرار، ويسمع السرد بصوته ولغته.",
-      en: "Illustrated stories where the child makes the choices and hears the narration.",
+      ar: "قصتان تفاعليتان: يومي الأول بالمدرسة، ومغامرة السلحفاة الصغيرة.",
+      en: "Two interactive stories: my first day at school, and the little turtle's adventure.",
     },
     site: "/stories",
+    kid: "/stories",
   },
   {
     key: "alwani",
-    image: WORLD_IMAGES.colors,
+    images: [WORLD_IMAGES.colors],
     bg: "bg-sun/15",
     ring: "ring-sun/30",
     accent: "text-sun-deep",
@@ -62,44 +52,21 @@ export const homeWorlds = [
       en: "A drawing and coloring studio with LAWNATQ colors and bold-line templates.",
     },
     site: "/colors",
-  },
-];
-
-/** «بيتي» — the five cards inside the child's own space. */
-export const kidWorlds = [
-  {
-    key: "bitqati",
-    image: WORLD_IMAGES.cards,
-    title: { ar: "بطاقاتي", en: "My cards" },
-    kidBody: { ar: "أختار بطاقة تعبّر عني.", en: "I pick a card that shows what I mean." },
-    kid: "/cards",
-  },
-  {
-    key: "mashaeri",
-    image: WORLD_IMAGES.feelings,
-    title: { ar: "مشاعري", en: "My feelings" },
-    kidBody: { ar: "أسمّي شعوري بكلمات بسيطة.", en: "I name my feeling in simple words." },
-    kid: "/cards",
-  },
-  {
-    key: "alwani",
-    image: WORLD_IMAGES.colors,
-    title: { ar: "ألواني", en: "My colors" },
-    kidBody: { ar: "أرسم وألوّن بحرية، بلا قواعد.", en: "Draw and color freely, no rules." },
     kid: "/draw",
   },
   {
-    key: "qissati",
-    image: WORLD_IMAGES.story,
-    title: { ar: "قصتي", en: "My stories" },
-    kidBody: { ar: "أختار ما يحدث في الحكاية.", en: "I choose what happens in the tale." },
-    kid: "/stories",
-  },
-  {
     key: "mosaedi",
-    image: WORLD_IMAGES.assistant,
+    images: [WORLD_IMAGES.assistant],
+    bg: "bg-turq/14",
+    ring: "ring-turq/25",
+    accent: "text-turq-deep",
+    glow: "shadow-[0_18px_40px_-24px_hsl(var(--turq)/0.85)]",
     title: { ar: "مساعدي", en: "My helper" },
-    kidBody: { ar: "صديق ودود يجيب بكلمات بسيطة.", en: "A friendly friend who answers simply." },
+    body: {
+      ar: "صديق ودود يجيب بكلمات بسيطة.",
+      en: "A friendly friend who answers in simple words.",
+    },
+    site: "/assistant",
     kid: "/assistant",
   },
 ];
