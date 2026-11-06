@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createParentPin, getPinState, resetParentPin, verifyParentPin } from "@/lib/pin-fns";
 import { clearPinToken, savePinToken } from "@/lib/pin-session";
-import { loginWithMfa } from "@/lib/authMfa";
 import { sanitizeReturnTo } from "@/lib/authReturnTo";
 import { useAuth } from "@/lib/AuthContext";
 import { useI18n } from "@/lib/preferences";
@@ -141,17 +140,16 @@ function ParentPinPage() {
     setBusy(true);
     setError("");
     try {
-      const result = await loginWithMfa(email.trim(), password);
-      if (result?.mfa_required) {
+      // The password is verified on the server before the old PIN is dropped.
+      const res = await resetParentPin({ data: { email: email.trim(), password } });
+      if (!res?.ok) {
         setError(
-          t(
-            "حسابك محمي بخطوة تحقق ثانية. أكمليها من صفحة الدخول ثم عودي هنا.",
-            "Your account needs a second verification step. Finish it on the login page, then come back.",
-          ),
+          res?.error === "bad_credentials"
+            ? t("البريد الإلكتروني أو كلمة المرور غير صحيحة.", "The email or password is not correct.")
+            : t("تعذّر التحقق من الحساب. حاولي مرة أخرى.", "We couldn't verify the account. Please try again."),
         );
         return;
       }
-      await resetParentPin({ data: {} });
       clearPinToken();
       setPassword("");
       setMode("setup");

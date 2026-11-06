@@ -4,11 +4,13 @@ import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
 import { AuthLayout } from "@/components/auth/AuthLayout";
 import { AuthError, AuthLink, GoogleButton, OrDivider, SubmitButton } from "@/components/auth/parts";
+import { PasswordChecklist } from "@/components/auth/PasswordChecklist";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
 import { continueMfa } from "@/lib/authMfa";
+import { isStrongPassword } from "@/lib/password-rules";
 import { safeReturnTo } from "@/lib/authReturnTo";
 import { useI18n } from "@/lib/preferences";
 
@@ -35,6 +37,15 @@ export function RegisterPage() {
   async function register(e) {
     e.preventDefault();
     setError("");
+    if (!isStrongPassword(password)) {
+      setError(
+        t(
+          "كلمة المرور ضعيفة. أكمل الشروط الظاهرة تحت الحقل.",
+          "That password is too weak. Complete the requirements under the field.",
+        ),
+      );
+      return;
+    }
     if (password !== confirm) {
       setError(t("كلمتا المرور غير متطابقتين", "Passwords do not match"));
       return;
@@ -220,8 +231,15 @@ export function RegisterPage() {
               disabled={busy}
               required
             />
+            {confirm && confirm !== password ? (
+              <p className="text-xs font-semibold text-destructive">
+                {t("كلمتا المرور غير متطابقتين", "Passwords do not match")}
+              </p>
+            ) : null}
           </div>
         </div>
+
+        <PasswordChecklist password={password} id="register-password-rules" />
 
         <label htmlFor="consent" className="flex cursor-pointer items-start gap-3 rounded-2xl bg-cream p-4">
           <Checkbox id="consent" checked={consent} onCheckedChange={(v) => setConsent(v === true)} className="mt-0.5" />

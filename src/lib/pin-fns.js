@@ -170,16 +170,25 @@ export const changeParentPin = createServerFn({ method: "POST" })
   });
 
 /**
- * Resetting a forgotten PIN requires a fresh sign-in: the parent leaves the
- * parent area, signs in again through the platform (email + password or Google),
- * and creates a new PIN from the setup screen.
+ * Resetting a forgotten PIN requires the account password, and the password is
+ * checked here on the server: only the parent who owns the password can drop
+ * the PIN, so a child holding an open session cannot replace it. The returned
+ * login token is discarded, never handed back to the browser.
  */
 export const resetParentPin = createServerFn({ method: "POST" })
   .middleware([requireUser])
-  .handler(async ({ context }) => {
+  .validator(z.object({ email: z.string().min(3).max(200), password: z.string().min(1).max(200) }))
+  .handler(async ({ data, context }) => {
+    const verified = await context
+      .getBase44()
+      .auth.loginViaEmailPassword(data.email.trim(), data.password)
+      .then((result) => result?.user ?? null)
+      .catch(() => null);
+
+    if (!verified || verified.id !== context.user.id) return { ok: false, error: "bad_credentials" };
+
     const sdk = serviceRole(context);
     const record = await findPinRecord(sdk, context.user.id);
-    if (!record) return { ok: true };
-    await sdk.entities.ParentPin.delete(record.id);
+    if (record) await sdk.entities.ParentPin.delete(record.id);
     return { ok: true };
   });

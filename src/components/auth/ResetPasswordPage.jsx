@@ -4,8 +4,10 @@ import { useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { AuthLayout } from "@/components/auth/AuthLayout";
 import { AuthError, SubmitButton } from "@/components/auth/parts";
+import { PasswordChecklist } from "@/components/auth/PasswordChecklist";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { isStrongPassword } from "@/lib/password-rules";
 import { useI18n } from "@/lib/preferences";
 
 // The /reset-password page; the reset email links here with ?token=.
@@ -21,6 +23,15 @@ export function ResetPasswordPage() {
   async function submit(e) {
     e.preventDefault();
     setError("");
+    if (!isStrongPassword(password)) {
+      setError(
+        t(
+          "كلمة المرور ضعيفة. أكمل الشروط الظاهرة تحت الحقل.",
+          "That password is too weak. Complete the requirements under the field.",
+        ),
+      );
+      return;
+    }
     if (password !== confirm) {
       setError(t("كلمتا المرور غير متطابقتين", "Passwords do not match"));
       return;
@@ -92,7 +103,15 @@ export function ResetPasswordPage() {
               required
             />
           </div>
+          {confirm && confirm !== password ? (
+            <p className="text-xs font-semibold text-destructive">
+              {t("كلمتا المرور غير متطابقتين", "Passwords do not match")}
+            </p>
+          ) : null}
         </div>
+
+        <PasswordChecklist password={password} id="reset-password-rules" />
+
         <SubmitButton busy={busy} busyLabel={t("جارٍ التغيير...", "Resetting...")}>
           {t("حفظ كلمة المرور", "Reset password")}
         </SubmitButton>

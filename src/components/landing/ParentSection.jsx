@@ -3,10 +3,12 @@ import { Check } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import Reveal from "@/components/landing/Reveal";
 import { PARENT_PHOTO_URL } from "@/lib/brand-asset";
+import { useAuth } from "@/lib/AuthContext";
 import { useI18n } from "@/lib/preferences";
 
 export function ParentSection() {
   const { t } = useI18n();
+  const { isAuthenticated } = useAuth();
   const points = [
     t("لوحة واحدة تجمع رسمات طفلك وقصصه وبطاقاته.", "One dashboard for your child's drawings, stories and cards."),
     t("أسئلة مقترحة تفتح الحوار بدل أن تحكم على المشاعر.", "Suggested questions that open a conversation instead of judging feelings."),
@@ -42,11 +44,15 @@ export function ParentSection() {
             ))}
           </ul>
 
+          {/* A signed-in parent goes straight to the PIN gate of the parent area,
+              never back to registration. */}
           <Link
-            to="/register"
+            to={isAuthenticated ? "/dashboard" : "/register"}
             className="mt-8 inline-flex h-14 items-center rounded-full bg-ink px-8 text-base font-bold text-background transition hover:opacity-90"
           >
-            {t("أنشئ حساب الوالد", "Create a parent account")}
+            {isAuthenticated
+              ? t("ادخل إلى مساحة الوالدين", "Open the parent area")
+              : t("أنشئ حساب الوالد", "Create a parent account")}
           </Link>
         </Reveal>
 

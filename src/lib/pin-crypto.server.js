@@ -10,6 +10,11 @@ const toHex = (buffer) =>
 
 export const isFourDigits = (value) => typeof value === "string" && /^\d{4}$/.test(value);
 
+// The platform runtime refuses PBKDF2 iteration counts above 100000, so this is
+// the strongest supported cost. Create, confirm, verify and change all derive
+// with this same constant, so one PIN can never be hashed two different ways.
+export const PBKDF2_ITERATIONS = 100000;
+
 export function randomHex(bytes = 24) {
   const arr = new Uint8Array(bytes);
   crypto.getRandomValues(arr);
@@ -19,7 +24,7 @@ export function randomHex(bytes = 24) {
 export async function hashPin(pin, salt) {
   const key = await crypto.subtle.importKey("raw", encoder.encode(pin), "PBKDF2", false, ["deriveBits"]);
   const bits = await crypto.subtle.deriveBits(
-    { name: "PBKDF2", hash: "SHA-256", salt: encoder.encode(salt), iterations: 120000 },
+    { name: "PBKDF2", hash: "SHA-256", salt: encoder.encode(salt), iterations: PBKDF2_ITERATIONS },
     key,
     256,
   );
