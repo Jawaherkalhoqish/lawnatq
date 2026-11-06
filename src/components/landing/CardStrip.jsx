@@ -40,8 +40,8 @@ export function CardStrip() {
           return (
             <div
               key={id}
-              className={cn("float-x min-w-0 flex-1 basis-0", index % 2 === 1 && "float-x-reverse")}
-              style={{ animationDelay: `${(index % 6) * 0.45}s` }}
+              className="card-sway min-w-0 flex-1 basis-0"
+              style={{ animationDelay: `${(index % 4) * 0.6}s` }}
             >
               <button
                 type="button"
