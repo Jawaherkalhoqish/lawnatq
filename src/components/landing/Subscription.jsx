@@ -125,26 +125,6 @@ export function Subscription() {
             </Reveal>
           ))}
         </div>
-
-        <div className="mt-6 rounded-[1.5rem] border border-border bg-card p-5">
-          <ul className="grid gap-2 text-sm leading-relaxed text-ink-soft sm:grid-cols-2">
-            <li>{t("التجربة ٧ أيام كاملة، بلا خصم قبل انتهائها.", "The trial lasts a full 7 days, with no charge before it ends.")}</li>
-            <li>{t("بعد التجربة: 19.99 ر.س شهريًا أو 199 ر.س سنويًا.", "After the trial: SAR 19.99 monthly or SAR 199 yearly.")}</li>
-            <li>{t("التجديد تلقائي حتى تلغي الاشتراك.", "Renewal is automatic until you cancel.")}</li>
-            <li>
-              {t("الإلغاء من إعدادات الوالد، أو برسالة إلى ", "Cancel from the parent settings, or email ")}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="font-bold text-ink underline underline-offset-4">
-                {CONTACT_EMAIL}
-              </a>
-            </li>
-          </ul>
-          <p className="mt-4 border-t border-border pt-3 text-xs text-ink-soft">
-            {t(
-              "تفعيل الدفع قيد الربط حاليًا؛ عند اختيار خطة مدفوعة نتواصل معك لإتمام الاشتراك بأمان.",
-              "Payment activation is being connected; when you choose a paid plan we contact you to complete it securely.",
-            )}
-          </p>
-        </div>
       </div>
     </section>
   );
