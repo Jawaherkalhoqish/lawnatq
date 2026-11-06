@@ -24,8 +24,7 @@ export const WORLD_IMAGES = {
   feelings: "/worlds/02_Mashaeri.png",
   story: "/worlds/03_Qissati.png",
   colors: "/worlds/04_Alwani.png",
-  assistant:
-    "https://media.base44.com/images/public/6aeaa7cdb1406c78a8420eae/d97b1d145_generated_image.png",
+  assistant: "/worlds/05_Mosaedi.png",
 };
 
 /** The three approved How It Works illustrations. */

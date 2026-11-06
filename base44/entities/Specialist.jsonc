@@ -1,7 +1,7 @@
 {
   "name": "Specialist",
   "type": "object",
-  "description": "A real specialist configured by the administrator. Nothing is invented here: an empty table means the booking service shows its prototype state.",
+  "description": "A specialist in the LAWNATQ directory. Demonstration profiles are flagged with is_demo and are never presented as real, licensed or verified.",
   "properties": {
     "name": {
       "type": "string"
@@ -33,6 +33,11 @@
     "license_verified": {
       "type": "boolean",
       "default": false
+    },
+    "is_demo": {
+      "type": "boolean",
+      "default": false,
+      "description": "True for sample demonstration profiles shown for preview only"
     },
     "session_price": {
       "type": "number",

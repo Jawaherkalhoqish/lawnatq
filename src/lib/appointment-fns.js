@@ -55,8 +55,8 @@ export const getAppointments = createServerFn({ method: "POST" })
   });
 
 /**
- * A booking request. Requires the PIN session and an active subscription;
- * the session fee stays separate and is never charged here.
+ * A demo booking request. Requires the PIN session; the sample session fee
+ * stays separate and is never charged here.
  */
 export const requestAppointment = createServerFn({ method: "POST" })
   .middleware([requireUser])
@@ -72,11 +72,6 @@ export const requestAppointment = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const sdk = context.getBase44().asServiceRole;
     await assertPinSession(sdk, context.user.id, data.token);
-
-    const subscription = (
-      await sdk.entities.Subscription.filter({ parent_id: context.user.id, status: "active" }, { limit: 1 })
-    ).items?.[0];
-    if (!subscription) return { ok: false, error: "no_subscription" };
 
     const specialist = await sdk.entities.Specialist.get(data.specialistId).catch(() => null);
     if (!specialist || specialist.is_active === false) return { ok: false, error: "no_specialist" };

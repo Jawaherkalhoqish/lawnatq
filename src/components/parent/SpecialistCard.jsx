@@ -38,6 +38,12 @@ export function SpecialistCard({ specialist, onBook }) {
         </p>
       ) : null}
 
+      {specialist.is_demo ? (
+        <p className="mt-2 inline-flex items-center rounded-full bg-sun/25 px-3 py-1 text-[0.7rem] font-bold text-sun-deep">
+          {t("بيانات تجريبية للعرض", "Demo data")}
+        </p>
+      ) : null}
+
       <div className="mt-4 flex items-center justify-between gap-3 border-t border-border pt-4">
         <p className="text-sm font-bold text-ink">
           {specialist.session_price ?? 0} {specialist.currency || "SAR"}

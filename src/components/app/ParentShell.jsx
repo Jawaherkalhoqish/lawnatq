@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
-import { CalendarDays, LayoutDashboard, Lock, LogOut, Sparkles, Settings as SettingsIcon, Users, ShieldCheck, Menu, X } from "lucide-react";
+import { CalendarDays, LayoutDashboard, Lock, LogOut, MessageCircleHeart, Sparkles, Settings as SettingsIcon, Users, ShieldCheck, Menu, X } from "lucide-react";
 import Logo from "@/components/brand/Logo";
 import LangToggle from "@/components/brand/LangToggle";
 import { ThemeToggle } from "@/components/brand/ThemeToggle";
@@ -14,6 +14,7 @@ const nav = [
   { to: "/dashboard", icon: LayoutDashboard, ar: "لوحة الوالد", en: "Dashboard" },
   { to: "/children", icon: Users, ar: "ملفات الأطفال", en: "Children" },
   { to: "/appointments", icon: CalendarDays, ar: "المواعيد والاستشارات", en: "Appointments" },
+  { to: "/feedback", icon: MessageCircleHeart, ar: "ملاحظاتك", en: "Feedback" },
   { to: "/insights", icon: Sparkles, ar: "الأسئلة والرؤى", en: "Insights" },
   { to: "/settings", icon: SettingsIcon, ar: "الإعدادات", en: "Settings" },
 ];

@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { CalendarClock, Info } from "lucide-react";
 import { toast } from "sonner";
 import AppointmentList from "@/components/parent/AppointmentList";
 import BookingDialog from "@/components/parent/BookingDialog";
-import SehhatyCard from "@/components/parent/SehhatyCard";
 import SpecialistCard from "@/components/parent/SpecialistCard";
 import { useChildren } from "@/hooks/useFamily";
 import { cancelAppointment, getAppointments, getSpecialists } from "@/lib/appointment-fns";
-import { getMySubscription } from "@/lib/subscription-fns";
 import { readPinToken } from "@/lib/pin-session";
 import { useI18n } from "@/lib/preferences";
 
@@ -24,8 +22,8 @@ function AppointmentsPage() {
   const token = readPinToken();
   const listAppointments = useServerFn(getAppointments);
   const listSpecialists = useServerFn(getSpecialists);
-  const readSubscription = useServerFn(getMySubscription);
   const cancel = useServerFn(cancelAppointment);
+  const queryClient = useQueryClient();
 
   const { data: children } = useChildren();
   const { data: appointments, refetch } = useQuery({
@@ -33,17 +31,11 @@ function AppointmentsPage() {
     queryFn: () => listAppointments({ data: { token } }),
   });
   const { data: directory } = useQuery({ queryKey: ["specialists"], queryFn: () => listSpecialists({ data: {} }) });
-  const { data: subscription } = useQuery({
-    queryKey: ["subscription"],
-    queryFn: () => readSubscription({ data: { token } }),
-  });
-
   const [booking, setBooking] = useState(null);
   const [cancelling, setCancelling] = useState(false);
 
   const specialists = directory?.specialists ?? [];
   const categories = directory?.categories ?? [];
-  const activeSub = subscription?.active;
 
   async function onCancel(id) {
     setCancelling(true);
@@ -67,35 +59,33 @@ function AppointmentsPage() {
         </h1>
         <p className="mt-2 max-w-2xl text-ink-soft">
           {t(
-            "خياران منفصلان: منصة صحتي للمواعيد الصحية، أو مختص من لونُطق بطلب داخل المنصة.",
-            "Two separate options: Sehhaty for health appointments, or a LAWNATQ specialist requested here.",
+            "دليل مختصين داخلي بصفحات تجريبية للعرض: اختاري مختصًا ووقتًا، أرسلي طلب موعد تجريبي، وتابعيه من هنا ومن لوحة الوالد.",
+            "An internal specialist directory with demonstration profiles: pick a specialist and a time, send a demo request, and follow it here and on your dashboard.",
           )}
         </p>
       </header>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <SehhatyCard />
-        <article className="flex h-full flex-col rounded-[2rem] border border-border bg-card p-6 shadow-soft">
-          <span className="inline-grid h-12 w-12 place-items-center rounded-2xl bg-lav/20 text-lav-deep">
-            <CalendarClock className="h-6 w-6" aria-hidden="true" />
-          </span>
-          <h2 className="mt-4 font-display text-xl font-extrabold text-ink">
-            {t("احجزي مع مختص من لونُطق", "Book a LAWNATQ specialist")}
-          </h2>
-          <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
-            {t(
-              "اختاري مختصًا، اطّلعي على ملفه ووقته وقيمة الجلسة، ثم أرسلي طلب موعد وتابعي حالته من هنا.",
-              "Choose a specialist, review the profile, time and session fee, then send a request and follow its status here.",
-            )}
-          </p>
-          <p className="mt-4 flex items-start gap-2 rounded-2xl bg-cream p-3 text-xs leading-relaxed text-ink-soft">
-            <Info className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-            {activeSub
-              ? t("اشتراكك نشط، ويمكنك إرسال طلبات المواعيد.", "Your subscription is active, so you can send requests.")
-              : t("طلب المختص يحتاج اشتراكًا نشطًا. فعّلي اشتراكك من قسم الاشتراك.", "Specialist requests need an active subscription. Activate it in the subscription section.")}
-          </p>
-        </article>
-      </div>
+      <article className="flex flex-col rounded-[2rem] border border-border bg-card p-6 shadow-soft">
+        <span className="inline-grid h-12 w-12 place-items-center rounded-2xl bg-lav/20 text-lav-deep">
+          <CalendarClock className="h-6 w-6" aria-hidden="true" />
+        </span>
+        <h2 className="mt-4 font-display text-xl font-extrabold text-ink">
+          {t("احجزي مع مختص من لونُطق", "Book a LAWNATQ specialist")}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+          {t(
+            "اختاري مختصًا، اطّلعي على ملفه ووقته وقيمة الجلسة، ثم أرسلي طلب موعد وتابعي حالته من هنا.",
+            "Choose a specialist, review the profile, time and session fee, then send a request and follow its status here.",
+          )}
+        </p>
+        <p className="mt-4 flex items-start gap-2 rounded-2xl bg-cream p-3 text-xs leading-relaxed text-ink-soft">
+          <Info className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+          {t(
+            "كل الأسماء والأسعار والأوقات في هذا الدليل بيانات تجريبية للعرض فقط: ليست مختصين حقيقيين، ولا تحمل ترخيصًا، ولا تُعد حجزًا مؤكدًا.",
+            "Every name, price and time in this directory is demonstration data only: these are not real or licensed specialists, and nothing is a confirmed booking.",
+          )}
+        </p>
+      </article>
 
       <section className="space-y-4">
         <h2 className="font-display text-2xl font-extrabold text-ink">{t("المختصون المتاحون", "Available specialists")}</h2>
@@ -143,7 +133,7 @@ function AppointmentsPage() {
           onOpenChange={(open) => !open && setBooking(null)}
           onBooked={() => {
             refetch();
-            listSpecialists({ data: {} });
+            queryClient.invalidateQueries({ queryKey: ["specialists"] });
           }}
         />
       ) : null}
