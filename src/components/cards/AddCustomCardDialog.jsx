@@ -54,7 +54,7 @@ export function AddCustomCardDialog({ child, onSaved }) {
         phrase_en: phraseEn.trim() || undefined,
         file_uri,
       });
-      toast.success(t("أُضيفت البطاقة إلى مشاعري", "The card was added to My Feelings"));
+      toast.success(t("أُضيفت البطاقة إلى عالم الصغير", "The card was added to the little one's world"));
       onSaved?.();
       setOpen(false);
       reset();
@@ -78,7 +78,7 @@ export function AddCustomCardDialog({ child, onSaved }) {
         <span className="grid h-11 w-11 place-items-center rounded-full bg-card text-lav-deep ring-1 ring-lav/40">
           <Sparkles className="h-5 w-5" aria-hidden="true" />
         </span>
-        <span className="text-sm font-bold text-ink">{t("+ إضافة بطاقة", "+ Add a card")}</span>
+        <span className="text-sm font-bold text-ink">{t("+ إضافة بطاقاتي", "+ Add my cards")}</span>
       </button>
 
       <Dialog
@@ -91,7 +91,7 @@ export function AddCustomCardDialog({ child, onSaved }) {
         <DialogContent className="max-h-[92vh] overflow-y-auto sm:max-w-2xl">
           <DialogHeader>
             <DialogTitle className="font-display text-xl font-extrabold text-ink">
-              {step === "phrase" ? t("بطاقة جديدة في مشاعري", "A new card in My Feelings") : phraseRef.current}
+              {step === "phrase" ? t("بطاقة جديدة في عالم الصغير", "A new card in the little one's world") : phraseRef.current}
             </DialogTitle>
             <DialogDescription className="text-ink-soft">
               {step === "phrase"

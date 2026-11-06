@@ -3,8 +3,8 @@ import { MUSIC_URL } from "@/lib/brand-asset";
 
 /**
  * One background-music element for the whole platform, created once and kept
- * across page navigation. Muted until the visitor turns it on (browser autoplay
- * rules), and ducked while a story or card is read aloud.
+ * across page navigation. On by default, started by the first interaction when
+ * the browser blocks autoplay, and ducked while a story or card is read aloud.
  */
 const KEY = "lawnatq_sound";
 const DEFAULT_VOLUME = 0.22;
@@ -14,12 +14,12 @@ const SoundContext = createContext(null);
 export function SoundProvider({ children }) {
   const audioRef = useRef(null);
   const [ready, setReady] = useState(false);
-  const [prefs, setPrefs] = useState({ muted: true, volume: DEFAULT_VOLUME });
+  const [prefs, setPrefs] = useState({ muted: false, volume: DEFAULT_VOLUME });
 
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(KEY);
-      if (raw) setPrefs({ muted: true, volume: DEFAULT_VOLUME, ...JSON.parse(raw) });
+      if (raw) setPrefs({ muted: false, volume: DEFAULT_VOLUME, ...JSON.parse(raw) });
     } catch {
       /* storage unavailable */
     }

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 const kidNav = [
   { path: "", icon: LayoutGrid, ar: "بيتي", en: "Home" },
-  { path: "/cards", icon: MessageCircleHeart, ar: "بطاقاتي", en: "Cards" },
+  { path: "/cards", icon: MessageCircleHeart, ar: "عالم الصغير", en: "Little world" },
   { path: "/draw", icon: Palette, ar: "ألواني", en: "Colors" },
   { path: "/stories", icon: BookOpen, ar: "قصتي", en: "Stories" },
   { path: "/assistant", icon: Sparkles, ar: "مساعدي", en: "Helper" },

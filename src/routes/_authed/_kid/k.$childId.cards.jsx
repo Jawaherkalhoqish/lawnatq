@@ -8,13 +8,11 @@ import FeelingsCustomCards from "@/components/cards/FeelingsCustomCards";
 import SequenceTray from "@/components/cards/SequenceTray";
 import { Input } from "@/components/ui/input";
 import { useCardSequences, useChild } from "@/hooks/useFamily";
-import { FEELINGS_CATEGORY } from "@/lib/activities";
-import { cardByKey, cardCategories, cardImage, cards, toneClasses } from "@/lib/cards";
-import { speak, useI18n, usePrefs } from "@/lib/preferences";
+import { cardByKey, cardCategories, cardImage, cards, toneClasses } from "@/lib/cards";import { speak, useI18n, usePrefs } from "@/lib/preferences";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authed/_kid/k/$childId/cards")({
-  head: () => ({ meta: [{ title: "بطاقاتي | لونُطق" }] }),
+  head: () => ({ meta: [{ title: "عالم الصغير | لونُطق" }] }),
   component: CardsPage,
 });
 
@@ -63,11 +61,13 @@ function CardsPage() {
   return (
     <div className="space-y-5 pb-4">
       <header>
-        <h1 className="font-display text-3xl font-extrabold text-ink">{t("بطاقاتي", "My cards")}</h1>
+        <h1 className="font-display text-3xl font-extrabold text-ink">{t("عالم الصغير", "The little one's world")}</h1>
         <p className="mt-2 text-ink-soft">
           {t("اضغط على الصور لتكوين جملتك، ثم اضغط «اقرأ».", "Tap pictures to build your sentence, then tap “Read”.")}
         </p>
       </header>
+
+      <FeelingsCustomCards child={child} />
 
       <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
         <div className="relative flex-1">
@@ -160,8 +160,6 @@ function CardsPage() {
           <p className="mt-1 text-sm text-ink-soft">{t("جرّب كلمة أبسط أو أزل التصفية.", "Try a simpler word or clear the filter.")}</p>
         </div>
       )}
-
-      {category === FEELINGS_CATEGORY ? <FeelingsCustomCards child={child} /> : null}
 
       <div className="sticky bottom-3 z-20">
         <SequenceTray

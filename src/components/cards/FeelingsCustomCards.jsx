@@ -26,7 +26,7 @@ function CardDrawing({ fileUri, alt }) {
   return <Image src={url} alt={alt} className="h-24 w-full rounded-xl object-contain" fittingType="fit" />;
 }
 
-/** The child's own cards inside «مشاعري»: parent-written phrases, drawn by the child. */
+/** The child's own cards inside «عالم الصغير»: parent-written phrases, drawn by the child. */
 export function FeelingsCustomCards({ child }) {
   const { t, lang } = useI18n();
   const queryClient = useQueryClient();

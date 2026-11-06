@@ -5,7 +5,7 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import Logo from "@/components/brand/Logo";
 import LangToggle from "@/components/brand/LangToggle";
-import MusicControl from "@/components/sound/MusicControl";
+import MusicSettings from "@/components/sound/MusicSettings";
 import { useAuth } from "@/lib/AuthContext";
 import { useI18n } from "@/lib/preferences";
 
@@ -15,6 +15,7 @@ const links = [
   { href: "/#how", ar: "كيف يعمل", en: "How it works" },
   { href: "/#activities", ar: "الأنشطة", en: "Activities" },
   { to: "/stories", ar: "القصص", en: "Stories" },
+  { to: "/dashboard", ar: "للوالدين", en: "For parents" },
   { href: "/#subscribe", ar: "الاشتراك", en: "Subscription" },
   { href: "/#contact", ar: "اتصل بنا", en: "Contact us" },
 ];
@@ -91,12 +92,10 @@ export function TopNav() {
               </Link>
             ),
           )}
-          <Link to="/dashboard" onClick={close} className="rounded-2xl px-4 py-3 text-base font-semibold text-ink transition hover:bg-cream">
-            {t("لوحة الوالد", "Parent dashboard")}
-          </Link>
         </nav>
 
         <div className="mt-3 space-y-2 border-t border-border pt-4">
+          <MusicSettings />
           <div className="flex items-center justify-between gap-3 rounded-2xl bg-card px-4 py-3 ring-1 ring-border">
             <span className="text-sm font-bold text-ink">{t("اللغة", "Language")}</span>
             <LangToggle />
@@ -153,7 +152,6 @@ export function TopNav() {
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <MusicControl />
           {isAuthenticated ? (
             <Link
               to="/dashboard"

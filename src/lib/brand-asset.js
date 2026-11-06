@@ -8,8 +8,9 @@ export const LOGO_URL = "/brand/lawnatq-logo.png";
 /** Kept for the mascot slots (child space, favicon) — same official mark. */
 export const MASCOT_URL = LOGO_URL;
 
-/** Approved homepage hero photograph (hd.jpg). */
-export const HERO_URL = "/hero/hd.jpg";
+/** Approved homepage hero artwork — the supplied drawing illustration, background removed. */
+export const HERO_URL =
+  "https://base44.app/api/apps/6aeaa7cdb1406c78a8420eae/files/mp/public/6aeaa7cdb1406c78a8420eae/008c0b156_hero-drawing-fun-mascot.png";
 
 /** Supplied photography, used exactly as provided — never regenerated or cropped. */
 export const PARENT_PHOTO_URL =
