@@ -1,273 +1,216 @@
-LAWNATQ | لونُطق
+<div align="center">
 
-Your Colors Speak for You.
+# LAWNATQ | لونُطق
 
-<p align="center">
-  <img src="gh.jpg" alt="LAWNATQ Logo and Mascot" width="300" />
-</p>
-<p align="center">
-  **An Interactive Bilingual Platform for Children with Down Syndrome**
-</p>
-<p align="center">
-  A space where children can communicate, create, and express themselves in their own unique ways.
-</p>
-<p align="center">
-  <a href="#about-the-project">About</a> •
-  <a href="#core-features">Features</a> •
-  <a href="#platform-architecture">Architecture</a> •
-  <a href="#parent-experience">Parents</a> •
-  <a href="#accessibility--inclusion">Accessibility</a>
-</p>
+### Your Colors Speak for You
 
-⸻
+<img src="./gh.jpg" alt="LAWNATQ – Children expressing themselves through creativity" width="520" />
 
-Table of Contents
+**An Interactive Bilingual Platform for Children with Down Syndrome**
 
-* About the Project
-* The Challenge
-* Our Approach
-* Core Features
-* Platform Architecture
-* User Journey
-* Parent Experience
-* Accessibility & Inclusion
-* Responsible AI
-* Language Support
-* Subscription Plans
-* Our Vision
+Designed with love, because every child deserves a story to tell.
 
-⸻
+[Explore the Website](#) · [Features](#key-features) · [Parents](#parent-experience) · [Accessibility](#accessibility--inclusion)
 
-About the Project
+![Platform](https://img.shields.io/badge/Platform-Web%20Website-6FD0C5?style=flat-square)
+![Languages](https://img.shields.io/badge/Languages-Arabic%20%7C%20English-C39BD3?style=flat-square)
+![Age](https://img.shields.io/badge/Age%20Group-5--10%20Years-FF9EAA?style=flat-square)
 
-LAWNATQ | لونُطق is a bilingual interactive website designed for children with Down syndrome aged 5–10 years.
+</div>
 
-The platform provides multiple ways for children to express their thoughts, needs, and creativity through communication cards, drawing, coloring, and interactive storytelling.
+---
 
-LAWNATQ also offers a dedicated parent experience, allowing families to revisit their children’s creative activities and use suggested conversation prompts to encourage meaningful communication.
+## About LAWNATQ
 
-Our goal is to make expression more accessible, engaging, and enjoyable — because every child deserves to be heard.
+**LAWNATQ (لونُطق)** is a bilingual interactive website designed for children with Down syndrome aged **5–10 years**.
 
-The Challenge
+The platform provides different ways for children to express themselves through communication cards, drawing, coloring, and interactive storytelling.
 
-Children communicate and express themselves in different ways. Some may find it challenging to communicate their everyday needs, describe their experiences, or express what they want to say.
+Rather than relying on one way of communication, LAWNATQ offers children a welcoming space to explore, create, and express themselves at their own pace.
 
-At the same time, parents may need additional ways to understand their children’s activities and encourage conversations.
+Parents can revisit their children's creations and use suggested questions to continue meaningful conversations together.
 
-LAWNATQ addresses this challenge by bringing multiple expression tools together in one accessible, child-friendly platform.
+## Key Features
 
-Our Approach
+LAWNATQ brings together four interactive experiences:
 
-LAWNATQ combines four interactive experiences:
+| Experience | Description |
+|---|---|
+| **My Little World** | Communication cards for feelings, everyday needs, and common expressions. |
+| **My Colors** | A creative drawing and coloring studio with free drawing and ready-to-color illustrations. |
+| **My Story** | Personal storytelling and illustrated interactive stories where children's choices shape what happens next. |
+| **My Companion** | An AI-powered chat companion that responds in simple language and encourages conversation. |
 
-Experience	Purpose
-Communication Cards	Support everyday communication and expression
-Drawing & Coloring	Encourage creativity and visual expression
-Interactive Stories	Support engagement and personal storytelling
-AI Companion	Offer simple conversational interaction
+### 1. My Little World
 
-These experiences work together to give children different ways to participate, create, and communicate.
+Children can explore communication cards to express everyday needs and messages, such as:
 
-⸻
+- I need a break.
+- Help me.
+- I want to play.
 
-Core Features
+Children can also explore cards they have created themselves.
 
-01. My Little World | عالمي الصغير
+### 2. My Colors
 
-A collection of communication cards that helps children express:
+A creative space that encourages visual expression through:
 
-* Feelings and emotions.
-* Everyday needs.
-* Common expressions.
-* Personal messages.
+- Free drawing.
+- Ready-to-color illustrations.
+- Wide outlines designed to make coloring easier.
 
-Children can select cards such as “I need a break” or “Help me”, and explore cards they have created themselves.
+### 3. My Story
 
-02. My Colors | ألواني
-
-An interactive creative studio that includes:
-
-* Free drawing activities.
-* Ready-to-color illustrations.
-* Wide outlines designed to make coloring easier.
-
-The experience encourages children to explore colors and express their creativity freely.
-
-03. My Story | قصتي
-
-An interactive storytelling space featuring:
-
-* Personal story creation.
-* An illustrated story library.
-* Interactive choices that influence story events.
+A storytelling experience that includes personal story creation and a library of interactive stories.
 
 Featured stories include:
 
-* My First Day at School
-* The Little Turtle’s Adventure
+- My First Day at School.
+- The Little Turtle's Adventure.
 
-Children can explore stories and make choices that shape what happens next.
+Children make choices throughout the stories, helping shape what happens next.
 
-04. My Companion | مساعدي
+### 4. My Companion
 
-An AI-powered conversational companion designed to interact using simple, child-friendly language.
+An AI-powered chat companion that uses simple language to interact with children.
 
-Children can:
+Children can talk about their day or ask for an idea for their next drawing.
 
-* Talk about their day.
-* Ask simple questions.
-* Explore ideas for their next drawing.
-* Engage in guided conversational activities.
+**Access note:** My Companion requires a parent account. Communication cards, stories, and drawing activities can be explored without one.
 
-Access to My Companion requires a parent account. Communication cards, stories, and drawing activities can be explored without one.
+---
 
-⸻
+## Platform Architecture
 
-Platform Architecture
+The following diagram illustrates the main experience areas and how they connect to the parent experience.
 
-The following diagram illustrates the platform’s main experience areas and how they connect to the parent experience.
-
-flowchart TB
+```mermaid
+flowchart TD
     A["LAWNATQ Website"] --> B["Child Experience"]
     A --> C["Parent Area"]
+
     B --> D["My Little World"]
     B --> E["My Colors"]
     B --> F["My Story"]
     B --> G["My Companion"]
+
     D --> H["Communication Cards"]
     E --> I["Drawing & Coloring"]
-    F --> J["Personal & Interactive Stories"]
+    F --> J["Interactive Stories"]
     G --> K["AI-Powered Conversation"]
+
     C --> L["Child Profiles"]
-    C --> M["Activity Dashboard"]
-    C --> N["Drawings, Stories & Cards"]
+    C --> M["Parent Dashboard"]
+    C --> N["Activity Review"]
     C --> O["Suggested Conversation Prompts"]
-    N -. "Activity review" .-> C
-    O --> P["Parent-Child Conversations"]
 
-User Journey
+    D --> M
+    E --> M
+    F --> M
+    G --> M
+```
 
-LAWNATQ provides separate experiences for children and parents.
+## User Journey
 
+The platform provides separate but connected experiences for children and parents.
+
+```mermaid
 flowchart TD
-    A["Visit LAWNATQ"] --> B{"Choose Experience"}
+    A["Visit LAWNATQ"] --> B["Choose Experience"]
+
     B --> C["Explore Child Activities"]
     B --> D["Parent Account"]
+
     C --> E["Communication Cards"]
     C --> F["Drawing & Coloring"]
     C --> G["Interactive Stories"]
-    D --> H["Create or Manage Child Profile"]
-    H --> I["Open Parent Dashboard"]
-    I --> J["Review Child Activities"]
-    I --> K["Explore Suggested Prompts"]
-    E --> L["Expression & Communication"]
-    F --> L
-    G --> L
-    L --> M["Meaningful Family Conversations"]
+    C --> H["My Companion"]
 
-⸻
+    H --> I["Parent Account Required"]
 
-Parent Experience
+    D --> J["Create or Manage Child Profile"]
+    J --> K["Open Parent Dashboard"]
+    K --> L["Review Child Activities"]
+    L --> M["Explore Suggested Prompts"]
+    M --> N["Meaningful Family Conversations"]
+```
 
-The parent area is designed to help families stay connected with their children’s activities.
+## Parent Experience
+
+The parent area is designed to help families stay connected with their children's activities.
 
 Parents can:
 
-* Create and manage separate profiles for their children.
-* Customize accessibility preferences for each child.
-* Review drawings, stories, and communication cards.
-* Explore activity insights.
-* Access suggested conversation prompts.
+- Create and manage separate profiles for their children.
+- Customize accessibility preferences for each child.
+- Review drawings, stories, and communication cards.
+- Explore activity insights.
+- Access suggested conversation prompts.
 
-The parent dashboard brings children’s creative activities together in one place, helping parents revisit what their children have explored and created.
+The parent dashboard brings children's creative activities together in one place, helping parents revisit and discuss what their children have explored and created.
 
-Parent Experience Flow
-
-flowchart LR
-    A["Parent Account"] --> B["Child Profiles"]
-    B --> C["Parent Dashboard"]
-    C --> D["Activity Overview"]
-    C --> E["Drawings"]
-    C --> F["Stories"]
-    C --> G["Communication Cards"]
-    C --> H["Suggested Prompts"]
-
-⸻
-
-Accessibility & Inclusion
+## Accessibility & Inclusion
 
 Accessibility is an essential part of the LAWNATQ experience.
 
 The website includes:
 
-* Arabic and English language support.
-* Layouts that adapt to each language’s reading direction.
-* Large, easy-to-use buttons.
-* Fewer choices per screen.
-* Adjustable text size.
-* Reduced-motion option.
-* Simple and child-friendly interactions.
+- **Bilingual Support:** Arabic and English language options.
+- **Reading Direction:** Layouts adapt to each language's reading direction.
+- **Large Buttons:** Easy-to-use interactive controls.
+- **Simplified Navigation:** Fewer choices per screen.
+- **Adjustable Text Size:** Options to adapt text visibility.
+- **Reduced Motion:** A setting to limit interface movement.
 
-These features allow families to adapt the experience to each child’s preferences and needs.
+These features aim to make the experience more accessible, comfortable, and adaptable to individual needs.
 
-Responsible AI
+## Responsible Use of AI
 
-LAWNATQ uses AI within My Companion to support simple, interactive communication.
+LAWNATQ uses AI in its companion feature to support simple conversational interaction.
 
-The platform is designed to support expression and family conversations. It is not a diagnostic or treatment tool.
+The platform is designed to encourage expression and family communication. It does **not**:
 
-LAWNATQ does not:
+- Diagnose medical or developmental conditions.
+- Infer a child's feelings from drawings or colors.
+- Replace professional assessment or treatment.
 
-* Diagnose Down syndrome or other conditions.
-* Infer a child’s feelings from drawings or colors.
-* Replace professional assessment or care.
-* Present activity insights as clinical conclusions.
+Families with health or developmental concerns should consult a qualified professional.
 
-Families with health or developmental concerns should consult qualified professionals.
+## Trial & Subscriptions
 
-⸻
+LAWNATQ lists the following subscription options:
 
-Language Support
+| Plan | Price |
+|---|---:|
+| Free Trial | 7 Days |
+| Monthly | SAR 19.99 |
+| Annual | SAR 199 |
 
-LAWNATQ is bilingual:
+The listed trial provides access to communication cards, My Colors, stories, and My Companion.
 
-Arabic	English
-لونُطق	LAWNATQ
-عالمي الصغير	My Little World
-ألواني	My Colors
-قصتي	My Story
-مساعدي	My Companion
+---
 
-The interface adapts its layout to the reading direction of the selected language.
+## Project Highlights
 
-Subscription Plans
+- Designed specifically for children with Down syndrome aged 5–10.
+- Combines communication, creativity, and interactive storytelling.
+- Provides separate experiences for children and parents.
+- Supports Arabic and English.
+- Encourages meaningful family conversations.
+- Prioritizes accessibility and responsible AI use.
 
-LAWNATQ lists the following access options:
+## Our Vision
 
-Plan	Price
-Free Trial	7 Days
-Monthly	SAR 19.99
-Annual	SAR 199
+We believe every child has a unique way of expressing themselves.
 
-The listed plans provide access to platform activities according to the selected subscription.
+LAWNATQ aims to create a welcoming digital space where children can communicate, create, and share their stories in their own way.
 
-⸻
+<div align="center">
 
-Our Vision
+### LAWNATQ | لونُطق
 
-We envision a world where every child has the opportunity to communicate, create, and express themselves with confidence.
+**Your Colors Speak for You.**
 
-LAWNATQ is more than a collection of activities. It is a space that brings children and families closer through creativity, communication, and shared experiences.
+© 2026 LAWNATQ. Designed with love, because every child deserves a story to tell.
 
-⸻
-
-<p align="center">
-  <img src="gh.jpg" alt="LAWNATQ" width="100" />
-</p>
-<p align="center">
-  **LAWNATQ | لونُطق**
-  <br />
-  © 2026 LAWNATQ
-  <br />
-  <em>صُمّم بحب، لأن لكل طفل حكاية تستحق أن تُنطق.</em>
-</p>
+</div>
