@@ -197,13 +197,6 @@
     animation-direction: reverse;
   }
 
-  /* A calmer, shorter sway for the communication cards: a few pixels to the
-     right, then to the left, then back to the exact starting point. */
-  .card-sway {
-    animation: lawnatq-card-sway 12s ease-in-out infinite;
-    will-change: transform;
-  }
-
   .dotted-grid {
     background-image: radial-gradient(hsl(var(--ink) / 0.09) 1px, transparent 1px);
     background-size: 22px 22px;
@@ -234,17 +227,32 @@
   50% { transform: translateY(-12px) rotate(-1.5deg); }
 }
 
-@keyframes lawnatq-card-sway {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  35% { transform: translate3d(3px, 0, 0); }
-  70% { transform: translate3d(-3px, 0, 0); }
+/* Communication-card marquee: one track holding four identical copies, sliding
+   by exactly half its width. The sequence repeats every copy, so the frame at
+   100% is identical to 0% — one direction, constant speed, never pausing. */
+@keyframes lawnatq-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.card-marquee {
+  animation: lawnatq-marquee 120s linear infinite;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card-sway { animation: none !important; transform: none !important; }
+  .card-marquee {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
 }
 
-[data-motion="reduced"] .card-sway { animation: none !important; transform: none !important; }
+[data-motion="reduced"] .card-marquee {
+  animation: none !important;
+  transform: none !important;
+  will-change: auto;
+}
 
 @keyframes lawnatq-float-x {
   0% { transform: translate3d(0, 0, 0); }
@@ -302,5 +310,3 @@
     0 0 32px -8px hsl(var(--lav) / 0.65),
     0 0 28px -10px hsl(var(--turq) / 0.6);
 }
-
-/* Communication cards stay in place; each card only sways inside its own slot. */
