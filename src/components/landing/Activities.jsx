@@ -20,7 +20,7 @@ export function Activities() {
             </span>
             <h2 className="mt-3 text-3xl font-extrabold text-ink sm:text-4xl">{t("عالمي", "My worlds")}</h2>
             <p className="mt-3 text-base leading-relaxed text-ink-soft">
-              {t("أربعة عوالم، نفسها التي يجدها طفلك داخل مساحته.", "Four little worlds, exactly the ones your child finds inside their space.")}
+              {t("أربعة عوالم، كلها بانتظار طفلك", "Four worlds, all waiting for your child")}
             </p>
           </div>
           <Link

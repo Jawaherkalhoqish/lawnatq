@@ -1,25 +1,26 @@
 import { WORLD_IMAGES } from "@/lib/brand-asset";
 
 /**
- * «عالمي» — the four approved worlds.
+ * «عالمي» — the four approved worlds, in the approved order.
  *
  * One single list, used by the homepage AND by the child's own space, so both
  * places always show the same four cards: same order, same approved images,
- * same names and descriptions. Never duplicate this list.
+ * same names and descriptions, same destinations. Never duplicate this list.
  */
 export const worlds = [
   {
-    key: "bitqati-mashaeri",
-    // The approved card and feelings illustrations together in one card.
-    images: [WORLD_IMAGES.cards, WORLD_IMAGES.feelings],
+    key: "small-world",
+    // The approved «عالمي الصغير» illustration: the smiling child between the
+    // apple card and the water-glass card. Used exactly as supplied.
+    images: [WORLD_IMAGES.cards],
     bg: "bg-coral/12",
     ring: "ring-coral/25",
     accent: "text-coral-deep",
     glow: "shadow-[0_18px_40px_-24px_hsl(var(--coral)/0.85)]",
-    title: { ar: "بطاقاتي ومشاعري", en: "My cards & feelings" },
+    title: { ar: "عالمي الصغير", en: "My little world" },
     body: {
-      ar: "بطاقات الاحتياجات والأفعال، وبطاقات تُسمّي المشاعر بهدوء، مع بطاقاتكم الخاصة.",
-      en: "Needs, action and feeling cards in one place, plus your own family cards.",
+      ar: "مشاعري واحتياجاتي وبطاقاتي التي رسمتها.",
+      en: "My feelings, my needs and the cards I drew.",
     },
     site: "/cards",
     kid: "/cards",
@@ -40,21 +41,6 @@ export const worlds = [
     kid: "/stories",
   },
   {
-    key: "alwani",
-    images: [WORLD_IMAGES.colors],
-    bg: "bg-sun/15",
-    ring: "ring-sun/30",
-    accent: "text-sun-deep",
-    glow: "shadow-[0_18px_40px_-24px_hsl(var(--sun)/0.9)]",
-    title: { ar: "ألواني", en: "My colors" },
-    body: {
-      ar: "استوديو رسم وتلوين بألوان لونُطق، ورسومات جاهزة بخطوط واسعة.",
-      en: "A drawing and coloring studio with LAWNATQ colors and bold-line templates.",
-    },
-    site: "/colors",
-    kid: "/draw",
-  },
-  {
     key: "mosaedi",
     images: [WORLD_IMAGES.assistant],
     bg: "bg-turq/14",
@@ -68,6 +54,21 @@ export const worlds = [
     },
     site: "/assistant",
     kid: "/assistant",
+  },
+  {
+    key: "alwani",
+    images: [WORLD_IMAGES.colors],
+    bg: "bg-sun/15",
+    ring: "ring-sun/30",
+    accent: "text-sun-deep",
+    glow: "shadow-[0_18px_40px_-24px_hsl(var(--sun)/0.9)]",
+    title: { ar: "ألواني", en: "My colors" },
+    body: {
+      ar: "استوديو رسم وتلوين بألوان لونُطق، ورسومات جاهزة بخطوط واسعة.",
+      en: "A drawing and coloring studio with LAWNATQ colors and bold-line templates.",
+    },
+    site: "/colors",
+    kid: "/draw",
   },
 ];
 
