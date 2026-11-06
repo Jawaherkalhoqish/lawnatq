@@ -18,10 +18,9 @@ export function Activities() {
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-lav-deep">
               {t("أنشطة لونُطق", "LAWNATQ activities")}
             </span>
-            <h2 className="mt-3 text-3xl font-extrabold text-ink sm:text-4xl">{t("عالمي", "My worlds")}</h2>
-            <p className="mt-3 text-base leading-relaxed text-ink-soft">
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-ink sm:text-4xl lg:text-5xl">
               {t("أربعة عوالم، كلها بانتظار طفلك", "Four worlds, all waiting for your child")}
-            </p>
+            </h2>
           </div>
           <Link
             to="/cards"
