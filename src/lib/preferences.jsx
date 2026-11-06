@@ -118,5 +118,9 @@ export function speak(text, lang = "ar") {
 }
 
 export function stopSpeaking() {
-  if (typeof window !== "undefined" && window.speechSynthesis) window.speechSynthesis.cancel();
+  if (typeof window !== "undefined" && window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+    // Ends the ducking so the music returns to the volume the user chose.
+    window.dispatchEvent(new CustomEvent("lawnatq:speaking", { detail: false }));
+  }
 }
