@@ -11,7 +11,7 @@ export function Hero() {
   const Arrow = isAr ? ArrowLeft : ArrowRight;
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-card via-background to-cream/70">
+    <section className="relative overflow-hidden bg-background">
       <div className="pointer-events-none absolute -top-28 start-[-12%] h-[420px] w-[420px] rounded-full bg-rose/25 blur-3xl dark:bg-rose/10" aria-hidden="true" />
       <div className="pointer-events-none absolute bottom-0 end-[-10%] h-[380px] w-[380px] rounded-full bg-lav/25 blur-3xl dark:bg-lav/10" aria-hidden="true" />
 

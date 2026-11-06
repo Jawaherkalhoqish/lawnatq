@@ -114,6 +114,15 @@
     font-size: var(--base-font-size);
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    /* One continuous paper layer from the top of the document to the last card:
+       the colour lives on <html> as well as <body>, so overscroll and short pages
+       never expose a white canvas. */
+    background-color: hsl(var(--background));
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   * {
@@ -122,6 +131,9 @@
 
   body {
     @apply bg-background font-body text-foreground;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: hsl(var(--background));
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }

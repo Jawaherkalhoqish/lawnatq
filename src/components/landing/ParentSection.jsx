@@ -17,7 +17,7 @@ export function ParentSection() {
   ];
 
   return (
-    <section id="parents" className="scroll-mt-24 bg-cream/70 py-20 lg:py-28">
+    <section id="parents" className="scroll-mt-24 py-20 lg:py-28">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
         <Reveal>
           <span className="text-sm font-bold uppercase tracking-[0.2em] text-lav-deep">

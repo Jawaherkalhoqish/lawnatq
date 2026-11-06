@@ -11,7 +11,7 @@ export function Activities() {
   const Arrow = isAr ? ArrowLeft : ArrowRight;
 
   return (
-    <section id="activities" className="scroll-mt-24 bg-cream/60 py-16 lg:py-24">
+    <section id="activities" className="scroll-mt-24 py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">

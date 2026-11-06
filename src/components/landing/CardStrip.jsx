@@ -61,7 +61,7 @@ export function CardStrip() {
   };
 
   return (
-    <section className="border-y border-border/70 bg-cream py-8" aria-label={t("بطاقات التواصل", "Communication cards")}>
+    <section className="border-y border-border/40 py-8" aria-label={t("بطاقات التواصل", "Communication cards")}>
       <p className="mb-5 text-center text-sm font-semibold text-ink-soft">
         {t("بطاقات حقيقية من مكتبة لونُطق — المسها لتكبر معك", "Real cards from the LAWNATQ library — tap one and watch it grow")}
       </p>
