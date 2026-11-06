@@ -15,7 +15,7 @@ const links = [
   { href: "/#how", ar: "كيف يعمل", en: "How it works" },
   { href: "/#activities", ar: "الأنشطة", en: "Activities" },
   { to: "/stories", ar: "القصص", en: "Stories" },
-  { to: "/dashboard", ar: "للوالدين", en: "For parents" },
+  { href: "/#parents", parents: true, ar: "للوالدين", en: "For parents" },
   { href: "/#subscribe", ar: "الاشتراك", en: "Subscription" },
   { href: "/#contact", ar: "اتصل بنا", en: "Contact us" },
 ];
@@ -44,6 +44,16 @@ export function TopNav() {
   }, [open]);
 
   const close = () => setOpen(false);
+
+  // «للوالدين» glides down the homepage to the parents section instead of leaving the page.
+  function goToParents(event) {
+    if (typeof window === "undefined" || window.location.pathname !== "/") return;
+    const target = document.getElementById("parents");
+    if (!target) return;
+    event.preventDefault();
+    window.setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+  }
+
   const isDark = resolvedTheme === "dark";
   const linkClass = "rounded-full px-2.5 py-2 text-sm font-semibold text-ink-soft transition hover:bg-cream hover:text-ink xl:px-3";
 
@@ -74,7 +84,14 @@ export function TopNav() {
               <a
                 key={l.href}
                 href={l.href}
-                onClick={close}
+                onClick={
+                  l.parents
+                    ? (event) => {
+                        close();
+                        goToParents(event);
+                      }
+                    : close
+                }
                 className="rounded-2xl px-4 py-3 text-base font-semibold text-ink transition hover:bg-cream"
               >
                 {t(l.ar, l.en)}
@@ -134,7 +151,7 @@ export function TopNav() {
         <nav className="hidden items-center gap-0.5 lg:flex" aria-label={t("التنقل الرئيسي", "Main navigation")}>
           {links.map((l) =>
             l.href ? (
-              <a key={l.href} href={l.href} className={linkClass}>
+              <a key={l.href} href={l.href} onClick={l.parents ? goToParents : undefined} className={linkClass}>
                 {t(l.ar, l.en)}
               </a>
             ) : (
