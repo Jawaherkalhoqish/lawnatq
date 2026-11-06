@@ -19,10 +19,10 @@ const strip = [
 ];
 
 /**
- * The real communication cards in one single row that stays exactly where it
- * belongs. Each card sways a few pixels to the right and back to its own origin
- * inside its slot — no scrolling, no marquee, no reordering — and the whole row
- * shrinks just enough to keep every card on screen at any width.
+ * The original communication cards, untouched: the same source images at their
+ * natural 64px size, the same rounded card, border, padding, label and tap-to-grow
+ * behaviour, in one single row. The only addition is a calm few-pixel sway that
+ * returns every card to its exact starting point.
  */
 export function CardStrip() {
   const { t } = useI18n();
@@ -33,21 +33,21 @@ export function CardStrip() {
       <p className="mb-5 text-center text-sm font-semibold text-ink-soft">
         {t("بطاقات حقيقية من مكتبة لونُطق — المسها لتكبر معك", "Real cards from the LAWNATQ library — tap one and watch it grow")}
       </p>
-      <div className="mx-auto flex max-w-6xl items-stretch justify-center gap-1.5 px-3 sm:gap-3 sm:px-6">
+      <div className="flex items-start justify-center gap-1.5 px-2 sm:gap-2 sm:px-4">
         {strip.map(([cat, file, ar, en], index) => {
           const id = `${cat}-${file}`;
           const isActive = active === id;
           return (
             <div
               key={id}
-              className="card-sway min-w-0 flex-1 basis-0"
-              style={{ animationDelay: `${(index % 4) * 0.6}s` }}
+              className="card-sway"
+              style={{ animationDelay: `${(index % 4) * 0.7}s` }}
             >
               <button
                 type="button"
                 onClick={() => setActive((current) => (current === id ? null : id))}
                 aria-pressed={isActive}
-                className="flex w-full max-w-[108px] flex-col items-center gap-1.5 rounded-3xl border border-border bg-card p-1.5 sm:p-2.5 mx-auto"
+                className="flex w-[72px] shrink-0 flex-col items-center gap-1.5 rounded-3xl border border-border bg-card p-1.5 sm:w-[84px] sm:p-2"
               >
                 <span
                   className={cn(
@@ -58,10 +58,10 @@ export function CardStrip() {
                   <Image
                     src={`/cards/${cat}/${file}.png`}
                     alt=""
-                    className="aspect-square w-full max-h-16 object-contain"
+                    className="h-14 w-14 object-contain sm:h-16 sm:w-16"
                     decoding="async"
                   />
-                  <span className="w-full truncate text-center text-[0.7rem] font-bold text-ink sm:text-xs">
+                  <span className="whitespace-nowrap text-[0.65rem] font-bold leading-tight text-ink sm:text-xs">
                     {t(ar, en)}
                   </span>
                 </span>
