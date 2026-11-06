@@ -2,7 +2,7 @@ import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import { useChild } from "@/hooks/useFamily";
-import { activities } from "@/lib/activities";
+import { kidWorlds } from "@/lib/activities";
 import { MASCOT_URL } from "@/lib/brand-asset";
 import { useI18n } from "@/lib/preferences";
 
@@ -49,7 +49,7 @@ function ChildHome() {
       </section>
 
       <div className="grid grid-cols-2 gap-3 sm:gap-4">
-        {activities.map((activity) => {
+        {kidWorlds.map((activity) => {
           const tone = toneFor[activity.key];
           return (
             <Link

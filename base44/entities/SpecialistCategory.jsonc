@@ -1,0 +1,57 @@
+{
+  "name": "SpecialistCategory",
+  "type": "object",
+  "description": "The four LAWNATQ specialist categories. Administrators maintain them; parents only read.",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable id used by specialists, e.g. speech"
+    },
+    "title_ar": {
+      "type": "string"
+    },
+    "title_en": {
+      "type": "string"
+    },
+    "order": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "key",
+    "title_ar",
+    "title_en"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

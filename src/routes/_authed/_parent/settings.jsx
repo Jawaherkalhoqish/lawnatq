@@ -4,6 +4,7 @@ import { Check, LogOut, Moon, ShieldCheck, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
+import ChangePinCard from "@/components/parent/ChangePinCard";
 import { useAuth } from "@/lib/AuthContext";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -185,6 +186,8 @@ function SettingsPage() {
           </button>
         </div>
       </section>
+
+      <ChangePinCard />
 
       <p className="px-1 text-xs leading-relaxed text-ink-soft">
         {t(

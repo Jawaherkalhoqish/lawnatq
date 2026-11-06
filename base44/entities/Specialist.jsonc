@@ -1,0 +1,85 @@
+{
+  "name": "Specialist",
+  "type": "object",
+  "description": "A real specialist configured by the administrator. Nothing is invented here: an empty table means the booking service shows its prototype state.",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "title_ar": {
+      "type": "string",
+      "description": "Professional title in Arabic"
+    },
+    "title_en": {
+      "type": "string"
+    },
+    "category_key": {
+      "type": "string",
+      "description": "Matches SpecialistCategory.key"
+    },
+    "bio_ar": {
+      "type": "string"
+    },
+    "bio_en": {
+      "type": "string"
+    },
+    "qualifications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Only qualifications the administrator has actually verified"
+    },
+    "license_verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "session_price": {
+      "type": "number",
+      "description": "Price of one session, separate from the LAWNATQ subscription"
+    },
+    "currency": {
+      "type": "string",
+      "default": "SAR"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "name",
+    "category_key"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

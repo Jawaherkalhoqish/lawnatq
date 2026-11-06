@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import Reveal from "@/components/landing/Reveal";
-import { activities } from "@/lib/activities";
+import { homeWorlds } from "@/lib/activities";
 import { useI18n } from "@/lib/preferences";
 
 /** The five worlds — shared with «بيتي», so both places always show the same cards. */
@@ -32,7 +32,7 @@ export function Activities() {
         </Reveal>
 
         <div className="mt-10 grid grid-cols-2 items-stretch gap-3 sm:gap-5 lg:grid-cols-4">
-          {activities.map((activity, i) => (
+          {homeWorlds.map((activity, i) => (
             <Reveal key={activity.key} delay={i * 0.06} className="h-full">
               <Link
                 to={activity.site}

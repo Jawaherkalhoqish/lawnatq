@@ -1,0 +1,118 @@
+{
+  "name": "Subscription",
+  "type": "object",
+  "description": "One subscription record per activation, owned by the parent who activated it. No payment provider is connected yet, so payment_status stays 'prototype'.",
+  "properties": {
+    "parent_id": {
+      "type": "string",
+      "description": "The parent account that owns this subscription"
+    },
+    "plan": {
+      "type": "string",
+      "enum": [
+        "trial",
+        "monthly",
+        "annual"
+      ],
+      "enumColors": [
+        "yellow",
+        "blue",
+        "purple"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "expired",
+        "cancelled"
+      ],
+      "enumColors": [
+        "green",
+        "gray",
+        "red"
+      ],
+      "default": "active"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "trial": {
+      "type": "boolean",
+      "default": false,
+      "description": "True only for the 7-day free trial"
+    },
+    "auto_renew": {
+      "type": "boolean",
+      "default": false,
+      "description": "Renewal information, only meaningful once a payment provider is connected"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "prototype",
+        "none",
+        "pending",
+        "paid"
+      ],
+      "enumColors": [
+        "yellow",
+        "gray",
+        "purple",
+        "green"
+      ],
+      "default": "prototype"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "parent_id",
+    "plan",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

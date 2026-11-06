@@ -1,0 +1,87 @@
+{
+  "name": "Appointment",
+  "type": "object",
+  "description": "A parent's request for a session with a specialist. Created as pending; only an administrator confirms or completes it.",
+  "properties": {
+    "parent_id": {
+      "type": "string"
+    },
+    "child_id": {
+      "type": "string"
+    },
+    "specialist_id": {
+      "type": "string"
+    },
+    "availability_id": {
+      "type": "string"
+    },
+    "scheduled_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "price": {
+      "type": "number",
+      "description": "Session price at request time, always separate from the subscription"
+    },
+    "currency": {
+      "type": "string",
+      "default": "SAR"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "cancelled",
+        "completed"
+      ],
+      "enumColors": [
+        "yellow",
+        "green",
+        "red",
+        "blue"
+      ],
+      "default": "pending"
+    },
+    "parent_note": {
+      "type": "string"
+    },
+    "status_note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "parent_id",
+    "specialist_id",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

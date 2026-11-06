@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { Link, Outlet, useLocation } from "@tanstack/react-router";
-import { LayoutDashboard, LogOut, Sparkles, Settings as SettingsIcon, Users, ShieldCheck, Menu, X } from "lucide-react";
+import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
+import { CalendarDays, LayoutDashboard, Lock, LogOut, Sparkles, Settings as SettingsIcon, Users, ShieldCheck, Menu, X } from "lucide-react";
 import Logo from "@/components/brand/Logo";
 import LangToggle from "@/components/brand/LangToggle";
 import { ThemeToggle } from "@/components/brand/ThemeToggle";
 import { useAuth } from "@/lib/AuthContext";
+import { clearPinSession } from "@/lib/pin-fns";
+import { clearPinToken } from "@/lib/pin-session";
 import { useI18n } from "@/lib/preferences";
 import { cn } from "@/lib/utils";
 
 const nav = [
   { to: "/dashboard", icon: LayoutDashboard, ar: "لوحة الوالد", en: "Dashboard" },
   { to: "/children", icon: Users, ar: "ملفات الأطفال", en: "Children" },
+  { to: "/appointments", icon: CalendarDays, ar: "المواعيد والاستشارات", en: "Appointments" },
   { to: "/insights", icon: Sparkles, ar: "الأسئلة والرؤى", en: "Insights" },
   { to: "/settings", icon: SettingsIcon, ar: "الإعدادات", en: "Settings" },
 ];
@@ -19,8 +22,18 @@ export function ParentShell() {
   const { t } = useI18n();
   const { user, logout } = useAuth();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const name = user?.full_name || user?.email?.split("@")[0] || "";
+
+  // Locking drops the PIN session on the server and here, so the next visit
+  // to any parent page asks for the PIN again.
+  async function lockParentArea() {
+    setOpen(false);
+    await clearPinSession({ data: {} }).catch(() => {});
+    clearPinToken();
+    navigate({ to: "/parent-pin", replace: true });
+  }
 
   const navLink = (item) => {
     const active = pathname === item.to || pathname.startsWith(`${item.to}/`);
@@ -64,6 +77,14 @@ export function ParentShell() {
               )}
             </p>
           </div>
+          <button
+            type="button"
+            onClick={lockParentArea}
+            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-card px-4 py-2.5 text-sm font-bold text-ink transition hover:bg-cream"
+          >
+            <Lock className="h-4 w-4" aria-hidden="true" />
+            {t("قفل المساحة", "Lock the area")}
+          </button>
           <div className="flex items-center gap-3 rounded-2xl border border-border p-3">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-lav/25 font-display text-sm font-extrabold text-lav-deep">
               {(name || "?").charAt(0).toUpperCase()}
@@ -109,6 +130,14 @@ export function ParentShell() {
           {open && (
             <div className="border-t border-border bg-card p-3 lg:hidden">
               <nav className="space-y-1">{nav.map(navLink)}</nav>
+              <button
+                type="button"
+                onClick={lockParentArea}
+                className="mt-2 flex w-full items-center gap-3 rounded-2xl border border-border px-4 py-3 text-sm font-semibold text-ink hover:bg-cream"
+              >
+                <Lock className="h-5 w-5" aria-hidden="true" />
+                {t("قفل المساحة", "Lock the area")}
+              </button>
               <button
                 type="button"
                 onClick={() => logout()}

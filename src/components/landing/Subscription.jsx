@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { Check, Sparkles } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import Reveal from "@/components/landing/Reveal";
-import SubscriptionSuccess from "@/components/landing/SubscriptionSuccess";
 import { SUBSCRIPTION_IMAGES } from "@/lib/brand-asset";
+import { activateSubscription as saveSubscription } from "@/lib/subscription-fns";
 import { useAuth } from "@/lib/AuthContext";
 import { useI18n } from "@/lib/preferences";
 import { activateSubscription, readSubscription } from "@/lib/subscription";
@@ -16,6 +17,7 @@ import { activateSubscription, readSubscription } from "@/lib/subscription";
 export function Subscription() {
   const { t } = useI18n();
   const { isAuthenticated } = useAuth();
+  const persistPlan = useServerFn(saveSubscription);
   const [activePlan, setActivePlan] = useState(null);
 
   // The stored subscription is read after mount, never during the server render.
@@ -69,9 +71,11 @@ export function Subscription() {
     },
   ];
 
-  // Prototype activation: records the plan locally and shows the confirmation.
+  // Prototype activation: no payment provider is connected. A signed-in parent
+  // also gets a real subscription record saved to their account.
   function subscribe(plan) {
     setActivePlan(activateSubscription(plan.action));
+    if (isAuthenticated) persistPlan({ data: { plan: plan.action } }).catch(() => {});
   }
 
   const activePlanData = activePlan ? plans.find((plan) => plan.action === activePlan.plan) : null;
@@ -137,9 +141,13 @@ export function Subscription() {
         </div>
 
         {activePlan ? (
-          <Reveal>
-            <SubscriptionSuccess planLabel={activePlanLabel} />
-          </Reveal>
+          <p role="status" className="mx-auto mt-8 max-w-2xl text-center text-sm font-semibold text-turq-deep">
+            {t(
+              "تم تفعيل الاشتراك لأغراض العرض التجريبي — لم تُخصم أي مبالغ ولم تتم أي عملية دفع.",
+              "The subscription is activated for demonstration purposes — no money was charged and no payment was made.",
+            )}
+            {activePlanLabel ? ` · ${activePlanLabel}` : ""}
+          </p>
         ) : null}
       </div>
     </section>

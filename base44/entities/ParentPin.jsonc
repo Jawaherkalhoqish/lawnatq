@@ -1,0 +1,65 @@
+{
+  "name": "ParentPin",
+  "type": "object",
+  "description": "Server-only record for one parent account: the four-digit PIN kept as a PBKDF2 hash, the lockout state, and the short-lived PIN session token. Never readable from the browser.",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "The authenticated parent account this PIN belongs to"
+    },
+    "pin_hash": {
+      "type": "string",
+      "description": "PBKDF2-SHA256 hash of the four digits"
+    },
+    "pin_salt": {
+      "type": "string",
+      "description": "Random per-parent salt"
+    },
+    "failed_attempts": {
+      "type": "number",
+      "default": 0,
+      "description": "Wrong attempts since the last success"
+    },
+    "locked_until": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Temporary lockout end, set after repeated wrong attempts"
+    },
+    "session_token": {
+      "type": "string",
+      "description": "Random token of the current verified parent session"
+    },
+    "session_expires": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Expiry of the current PIN session"
+    }
+  },
+  "required": [
+    "user_id",
+    "pin_hash",
+    "pin_salt"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

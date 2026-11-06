@@ -6,6 +6,8 @@ import { base44 } from "@/api/base44Client";
 import ChildPicker from "@/components/app/ChildPicker";
 import RecentWork from "@/components/app/RecentWork";
 import Recommendation from "@/components/app/Recommendation";
+import AppointmentsSummary from "@/components/parent/AppointmentsSummary";
+import SubscriptionCard from "@/components/parent/SubscriptionCard";
 import { useAuth } from "@/lib/AuthContext";
 import { useCardSequences, useChildren, useDrawings, useStoryProgress } from "@/hooks/useFamily";
 import { useI18n } from "@/lib/preferences";
@@ -80,6 +82,11 @@ function DashboardPage() {
           </div>
         )}
       </header>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <SubscriptionCard />
+        <AppointmentsSummary />
+      </div>
 
       {isLoading ? (
         <div className="h-24 animate-pulse rounded-[2rem] bg-cream" />
