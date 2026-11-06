@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import Logo from "@/components/brand/Logo";
@@ -8,6 +8,7 @@ import LangToggle from "@/components/brand/LangToggle";
 import MusicSettings from "@/components/sound/MusicSettings";
 import { useAuth } from "@/lib/AuthContext";
 import { useI18n } from "@/lib/preferences";
+import { scrollToSection, scrollToSectionWhenReady } from "@/lib/scroll";
 
 /** The one navigation used on every public page — pages first, then homepage sections. */
 const links = [
@@ -24,6 +25,8 @@ export function TopNav() {
   const { t } = useI18n();
   const { isAuthenticated } = useAuth();
   const { resolvedTheme, setTheme } = useTheme();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -45,14 +48,29 @@ export function TopNav() {
 
   const close = () => setOpen(false);
 
-  // «للوالدين» glides down the homepage to the parents section instead of leaving the page.
+  // «للوالدين» always ends at the start of the parents section: straight there on
+  // the homepage, otherwise a client-side trip home followed by the same scroll.
   function goToParents(event) {
-    if (typeof window === "undefined" || window.location.pathname !== "/") return;
-    const target = document.getElementById("parents");
-    if (!target) return;
-    event.preventDefault();
-    window.setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+    // Let the browser handle new-tab / new-window clicks.
+    if (event && (event.metaKey || event.ctrlKey || event.shiftKey || event.button > 0)) return;
+    if (event) event.preventDefault();
+    close();
+
+    // One frame after the menu closes, so its scroll lock is released first.
+    if (pathname === "/") {
+      window.requestAnimationFrame(() => scrollToSection("parents"));
+      return;
+    }
+    // resetScroll keeps the router from jumping to the top over our own scroll.
+    navigate({ to: "/", resetScroll: false });
+    scrollToSectionWhenReady("parents");
   }
+
+  // A link straight to /#parents still lands below the sticky header.
+  useEffect(() => {
+    if (pathname !== "/" || window.location.hash !== "#parents") return;
+    scrollToSectionWhenReady("parents");
+  }, [pathname]);
 
   const isDark = resolvedTheme === "dark";
   const linkClass = "rounded-full px-2.5 py-2 text-sm font-semibold text-ink-soft transition hover:bg-cream hover:text-ink xl:px-3";
@@ -84,14 +102,7 @@ export function TopNav() {
               <a
                 key={l.href}
                 href={l.href}
-                onClick={
-                  l.parents
-                    ? (event) => {
-                        close();
-                        goToParents(event);
-                      }
-                    : close
-                }
+                onClick={l.parents ? goToParents : close}
                 className="rounded-2xl px-4 py-3 text-base font-semibold text-ink transition hover:bg-cream"
               >
                 {t(l.ar, l.en)}
@@ -142,7 +153,7 @@ export function TopNav() {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 shadow-[0_10px_30px_-26px_hsl(var(--ink)/0.45)] backdrop-blur-xl">
+    <header data-site-header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 shadow-[0_10px_30px_-26px_hsl(var(--ink)/0.45)] backdrop-blur-xl">
       <div className="mx-auto flex h-15 max-w-7xl items-center justify-between gap-2 px-4 sm:h-[4.25rem] sm:px-8">
         <Link to="/" onClick={close} className="flex shrink-0 items-center gap-2" aria-label="لونُطق — LAWNATQ">
           <Logo className="h-8 sm:h-9" wordmark />
