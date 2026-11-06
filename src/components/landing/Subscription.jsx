@@ -1,22 +1,25 @@
-import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Check, Sparkles } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import Reveal from "@/components/landing/Reveal";
+import SubscriptionSuccess from "@/components/landing/SubscriptionSuccess";
 import { SUBSCRIPTION_IMAGES } from "@/lib/brand-asset";
 import { useAuth } from "@/lib/AuthContext";
 import { useI18n } from "@/lib/preferences";
-/* Real actions only: the trial opens the account, paid plans open a message. */
-
-const CONTACT_EMAIL = "lonotq@gmail.com";
+import { activateSubscription, readSubscription } from "@/lib/subscription";
 
 /**
- * Subscription section. The free trial starts from the account itself; the two
- * paid plans are activated by the LAWNATQ team until a payment provider is
- * connected, so their buttons open a real message rather than a fake checkout.
+ * Subscription section. Prototype only: choosing any plan activates it in the
+ * browser and shows a friendly confirmation. No payment provider, no card
+ * details, no charge.
  */
 export function Subscription() {
   const { t } = useI18n();
   const { isAuthenticated } = useAuth();
+  const [activePlan, setActivePlan] = useState(null);
+
+  // The stored subscription is read after mount, never during the server render.
+  useEffect(() => setActivePlan(readSubscription()), []);
 
   const plans = [
     {
@@ -66,10 +69,15 @@ export function Subscription() {
     },
   ];
 
-  const mailto = (plan) =>
-    `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-      plan === "monthly" ? "تفعيل الاشتراك الشهري — لونُطق" : "تفعيل الاشتراك السنوي — لونُطق",
-    )}`;
+  // Prototype activation: records the plan locally and shows the confirmation.
+  function subscribe(plan) {
+    setActivePlan(activateSubscription(plan.action));
+  }
+
+  const activePlanData = activePlan ? plans.find((plan) => plan.action === activePlan.plan) : null;
+  const activePlanLabel = activePlanData
+    ? `${t("خطتك الحالية", "Your current plan")}: ${activePlanData.title}`
+    : null;
 
   return (
     <section id="subscribe" className="scroll-mt-24 px-5 py-16 sm:px-8 lg:py-24">
@@ -105,26 +113,34 @@ export function Subscription() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink">{plan.body}</p>
 
                 {plan.action === "trial" ? (
-                  <Link
-                    to={isAuthenticated ? "/dashboard" : "/register"}
+                  <button
+                    type="button"
+                    onClick={() => subscribe(plan)}
                     className="mt-5 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-rose-deep px-6 text-base font-bold text-primary-foreground transition hover:brightness-110"
                   >
                     <Sparkles className="h-4 w-4" aria-hidden="true" />
                     {isAuthenticated ? t("ابدأ التجربة الآن", "Start the trial") : t("ابدأ التجربة المجانية", "Start the free trial")}
-                  </Link>
+                  </button>
                 ) : (
-                  <a
-                    href={mailto(plan.action)}
+                  <button
+                    type="button"
+                    onClick={() => subscribe(plan)}
                     className="mt-5 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-base font-bold text-background transition hover:opacity-90"
                   >
                     <Check className="h-4 w-4" aria-hidden="true" />
                     {t("اطلب هذا الاشتراك", "Request this plan")}
-                  </a>
+                  </button>
                 )}
               </article>
             </Reveal>
           ))}
         </div>
+
+        {activePlan ? (
+          <Reveal>
+            <SubscriptionSuccess planLabel={activePlanLabel} />
+          </Reveal>
+        ) : null}
       </div>
     </section>
   );
