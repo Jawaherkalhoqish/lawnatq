@@ -1,8 +1,9 @@
-import { Lock, Mail, UserRound } from "lucide-react";
+import { Mail, UserRound } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
 import { AuthLayout } from "@/components/auth/AuthLayout";
+import { PasswordInput } from "@/components/auth/PasswordInput";
 import { AuthError, AuthLink, GoogleButton, OrDivider, SubmitButton } from "@/components/auth/parts";
 import { PasswordChecklist } from "@/components/auth/PasswordChecklist";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -203,31 +204,27 @@ export function RegisterPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="register-password">{t("كلمة المرور", "Password")}</Label>
-            <div className="relative">
-              <Lock className="absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" aria-hidden="true" />
-              <Input
-                id="register-password"
-                type="password"
-                autoComplete="new-password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="h-13 rounded-2xl ps-11"
-                disabled={busy}
-                required
-              />
-            </div>
+            <PasswordInput
+              id="register-password"
+              autoComplete="new-password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="h-13 rounded-2xl"
+              disabled={busy}
+              required
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="register-confirm">{t("تأكيد كلمة المرور", "Confirm password")}</Label>
-            <Input
+            <PasswordInput
               id="register-confirm"
-              type="password"
+              withLock={false}
               autoComplete="new-password"
               placeholder="••••••••"
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
-              className="h-13 rounded-2xl px-4"
+              className="h-13 rounded-2xl"
               disabled={busy}
               required
             />

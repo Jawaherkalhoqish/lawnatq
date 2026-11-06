@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import Logo from "@/components/brand/Logo";
 import LangToggle from "@/components/brand/LangToggle";
 import { ThemeToggle } from "@/components/brand/ThemeToggle";
+import { PasswordInput } from "@/components/auth/PasswordInput";
 import { PinPad, PinDots } from "@/components/parent/PinPad";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -229,9 +230,9 @@ function ParentPinPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pin-reset-password">{t("كلمة المرور", "Password")}</Label>
-                <Input
+                <PasswordInput
                   id="pin-reset-password"
-                  type="password"
+                  withLock={false}
                   autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

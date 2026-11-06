@@ -1,6 +1,7 @@
-import { Lock, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { useState } from "react";
 import { AuthLayout } from "@/components/auth/AuthLayout";
+import { PasswordInput } from "@/components/auth/PasswordInput";
 import { AuthError, AuthLink, GoogleButton, OrDivider, SubmitButton } from "@/components/auth/parts";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -68,19 +69,15 @@ export function LoginPage() {
               {t("نسيتِ كلمة المرور؟", "Forgot password?")}
             </AuthLink>
           </div>
-          <div className="relative">
-            <Lock className="absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" aria-hidden="true" />
-            <Input
-              id="login-password"
-              type="password"
-              autoComplete="current-password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="h-13 rounded-2xl ps-11"
-              required
-            />
-          </div>
+          <PasswordInput
+            id="login-password"
+            autoComplete="current-password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="h-13 rounded-2xl"
+            required
+          />
         </div>
         <SubmitButton busy={busy} busyLabel={t("جارٍ الدخول...", "Signing in...")}>
           {t("تسجيل الدخول", "Log in")}

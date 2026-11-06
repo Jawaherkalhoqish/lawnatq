@@ -1,11 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { AlertTriangle, Lock } from "lucide-react";
 import { useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { AuthLayout } from "@/components/auth/AuthLayout";
+import { PasswordInput } from "@/components/auth/PasswordInput";
 import { AuthError, SubmitButton } from "@/components/auth/parts";
 import { PasswordChecklist } from "@/components/auth/PasswordChecklist";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { isStrongPassword } from "@/lib/password-rules";
 import { useI18n } from "@/lib/preferences";
@@ -73,36 +72,28 @@ export function ResetPasswordPage() {
       <form onSubmit={submit} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="reset-password">{t("كلمة المرور الجديدة", "New password")}</Label>
-          <div className="relative">
-            <Lock className="absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" aria-hidden="true" />
-            <Input
-              id="reset-password"
-              type="password"
-              autoComplete="new-password"
-              autoFocus
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="h-13 rounded-2xl ps-11"
-              required
-            />
-          </div>
+          <PasswordInput
+            id="reset-password"
+            autoComplete="new-password"
+            autoFocus
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="h-13 rounded-2xl"
+            required
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="reset-confirm">{t("تأكيد كلمة المرور", "Confirm password")}</Label>
-          <div className="relative">
-            <Lock className="absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" aria-hidden="true" />
-            <Input
-              id="reset-confirm"
-              type="password"
-              autoComplete="new-password"
-              placeholder="••••••••"
-              value={confirm}
-              onChange={(e) => setConfirm(e.target.value)}
-              className="h-13 rounded-2xl ps-11"
-              required
-            />
-          </div>
+          <PasswordInput
+            id="reset-confirm"
+            autoComplete="new-password"
+            placeholder="••••••••"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+            className="h-13 rounded-2xl"
+            required
+          />
           {confirm && confirm !== password ? (
             <p className="text-xs font-semibold text-destructive">
               {t("كلمتا المرور غير متطابقتين", "Passwords do not match")}
