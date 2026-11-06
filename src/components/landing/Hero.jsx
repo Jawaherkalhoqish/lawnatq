@@ -52,7 +52,8 @@ export function Hero() {
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
-              to="/cards"
+              to="/register"
+              search={{ returnTo: "/dashboard" }}
               className="group inline-flex h-15 items-center justify-center gap-2 rounded-full bg-lav-deep px-8 text-lg font-bold text-primary-foreground shadow-lift transition hover:brightness-110"
             >
               {t("ابدأ الرحلة", "Start the journey")}
