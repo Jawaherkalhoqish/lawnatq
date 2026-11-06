@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 
 /** Family data hooks. RLS scopes every query to the signed-in parent. */
-export function useChildren() {
+export function useChildren({ enabled = true } = {}) {
   return useQuery({
     queryKey: ["children"],
+    enabled,
     queryFn: async () => {
       const page = await base44.entities.Child.list({ sort: "created_date", limit: 24 });
       return page.items ?? [];

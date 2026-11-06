@@ -18,6 +18,17 @@ export const activateSubscription = createServerFn({ method: "POST" })
     const sdk = context.getBase44().asServiceRole;
     const parentId = context.user.id;
 
+    // Repeated clicks must never create a second subscription: an active,
+    // still-running plan of the same kind is returned untouched.
+    const current = await sdk.entities.Subscription.filter(
+      { parent_id: parentId, status: "active" },
+      { sort: "-created_date", limit: 1 },
+    );
+    const active = current.items?.[0];
+    if (active && active.plan === data.plan && new Date(active.end_date).getTime() > Date.now()) {
+      return { ok: true, reused: true, subscription: active };
+    }
+
     await sdk.entities.Subscription.updateMany(
       { parent_id: parentId, status: "active" },
       { $set: { status: "expired" } },

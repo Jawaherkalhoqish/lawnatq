@@ -1,24 +1,33 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Loader2, Sparkles } from "lucide-react";
 import { Image } from "@/components/ui/image";
 import Reveal from "@/components/landing/Reveal";
+import ActivationSuccessDialog from "@/components/subscription/ActivationSuccessDialog";
 import { SUBSCRIPTION_IMAGES } from "@/lib/brand-asset";
 import { activateSubscription as saveSubscription } from "@/lib/subscription-fns";
 import { useAuth } from "@/lib/AuthContext";
+import { useChildren } from "@/hooks/useFamily";
 import { useI18n } from "@/lib/preferences";
 import { activateSubscription, readSubscription } from "@/lib/subscription";
 
 /**
- * Subscription section. Prototype only: choosing any plan activates it in the
- * browser and shows a friendly confirmation. No payment provider, no card
- * details, no charge.
+ * Subscription section. Prototype only: choosing any plan activates it and
+ * saves the record to the parent's account, then a branded dialog confirms it
+ * and offers to start exploring. No payment provider, no card details, no charge.
  */
 export function Subscription() {
   const { t } = useI18n();
+  const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const { data: children } = useChildren({ enabled: isAuthenticated });
   const persistPlan = useServerFn(saveSubscription);
+
   const [activePlan, setActivePlan] = useState(null);
+  const [busy, setBusy] = useState(null);
+  const [successPlan, setSuccessPlan] = useState(null);
+  const [error, setError] = useState(null);
 
   // The stored subscription is read after mount, never during the server render.
   useEffect(() => setActivePlan(readSubscription()), []);
@@ -73,9 +82,40 @@ export function Subscription() {
 
   // Prototype activation: no payment provider is connected. A signed-in parent
   // also gets a real subscription record saved to their account.
-  function subscribe(plan) {
+  async function subscribe(plan) {
+    if (busy) return;
+    setError(null);
+    setBusy(plan.action);
     setActivePlan(activateSubscription(plan.action));
-    if (isAuthenticated) persistPlan({ data: { plan: plan.action } }).catch(() => {});
+    try {
+      if (isAuthenticated) await persistPlan({ data: { plan: plan.action } });
+      setSuccessPlan(plan.action);
+    } catch {
+      setError(
+        t(
+          "تعذّر حفظ الاشتراك في حسابك. تحقّقي من الاتصال وحاولي مرة أخرى.",
+          "We couldn't save the subscription to your account. Check your connection and try again.",
+        ),
+      );
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  /** «تمام، لنبدأ!» — straight into the child's space, never back to this section. */
+  function startExploring() {
+    setSuccessPlan(null);
+    if (!isAuthenticated) {
+      navigate({ to: "/register" });
+      return;
+    }
+    const child = children?.[0];
+    if (child?.id) {
+      navigate({ to: "/k/$childId", params: { childId: child.id } });
+    } else {
+      // A parent without a child profile yet adds one, then explores.
+      navigate({ to: "/parent/children" });
+    }
   }
 
   const activePlanData = activePlan ? plans.find((plan) => plan.action === activePlan.plan) : null;
@@ -116,29 +156,41 @@ export function Subscription() {
                 </p>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink">{plan.body}</p>
 
-                {plan.action === "trial" ? (
-                  <button
-                    type="button"
-                    onClick={() => subscribe(plan)}
-                    className="mt-5 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-rose-deep px-6 text-base font-bold text-primary-foreground transition hover:brightness-110"
-                  >
+                <button
+                  type="button"
+                  onClick={() => subscribe(plan)}
+                  disabled={Boolean(busy)}
+                  className={
+                    plan.action === "trial"
+                      ? "mt-5 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-rose-deep px-6 text-base font-bold text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+                      : "mt-5 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-base font-bold text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
+                  }
+                >
+                  {busy === plan.action ? (
+                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  ) : plan.action === "trial" ? (
                     <Sparkles className="h-4 w-4" aria-hidden="true" />
-                    {isAuthenticated ? t("ابدأ التجربة الآن", "Start the trial") : t("ابدأ التجربة المجانية", "Start the free trial")}
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => subscribe(plan)}
-                    className="mt-5 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-base font-bold text-background transition hover:opacity-90"
-                  >
+                  ) : (
                     <Check className="h-4 w-4" aria-hidden="true" />
-                    {t("اطلب هذا الاشتراك", "Request this plan")}
-                  </button>
-                )}
+                  )}
+                  {busy === plan.action
+                    ? t("جارٍ التفعيل…", "Activating…")
+                    : plan.action === "trial"
+                      ? isAuthenticated
+                        ? t("ابدأ التجربة الآن", "Start the trial")
+                        : t("ابدأ التجربة المجانية", "Start the free trial")
+                      : t("اطلب هذا الاشتراك", "Request this plan")}
+                </button>
               </article>
             </Reveal>
           ))}
         </div>
+
+        {error ? (
+          <p role="alert" className="mx-auto mt-8 max-w-2xl text-center text-sm font-semibold text-destructive">
+            {error}
+          </p>
+        ) : null}
 
         {activePlan ? (
           <p role="status" className="mx-auto mt-8 max-w-2xl text-center text-sm font-semibold text-turq-deep">
@@ -150,6 +202,13 @@ export function Subscription() {
           </p>
         ) : null}
       </div>
+
+      <ActivationSuccessDialog
+        open={Boolean(successPlan)}
+        plan={successPlan}
+        onClose={() => setSuccessPlan(null)}
+        onStart={startExploring}
+      />
     </section>
   );
 }
