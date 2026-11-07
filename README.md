@@ -109,20 +109,7 @@ LAWNATQ is not a diagnostic or medical tool. It focuses on encouraging communica
 | Monthly | SAR 19.99 |
 | Annual | SAR 199 |
 
-## Visual Identity
 
-The visual identity uses a soft and welcoming color palette to create a comfortable and friendly experience.
-
-| Color | Hex Code |
-|---|---|
-| Soft Turquoise | `#6FD0C5` |
-| Warm Yellow | `#FFD068` |
-| Soft Coral | `#FF7E75` |
-| Soft Lavender | `#C39BD3` |
-| Soft Blue | `#7FB3D5` |
-| Rosy Pink | `#FF9EAA` |
-
----
 
 <div align="center">
 
